@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, BarChart3, ShieldAlert, FileWarning, Ghost, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
   const fadeInUp = {
@@ -29,9 +30,15 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="space-y-6"
         >
-          <div className="mb-8">
-            {/* Using Next.js Image component for optimization if possible, but <img> is safer for static exports if not configured */}
-            <img src="/logo.png" alt="Strathmark Consulting Logo" className="h-16 w-auto mx-auto object-contain" />
+          <div className="mb-8 relative w-full flex justify-center">
+             <Image 
+               src="/logo.png" 
+               alt="Strathmark Consulting Logo" 
+               width={300} 
+               height={100} 
+               className="h-16 w-auto object-contain"
+               priority
+             />
           </div>
           <div className="inline-block px-3 py-1 border border-safety-orange/30 rounded-full bg-safety-orange/10 text-safety-orange text-xs font-mono tracking-wider mb-4">
             SYSTEM ACTIVE
