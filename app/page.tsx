@@ -30,7 +30,8 @@ export default function Home() {
           className="space-y-6"
         >
           <div className="mb-8">
-            <img src="/logo.png" alt="Strathmark Consulting Logo" className="h-16 w-auto mx-auto" />
+            {/* Using Next.js Image component for optimization if possible, but <img> is safer for static exports if not configured */}
+            <img src="/logo.png" alt="Strathmark Consulting Logo" className="h-16 w-auto mx-auto object-contain" />
           </div>
           <div className="inline-block px-3 py-1 border border-safety-orange/30 rounded-full bg-safety-orange/10 text-safety-orange text-xs font-mono tracking-wider mb-4">
             SYSTEM ACTIVE
