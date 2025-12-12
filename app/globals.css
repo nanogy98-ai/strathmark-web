@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+@theme {
+  --color-strath-navy: #1B2A41;
+  --color-safety-orange: #F59E0B;
+  --color-steel: #94a3b8;
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #1B2A41;
+  --foreground: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
