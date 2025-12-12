@@ -29,6 +29,9 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="space-y-6"
         >
+          <div className="mb-8">
+            <img src="/logo.png" alt="Strathmark Consulting Logo" className="h-16 w-auto mx-auto" />
+          </div>
           <div className="inline-block px-3 py-1 border border-safety-orange/30 rounded-full bg-safety-orange/10 text-safety-orange text-xs font-mono tracking-wider mb-4">
             SYSTEM ACTIVE
           </div>
