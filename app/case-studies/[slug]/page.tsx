@@ -72,15 +72,17 @@ export default async function CaseStudyDetail({ params }: PageProps) {
       </header>
 
       <article className="max-w-3xl mx-auto px-6 py-16 md:py-24 w-full">
-        {/* Placeholder for Screenshot */}
+        {/* GSC Performance Graph */}
         <figure className="mb-16 -mx-6 md:-mx-12 lg:-mx-24 bg-black/20 border-y border-white/5 p-6 md:p-12 text-center">
-          <div className="relative aspect-video w-full bg-slate-900 border border-white/10 flex items-center justify-center overflow-hidden">
-             {/* Replace this div with <Image /> once file is uploaded */}
-             <div className="text-slate-600 font-mono text-sm">
-               [Image: Google Search Console Performance Graph]
-               <br/>
-               <span className="text-xs opacity-50">Upload to public/case-studies/organic-turnaround-gsc.png</span>
-             </div>
+          <div className="relative w-full bg-slate-900 border border-white/10 flex items-center justify-center overflow-hidden">
+             <Image 
+               src="/case-studies/organic-turnaround-gsc.png"
+               alt="Google Search Console Performance Graph"
+               width={1200}
+               height={675}
+               className="w-full h-auto object-cover"
+               priority
+             />
           </div>
           <figcaption className="text-xs text-slate-500 font-mono mt-4">
             Figure 1: Google Search Console performance (client name withheld).
@@ -111,4 +113,3 @@ export default async function CaseStudyDetail({ params }: PageProps) {
     </main>
   );
 }
-
