@@ -2,21 +2,27 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-strath-navy: #1B2A41;
-  --color-safety-orange: #F59E0B;
-  --color-steel: #94a3b8;
+  --color-strath-navy: #0F172A;
+  --color-slate-light: #94A3B8;
+  --color-gold: #C5A059;
+  --color-gold-light: #E5C585;
   
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif);
 }
 
 :root {
-  --background: #1B2A41;
-  --foreground: #ffffff;
+  --background: #0F172A;
+  --foreground: #F8FAFC;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), Georgia, serif;
 }

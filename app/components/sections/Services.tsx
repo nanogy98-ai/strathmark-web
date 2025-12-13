@@ -1,77 +1,114 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldAlert, FileWarning, Ghost, Code2, Database, Globe2 } from "lucide-react";
+import { ArrowRight, BarChart, Server, Lock } from "lucide-react";
 
 export function Services() {
-  const problems = [
-    { title: "Canonical Confusion", icon: <ShieldAlert className="text-red-500" />, desc: "Duplicate content signals diluting authority across regional subdomains." },
-    { title: "Crawl Budget Waste", icon: <FileWarning className="text-orange-500" />, desc: "Millions of low-value parameter URLs exhausting bot resources." },
-    { title: "Ghost Pages", icon: <Ghost className="text-purple-500" />, desc: "Orphaned landing pages generating 404s and losing link equity." }
-  ];
-
-  const solutions = [
-    { title: "Technical Audit", icon: <Code2 className="text-safety-orange" />, desc: "Deep-dive analysis of JS rendering, schema, and server logs." },
-    { title: "Migration Architecture", icon: <Database className="text-blue-400" />, desc: "Zero-loss platform migrations for enterprise datasets." },
-    { title: "International Expansion", icon: <Globe2 className="text-green-400" />, desc: "Hreflang structuring for multi-region domination." }
+  const pillars = [
+    {
+      title: "Strategic Digital & Commercial Advisory",
+      icon: <BarChart className="text-gold" size={32} />,
+      for: "For leadership teams needing oversight.",
+      outcome: "Clarity on spend, performance, and priorities.",
+      includes: [
+        "Performance spend audit",
+        "Vendor & agency management",
+        "Commercial impact modeling",
+        "Search strategy validation"
+      ],
+      cta: "Strategic Review",
+      link: "#contact"
+    },
+    {
+      title: "Platform & Infrastructure Consulting",
+      icon: <Server className="text-gold" size={32} />,
+      for: "For technical teams facing scale issues.",
+      outcome: "Remediation of debt, speed, and scalability.",
+      includes: [
+        "Next.js / Headless architecture",
+        "Core Web Vitals engineering",
+        "Migration risk mitigation",
+        "Technical debt consolidation"
+      ],
+      cta: "Technical Audit",
+      link: "#contact"
+    },
+    {
+      title: "Retained Execution (By Invitation)",
+      icon: <Lock className="text-gold" size={32} />,
+      for: "For organizations requiring ongoing precision.",
+      outcome: "Continuous architectural evolution.",
+      includes: [
+        "Limited client roster",
+        "Direct senior engineer access",
+        "Rolling 30-day terms",
+        "Execution only after review"
+      ],
+      cta: "Retainer Consideration",
+      link: "#contact"
+    }
   ];
 
   return (
-    <section className="w-full max-w-6xl px-6 py-24" id="services">
+    <section className="w-full max-w-7xl px-6 py-24 mx-auto" id="services">
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="mb-16"
+        className="mb-16 md:mb-24 max-w-3xl"
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">The Black Box</h2>
-        <p className="text-steel text-xl">We identify the failures your previous agency missed.</p>
+        <div className="text-gold font-mono text-xs uppercase tracking-widest mb-4">Core Pillars</div>
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
+          Advisory First. Execution Second.
+        </h2>
+        <p className="text-slate-400 text-lg leading-relaxed">
+          We separate strategy from implementation. Most "agencies" profit from confusion; we profit from clarity. Our three engagement models are designed to solve specific organizational failures.
+        </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
-        {problems.map((item, i) => (
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {pillars.map((pillar, i) => (
           <motion.div 
             key={i}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-black/50 border border-white/10 p-8 hover:border-red-500/50 transition-colors group"
+            className="bg-white/[0.02] border border-white/5 p-8 md:p-10 flex flex-col hover:border-gold/30 transition-colors group"
           >
-            <div className="mb-6 bg-white/5 w-14 h-14 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-              {item.icon}
+            <div className="mb-8 p-4 bg-white/5 w-fit rounded-sm group-hover:bg-gold/10 transition-colors">
+              {pillar.icon}
             </div>
-            <h3 className="text-xl font-bold mb-4 text-white">{item.title}</h3>
-            <p className="text-steel text-sm leading-relaxed">{item.desc}</p>
-          </motion.div>
-        ))}
-      </div>
+            
+            <h3 className="text-2xl font-serif font-bold text-white mb-4 min-h-[64px]">
+              {pillar.title}
+            </h3>
+            
+            <div className="text-gold/80 font-mono text-xs uppercase mb-2 tracking-wide">Who it is for</div>
+            <p className="text-slate-400 text-sm mb-6 pb-6 border-b border-white/5">
+              {pillar.for}
+            </p>
 
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="mb-16"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Engineered Solutions</h2>
-        <p className="text-steel text-xl">Precision interventions for complex infrastructure.</p>
-      </motion.div>
+            <div className="text-gold/80 font-mono text-xs uppercase mb-2 tracking-wide">Outcomes</div>
+            <p className="text-slate-300 text-base font-medium mb-8">
+              {pillar.outcome}
+            </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {solutions.map((item, i) => (
-          <motion.div 
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-strath-navy border border-white/10 p-8 hover:border-safety-orange transition-colors group"
-          >
-            <div className="mb-6 bg-white/5 w-14 h-14 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-              {item.icon}
-            </div>
-            <h3 className="text-xl font-bold mb-4 text-white">{item.title}</h3>
-            <p className="text-steel text-sm leading-relaxed">{item.desc}</p>
+            <ul className="space-y-3 mb-10 flex-1">
+              {pillar.includes.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-sm text-slate-400">
+                  <div className="mt-1.5 w-1 h-1 bg-gold rounded-full shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <a 
+              href={pillar.link}
+              className="w-full py-4 border border-white/10 text-white text-center text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-strath-navy transition-all flex items-center justify-center gap-2 group-hover:border-white"
+            >
+              {pillar.cta} <ArrowRight size={16} />
+            </a>
           </motion.div>
         ))}
       </div>

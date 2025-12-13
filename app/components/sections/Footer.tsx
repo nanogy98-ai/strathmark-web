@@ -7,7 +7,7 @@ export function Footer() {
         
         <div className="text-left flex flex-col items-start gap-4">
           <Image 
-            src="/logo.png" 
+            src="/logo-footer.png" 
             alt="Strathmark Consulting" 
             width={180} 
             height={60} 
