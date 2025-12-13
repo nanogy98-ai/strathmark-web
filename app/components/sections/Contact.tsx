@@ -68,7 +68,7 @@ export function Contact() {
           <CheckCircle2 className="text-gold w-16 h-16" />
           <h3 className="text-2xl font-serif font-bold text-white">Application Received</h3>
           <p className="text-slate-300">
-            We have received your brief. Our engineering team will review your infrastructure requirements and respond within 2 business days if we believe we can add material value.
+            We have received your brief. We will review your requirements and response within 2 business days if we believe we can add material value.
           </p>
           <button 
             onClick={() => window.location.reload()}
@@ -84,8 +84,8 @@ export function Contact() {
   return (
     <section className="w-full max-w-4xl px-6 py-24 mx-auto" id="contact">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Request a Review</h2>
-        <p className="text-slate-400 text-lg">Tell us about your infrastructure and commercial goals.</p>
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Request an Independent Review</h2>
+        <p className="text-slate-400 text-lg">Tell us about your commercial goals and current infrastructure.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="bg-white/[0.02] border border-white/10 p-8 md:p-12 space-y-8 backdrop-blur-sm">
@@ -101,7 +101,7 @@ export function Contact() {
             <InputField label="Work Email" name="email" type="email" placeholder="john@company.com" error={errors.email} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField label="Company Entity" name="company" placeholder="Acme Corp Ltd." error={errors.company} />
+            <InputField label="Company Name" name="company" placeholder="Acme Corp Ltd." error={errors.company} />
             <InputField label="Website URL" name="website" placeholder="https://..." error={errors.website} />
           </div>
           <InputField label="Country of Operation" name="country" placeholder="United Kingdom" error={errors.country} />
@@ -116,9 +116,9 @@ export function Contact() {
               label="Engagement Type" 
               name="serviceType" 
               options={[
-                { label: "Strategic Review", value: "strategic-review" },
-                { label: "Platform & Infrastructure Audit", value: "platform-audit" },
-                { label: "Retained Execution (Waitlist)", value: "retainer" },
+                { label: "Independent Digital & Spend Review", value: "strategic-review" },
+                { label: "Strategic Advisory (Ongoing)", value: "advisory" },
+                { label: "Selective Execution (By Invitation)", value: "execution" },
                 { label: "Unsure / Other", value: "unsure" }
               ]}
               error={errors.serviceType}
@@ -128,10 +128,10 @@ export function Contact() {
               name="situation" 
               options={[
                 { label: "Growth has stalled", value: "stalled" },
-                { label: "Paid spend efficiency", value: "inefficient-spend" },
-                { label: "Platform issues / Rebuild", value: "platform-issues" },
-                { label: "Tracking / Attribution", value: "tracking" },
-                { label: "Penalty / Indexing", value: "penalty" },
+                { label: "Paid spend feels inefficient", value: "inefficient-spend" },
+                { label: "Platform issues / Rebuild needed", value: "platform-issues" },
+                { label: "Tracking & Attribution unclear", value: "tracking" },
+                { label: "Penalty or Technical Issues", value: "penalty" },
                 { label: "Other", value: "other" }
               ]}
               error={errors.situation}
@@ -140,7 +140,7 @@ export function Contact() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <SelectField 
-              label="Monthly Marketing Spend" 
+              label="Approx Monthly Marketing Spend" 
               name="spend" 
               options={[
                 { label: "Under £5k", value: "under-5k" },
@@ -156,8 +156,8 @@ export function Contact() {
               name="timeline" 
               options={[
                 { label: "Immediate (0-30 days)", value: "immediate" },
-                { label: "Next Quarter (1-3 months)", value: "1-3-months" },
-                { label: "Future Planning (3-6 months)", value: "3-6-months" },
+                { label: "1 to 3 months", value: "1-3-months" },
+                { label: "3 to 6 months", value: "3-6-months" },
                 { label: "6+ months", value: "6-plus-months" }
               ]}
               error={errors.timeline}
@@ -175,7 +175,7 @@ export function Contact() {
               "w-full bg-black/30 border p-4 text-white focus:border-gold outline-none transition-colors placeholder:text-slate-600",
               errors.message ? "border-red-500" : "border-white/10"
             )}
-            placeholder="Describe the current state of failure or the objective..."
+            placeholder="Describe your objectives or the current failure state..."
           />
           {errors.message && (
             <p className="text-red-500 text-xs flex items-center gap-1 mt-1">

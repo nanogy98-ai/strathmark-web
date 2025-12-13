@@ -6,27 +6,27 @@ export function Approach() {
   const steps = [
     {
       num: "01",
-      title: "Initial Review",
-      desc: "We analyze logs, code, and spend. No assumptions.",
-      time: "7-14 Days"
+      title: "Review & Diagnosis",
+      desc: "We analyze your spend, infrastructure, and team capabilities. 7-14 day turnaround.",
+      time: "Fixed Fee"
     },
     {
       num: "02",
       title: "Findings & Priorities",
-      desc: "We identify the 20% of issues causing 80% of the drag.",
+      desc: "You get a prioritized roadmap of what to fix, what to stop, and where to double down.",
       time: "Delivery Meeting"
     },
     {
       num: "03",
-      title: "Roadmap Architecture",
-      desc: "A detailed technical plan for your dev team or ours.",
-      time: "Strategic Plan"
+      title: "Execution Plan",
+      desc: "We architect the solution. Your team executes, or we bring in specialists.",
+      time: "Strategic Roadmap"
     },
     {
       num: "04",
-      title: "Optional Execution",
-      desc: "We step in only if your team lacks capacity.",
-      time: "Ongoing"
+      title: "Oversight & Accountability",
+      desc: "Ongoing advisory to ensure the plan is followed and ROI is realized.",
+      time: "Optional Retainer"
     }
   ];
 
@@ -34,7 +34,7 @@ export function Approach() {
     <section className="w-full max-w-7xl px-6 py-24 mx-auto bg-white/[0.02]" id="approach">
       <div className="mb-16 text-center">
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">The Methodology</h2>
-        <p className="text-slate-400">Systematic. Predictable. Transparent.</p>
+        <p className="text-slate-400">Predictable. Transparent. Commercial.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -59,4 +59,3 @@ export function Approach() {
     </section>
   );
 }
-

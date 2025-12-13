@@ -4,20 +4,20 @@ import { motion } from "framer-motion";
 import { Check, XCircle } from "lucide-react";
 
 export function Proof() {
-  const issues = [
-    "Wasted crawl budget on parameter URLs",
-    "JavaScript rendering failures (Client-side only)",
-    "Hreflang conflicts across regions",
-    "Inefficient paid spend due to tracking gaps",
-    "Canonical tags de-indexing revenue pages"
+  const failures = [
+    "Wasted marketing spend on low-intent traffic",
+    "Tracking blind spots hiding true ROI",
+    "Slow site speed killing conversion rates",
+    "Agency activity reports without commercial results",
+    "Messy measurement and unclear attribution"
   ];
 
-  const standards = [
-    "Server-side rendering (SSR) or Static Generation",
-    "Logic-based canonicalization strategies",
-    "Schema graph mapped to Knowledge Graph",
-    "Log file analysis for bot behavior",
-    "Performance scores >90 on Core Web Vitals"
+  const goodLooksLike = [
+    "Clear attribution linked to revenue",
+    "Fast, high-converting digital infrastructure",
+    "Predictable, qualified lead flow",
+    "Clean reporting that the Board understands",
+    "Accountable vendors and internal clarity"
   ];
 
   return (
@@ -30,7 +30,7 @@ export function Proof() {
             <XCircle className="text-red-500" /> Common Failures
           </h3>
           <ul className="space-y-6">
-            {issues.map((issue, i) => (
+            {failures.map((issue, i) => (
               <motion.li 
                 key={i}
                 initial={{ opacity: 0, x: -10 }}
@@ -52,7 +52,7 @@ export function Proof() {
             <Check className="text-gold" /> What Good Looks Like
           </h3>
           <ul className="space-y-6">
-            {standards.map((std, i) => (
+            {goodLooksLike.map((std, i) => (
               <motion.li 
                 key={i}
                 initial={{ opacity: 0, x: 10 }}
