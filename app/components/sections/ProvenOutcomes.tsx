@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BarChart3 } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 
@@ -55,16 +56,13 @@ export function ProvenOutcomes() {
         </div>
 
         <div className="relative h-64 md:h-full min-h-[300px] bg-black/40 border border-white/10 flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-gold/5 to-transparent opacity-50" />
-          <div className="text-slate-500 font-mono text-xs flex flex-col items-center gap-3 z-10">
-            <BarChart3 size={48} className="text-gold/50 group-hover:text-gold transition-colors duration-500" />
-            <span>[Performance Data Visualization]</span>
-          </div>
-          {/* Simulated graph line */}
-          <svg className="absolute bottom-0 left-0 right-0 h-32 w-full text-gold/20" preserveAspectRatio="none">
-            <path d="M0,100 C150,100 200,50 400,20 L500,0 L500,128 L0,128 Z" fill="currentColor" />
-            <path d="M0,100 C150,100 200,50 400,20 L500,0" fill="none" stroke="#C5A059" strokeWidth="2" />
-          </svg>
+          <Image 
+            src="/case-studies/organic-turnaround-gsc.png"
+            alt="Performance Graph"
+            fill
+            className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-strath-navy/80 via-transparent to-transparent opacity-60"></div>
         </div>
       </div>
 
@@ -76,4 +74,3 @@ export function ProvenOutcomes() {
     </section>
   );
 }
-
