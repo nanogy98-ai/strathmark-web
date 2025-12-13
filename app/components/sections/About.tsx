@@ -37,9 +37,9 @@ export function About() {
             </div>
           </div>
 
-          <div className="mt-16 pt-12 border-t border-white/5 grid grid-cols-1 md:grid-cols-12 gap-12">
-            <div className="md:col-span-4">
-              <div className="relative group w-full max-w-[240px]">
+          <div className="mt-16 pt-12 border-t border-white/5 flex flex-col md:flex-row gap-12 items-start">
+            <div className="md:w-1/3 flex justify-center md:justify-start">
+              <div className="relative group w-full max-w-[280px]">
                 <div className="absolute inset-0 bg-gold/10 transform translate-x-3 translate-y-3 rounded-none group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500 ease-out"></div>
                 <div className="relative aspect-[3/4] w-full transition-all duration-700 ease-in-out bg-slate-900 overflow-hidden">
                   <Image 
@@ -47,14 +47,14 @@ export function About() {
                     alt="Graeme Tudhope - Principal Consultant"
                     fill
                     className="object-cover object-center opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-                    sizes="(max-width: 768px) 100vw, 240px"
+                    sizes="(max-width: 768px) 100vw, 280px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-strath-navy/80 via-transparent to-transparent opacity-60"></div>
                 </div>
               </div>
             </div>
             
-            <div className="md:col-span-8">
+            <div className="md:w-2/3">
               <h3 className="text-2xl font-serif font-bold text-white mb-6">Principal-Led Advisory</h3>
               <div className="space-y-6 text-base text-slate-400">
                 <p>
