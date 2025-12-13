@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 export function BlogSection() {
   return (
-    <section className="w-full max-w-6xl px-6 py-24">
+    <section className="w-full max-w-6xl px-6 py-24" id="blog">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Intelligence Log</h2>
@@ -53,4 +53,3 @@ export function BlogSection() {
     </section>
   );
 }
-
