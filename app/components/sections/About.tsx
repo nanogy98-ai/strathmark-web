@@ -38,17 +38,19 @@ export function About() {
           </div>
 
           <div className="mt-16 pt-12 border-t border-white/5 grid grid-cols-1 md:grid-cols-12 gap-12">
-            <div className="md:col-span-4 relative group">
-              <div className="absolute inset-0 bg-gold/10 transform translate-x-3 translate-y-3 rounded-none group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500 ease-out"></div>
-              <div className="relative aspect-[3/4] w-full max-w-[240px] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out bg-slate-900 overflow-hidden">
-                <Image 
-                  src="/founder.png"
-                  alt="Graeme Tudhope - Principal Consultant"
-                  fill
-                  className="object-cover object-center opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                  sizes="(max-width: 768px) 100vw, 240px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-strath-navy/80 via-transparent to-transparent opacity-60"></div>
+            <div className="md:col-span-4">
+              <div className="relative group w-full max-w-[240px]">
+                <div className="absolute inset-0 bg-gold/10 transform translate-x-3 translate-y-3 rounded-none group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500 ease-out"></div>
+                <div className="relative aspect-[3/4] w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out bg-slate-900 overflow-hidden">
+                  <Image 
+                    src="/founder.png"
+                    alt="Graeme Tudhope - Principal Consultant"
+                    fill
+                    className="object-cover object-center opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                    sizes="(max-width: 768px) 100vw, 240px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-strath-navy/80 via-transparent to-transparent opacity-60"></div>
+                </div>
               </div>
             </div>
             
