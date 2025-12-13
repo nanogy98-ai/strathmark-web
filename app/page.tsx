@@ -5,7 +5,7 @@ import { Hero } from "@/app/components/sections/Hero";
 import { About } from "@/app/components/sections/About";
 import { Services } from "@/app/components/sections/Services";
 import { Approach } from "@/app/components/sections/Approach";
-import { Proof } from "@/app/components/sections/Proof";
+import { ProvenOutcomes } from "@/app/components/sections/ProvenOutcomes";
 import { Insights } from "@/app/components/sections/Insights";
 import { FAQ } from "@/app/components/sections/FAQ";
 import { Contact } from "@/app/components/sections/Contact";
@@ -19,8 +19,8 @@ export default function Home() {
       <About />
       <Services />
       <Approach />
+      <ProvenOutcomes />
       <Insights />
-      <Proof />
       <FAQ />
       <Contact />
       <Footer />

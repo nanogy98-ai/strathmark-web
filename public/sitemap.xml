@@ -6,16 +6,39 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://strathmark.com/#about</loc>
+    <loc>https://strathmark.com/case-studies</loc>
+    <lastmod>2025-12-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://strathmark.com/case-studies/organic-turnaround-uk-automotive</loc>
+    <lastmod>2025-12-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://strathmark.com/insights/marketing-retainer-failure</loc>
     <lastmod>2025-12-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://strathmark.com/#services</loc>
+    <loc>https://strathmark.com/insights/traffic-is-not-kpi</loc>
+    <lastmod>2025-12-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://strathmark.com/insights/ad-account-audit</loc>
+    <lastmod>2025-12-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://strathmark.com/insights/hidden-cost-technical-debt</loc>
     <lastmod>2025-12-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>
-

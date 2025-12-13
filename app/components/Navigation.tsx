@@ -22,12 +22,12 @@ export function Navigation() {
     { name: "About", href: "/#about" },
     { name: "Services", href: "/#services" },
     { name: "Approach", href: "/#approach" },
+    { name: "Case Studies", href: "/case-studies" },
     { name: "Insights", href: "/#insights" },
     { name: "FAQs", href: "/#faq" },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Only handle smooth scroll if on the home page and link is an anchor
     if (window.location.pathname === "/" && href.startsWith("/#")) {
       e.preventDefault();
       setIsOpen(false);
@@ -65,7 +65,7 @@ export function Navigation() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
