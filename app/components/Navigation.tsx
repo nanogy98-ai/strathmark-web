@@ -19,23 +19,29 @@ export function Navigation() {
   }, []);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Approach", href: "#approach" },
-    { name: "Proof", href: "#proof" },
-    { name: "FAQs", href: "#faq" },
+    { name: "About", href: "/#about" },
+    { name: "Services", href: "/#services" },
+    { name: "Approach", href: "/#approach" },
+    { name: "Insights", href: "/#insights" },
+    { name: "FAQs", href: "/#faq" },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 100;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth"
-      });
+    // Only handle smooth scroll if on the home page and link is an anchor
+    if (window.location.pathname === "/" && href.startsWith("/#")) {
+      e.preventDefault();
+      setIsOpen(false);
+      const id = href.replace("/", "");
+      const element = document.querySelector(id);
+      if (element) {
+        const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: "smooth"
+        });
+      }
+    } else {
+      setIsOpen(false);
     }
   };
 
@@ -61,22 +67,22 @@ export function Navigation() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
-            <a 
+            <Link 
               key={link.name} 
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
               className="text-sm font-medium text-slate-300 hover:text-white hover:text-gold transition-colors uppercase tracking-wider"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
-          <a 
-            href="#contact"
-            onClick={(e) => handleLinkClick(e, "#contact")}
+          <Link 
+            href="/#contact"
+            onClick={(e) => handleLinkClick(e, "/#contact")}
             className="bg-white text-strath-navy px-6 py-2.5 text-sm font-bold tracking-wide hover:bg-gold hover:text-white transition-all duration-300 uppercase"
           >
             Request a Review
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -100,22 +106,22 @@ export function Navigation() {
           >
             <div className="flex flex-col p-8 gap-6">
               {navLinks.map((link) => (
-                <a 
+                <Link 
                   key={link.name} 
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
                   className="text-xl font-serif text-slate-200 hover:text-gold transition-colors"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
-              <a 
-                href="#contact"
-                onClick={(e) => handleLinkClick(e, "#contact")}
+              <Link 
+                href="/#contact"
+                onClick={(e) => handleLinkClick(e, "/#contact")}
                 className="mt-4 text-center bg-gold text-strath-navy py-4 font-bold uppercase tracking-widest"
               >
                 Request a Review
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
@@ -123,4 +129,3 @@ export function Navigation() {
     </nav>
   );
 }
-

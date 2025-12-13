@@ -6,6 +6,7 @@ import { About } from "@/app/components/sections/About";
 import { Services } from "@/app/components/sections/Services";
 import { Approach } from "@/app/components/sections/Approach";
 import { Proof } from "@/app/components/sections/Proof";
+import { Insights } from "@/app/components/sections/Insights";
 import { FAQ } from "@/app/components/sections/FAQ";
 import { Contact } from "@/app/components/sections/Contact";
 import { Footer } from "@/app/components/sections/Footer";
@@ -18,6 +19,7 @@ export default function Home() {
       <About />
       <Services />
       <Approach />
+      <Insights />
       <Proof />
       <FAQ />
       <Contact />
