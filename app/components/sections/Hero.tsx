@@ -16,13 +16,13 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="lg:col-span-7 space-y-8"
+          className="lg:col-span-8 space-y-8"
         >
           <div className="inline-block px-3 py-1 border border-gold/30 bg-gold/5 text-gold text-xs font-mono tracking-widest uppercase mb-4">
             Strategic Digital Consulting
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight max-w-4xl">
             Strategic Digital Consulting for Organisations Where <span className="text-gold italic">Spend</span>, <span className="text-gold italic">Scale</span>, and <span className="text-gold italic">Search</span> Matter.
           </h1>
           
@@ -46,15 +46,15 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="pt-8 border-t border-white/5 flex flex-wrap gap-x-8 gap-y-4 text-sm text-slate-400 font-mono">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={16} className="text-gold" /> Senior-led engagements
+          <div className="pt-8 border-t border-white/5 flex flex-wrap gap-x-12 gap-y-4 text-sm text-slate-400 font-mono">
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-1.5 bg-gold rounded-full"></div> Senior-led engagements
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={16} className="text-gold" /> Platform & spend oversight
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-1.5 bg-gold rounded-full"></div> Platform & spend oversight
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={16} className="text-gold" /> Selective retainers
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-1.5 bg-gold rounded-full"></div> Selective retainers
             </div>
           </div>
         </motion.div>
@@ -64,15 +64,10 @@ export function Hero() {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="lg:col-span-5"
+          className="lg:col-span-4"
         >
-          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 md:p-10 rounded-none relative">
-            <div className="absolute top-0 right-0 p-4 opacity-20">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-white">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <h3 className="text-white font-serif text-2xl mb-6 border-b border-white/10 pb-4">Engagement Protocol</h3>
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 rounded-none relative">
+            <h3 className="text-white font-serif text-xl mb-6 border-b border-white/10 pb-4">Engagement Protocol</h3>
             
             <div className="space-y-6">
               {[
@@ -82,10 +77,10 @@ export function Hero() {
                 { step: "04", title: "Execution (Optional)", desc: "Implementation support where needed." }
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 items-start group">
-                  <span className="font-mono text-gold/50 text-sm pt-1 group-hover:text-gold transition-colors">{item.step}</span>
+                  <span className="font-mono text-gold/50 text-xs pt-1 group-hover:text-gold transition-colors">{item.step}</span>
                   <div>
                     <h4 className="text-white font-medium text-sm group-hover:text-gold transition-colors">{item.title}</h4>
-                    <p className="text-slate-500 text-xs mt-1">{item.desc}</p>
+                    <p className="text-slate-500 text-xs mt-1 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -100,10 +95,6 @@ export function Hero() {
                 <ChevronRight size={12} className="text-gold" />
                 Clear priorities in 7-14 days
               </div>
-              <div className="flex items-center gap-2">
-                <ChevronRight size={12} className="text-gold" />
-                No long-term lock-ins required
-              </div>
             </div>
           </div>
         </motion.div>
@@ -111,4 +102,3 @@ export function Hero() {
     </section>
   );
 }
-
