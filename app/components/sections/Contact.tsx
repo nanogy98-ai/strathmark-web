@@ -27,12 +27,14 @@ function getEmailDomain(email: string) {
 
 const DEFAULT_FORMSPREE_ENDPOINT = "https://formspree.io/f/xvgeyopw";
 
+function isFreeEmailDomain(email: string) {
+  const domain = getEmailDomain(email);
+  return domain.length > 0 && FREE_EMAIL_DOMAINS.has(domain);
+}
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email address").refine((value) => {
-    const domain = getEmailDomain(value);
-    return domain.length > 0 && !FREE_EMAIL_DOMAINS.has(domain);
-  }, "Please use a work email address (free email domains are blocked)"),
+  email: z.string().email("Invalid email address"),
   company: z.string().min(2, "Company name is required"),
   website: z.string().url("Invalid URL"),
   country: z.string().min(2, "Country is required"),
@@ -68,6 +70,7 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [emailWarning, setEmailWarning] = useState<string | null>(null);
   const [errors, setErrors] = useState<ContactFormErrors>({});
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -109,6 +112,8 @@ export function Contact() {
     // We include a readable "summary" field for fast scanning.
     const payload = {
       ...result.data,
+      emailDomain: getEmailDomain(result.data.email),
+      emailIsFreeDomain: isFreeEmailDomain(result.data.email),
       summary: [
         `Name: ${result.data.name}`,
         `Email: ${result.data.email}`,
@@ -187,7 +192,39 @@ export function Contact() {
           <h3 className="text-white font-serif border-b border-white/10 pb-2 mb-6">Identity</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InputField label="Full Name" name="name" placeholder="John Doe" error={errors.name} />
-            <InputField label="Work Email" name="email" type="email" placeholder="john@company.com" error={errors.email} />
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono text-gold uppercase tracking-wider block">Work Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="john@company.com"
+                      className={clsx(
+                        "w-full bg-black/30 border p-4 text-white focus:border-gold outline-none transition-colors placeholder:text-slate-600",
+                        errors.email ? "border-red-500" : "border-white/10"
+                      )}
+                      onChange={(e) => {
+                        const value = e.currentTarget.value;
+                        if (value && isFreeEmailDomain(value)) {
+                          setEmailWarning(
+                            "Free email domains are allowed, but we prioritise enquiries from company addresses. If you are early-stage, add a short note in the brief."
+                          );
+                        } else {
+                          setEmailWarning(null);
+                        }
+                      }}
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-xs flex items-center gap-1 mt-1">
+                        <AlertCircle size={12} /> {errors.email[0]}
+                      </p>
+                    )}
+                    {emailWarning && !errors.email && (
+                      <p className="text-amber-200/90 text-xs flex items-start gap-2 mt-1">
+                        <AlertCircle size={12} className="mt-0.5 shrink-0 text-amber-300" />
+                        <span>{emailWarning}</span>
+                      </p>
+                    )}
+                  </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InputField label="Company Name" name="company" placeholder="Acme Corp Ltd." error={errors.company} />
