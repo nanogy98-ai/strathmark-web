@@ -38,16 +38,14 @@ export function CookieBanner() {
     }
     setDismissed(true);
 
-    if (value === "analytics") {
-      // Consent Mode: upgrade analytics storage without requiring a reload.
-      if (typeof window.gtag === "function") {
-        window.gtag("consent", "update", {
-          analytics_storage: "granted",
-          ad_storage: "denied",
-          ad_user_data: "denied",
-          ad_personalization: "denied",
-        });
-      }
+    // Consent Mode: update immediately (works for both GTM and gtag-based setups).
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        analytics_storage: value === "analytics" ? "granted" : "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      });
     }
   };
 
