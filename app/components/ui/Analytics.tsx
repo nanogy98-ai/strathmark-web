@@ -4,7 +4,7 @@ import Script from "next/script";
 import { useEffect } from "react";
 
 const CONSENT_KEY = "strathmark_cookie_consent_v1";
-const GTM_ID = "GTM-MFZTXSGM";
+const GA_MEASUREMENT_ID = "G-6W1G9FJ5TV";
 
 declare global {
   interface Window {
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-export function GTM() {
+export function Analytics() {
   // If the user has already consented, upgrade analytics storage on mount.
   useEffect(() => {
     let stored: string | null = null;
@@ -35,8 +35,8 @@ export function GTM() {
 
   return (
     <>
-      {/* Consent Mode defaults must be set before GTM loads */}
-      <Script id="gtm-consent-default" strategy="beforeInteractive">
+      {/* Consent Mode defaults should be set before gtag loads */}
+      <Script id="ga-consent-default" strategy="beforeInteractive">
         {`
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -50,31 +50,21 @@ gtag('consent', 'default', {
         `}
       </Script>
 
-      {/* Google Tag Manager */}
-      <Script id="gtm-loader" strategy="beforeInteractive">
+      {/* Google tag (gtag.js) */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="beforeInteractive"
+      />
+
+      <Script id="ga4-init" strategy="beforeInteractive">
         {`
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM_ID}');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
         `}
       </Script>
     </>
-  );
-}
-
-export function GTMNoScript() {
-  return (
-    <noscript>
-      <iframe
-        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-        height="0"
-        width="0"
-        style={{ display: "none", visibility: "hidden" }}
-        title="Google Tag Manager"
-      />
-    </noscript>
   );
 }
 

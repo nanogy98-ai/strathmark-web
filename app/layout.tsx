@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/app/components/ui/CookieBanner";
-import { GTM, GTMNoScript } from "@/app/components/ui/GTM";
+import { Analytics } from "@/app/components/ui/Analytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -74,8 +74,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-strath-navy text-slate-200`}>
-        <GTMNoScript />
-        <GTM />
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

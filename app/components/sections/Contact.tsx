@@ -26,7 +26,11 @@ function getEmailDomain(email: string) {
 }
 
 const DEFAULT_FORMSPREE_ENDPOINT = "https://formspree.io/f/xvgeyopw";
-const DATALAYER_EVENT_FORM_SUBMIT = "strathmark_generate_lead";
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
 function isFreeEmailDomain(email: string) {
   const domain = getEmailDomain(email);
@@ -149,18 +153,18 @@ export function Contact() {
 
       window.localStorage.setItem("strathmark_last_submit_ts", String(Date.now()));
 
-      // Tracking hook (GTM/GA4): push a non-PII lead event on successful submission.
-      // Note: do not include email/name/message in the dataLayer.
+      // Tracking hook (GA4): fire a non-PII lead event on successful submission.
+      // Note: do not include email/name/message in analytics payloads.
       try {
-        (window as unknown as { dataLayer?: unknown[] }).dataLayer = (window as unknown as { dataLayer?: unknown[] }).dataLayer || [];
-        (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({
-          event: DATALAYER_EVENT_FORM_SUBMIT,
-          form_id: "contact",
-          serviceType: result.data.serviceType,
-          situation: result.data.situation,
-          spend: result.data.spend,
-          timeline: result.data.timeline,
-        });
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", {
+            form_id: "contact",
+            serviceType: result.data.serviceType,
+            situation: result.data.situation,
+            spend: result.data.spend,
+            timeline: result.data.timeline,
+          });
+        }
       } catch {
         // ignore tracking errors
       }
