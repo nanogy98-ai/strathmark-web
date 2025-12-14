@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Navigation } from "@/app/components/Navigation";
 import { Footer } from "@/app/components/sections/Footer";
+import { CookieResetButton } from "@/app/components/ui/CookieResetButton";
 
 export const metadata: Metadata = {
   title: "Privacy & Cookies | Strathmark Consulting",
@@ -32,14 +33,23 @@ export default function PrivacyPage() {
         <section className="space-y-6 text-slate-300 leading-relaxed">
           <h2 className="text-2xl font-serif font-bold text-white">Cookies and local storage</h2>
           <p>
-            We use essential storage to remember site preferences, such as dismissing the cookie notice.
-            We do not use marketing cookies.
+            We use essential storage to remember site preferences, such as your cookie choices.
+          </p>
+
+          <h2 className="text-2xl font-serif font-bold text-white">Analytics</h2>
+          <p>
+            With your permission, we use Google Analytics (GA4) to understand how the site is used and to improve performance and clarity.
+            If you reject analytics cookies, Google Analytics will not load.
           </p>
 
           <h2 className="text-2xl font-serif font-bold text-white">Contact form submissions</h2>
           <p>
             When you submit the contact form, the information you provide is sent to Strathmark Consulting for the purpose of responding to your enquiry.
           </p>
+
+          <div className="pt-2">
+            <CookieResetButton />
+          </div>
 
           <h2 className="text-2xl font-serif font-bold text-white">Contact</h2>
           <p>
@@ -51,7 +61,7 @@ export default function PrivacyPage() {
           </p>
 
           <p className="text-xs text-slate-500">
-            Note: this page is intentionally concise and can be expanded once analytics, advertising, or additional vendors are introduced.
+            Note: this page is intentionally concise and can be expanded once advertising or additional vendors are introduced.
           </p>
         </section>
       </article>
