@@ -61,6 +61,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://strathmark.com",
+    languages: {
+      "en-GB": "https://strathmark.com",
+      "es-ES": "https://strathmark.com/es",
+    },
   },
 };
 

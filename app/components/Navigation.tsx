@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 
@@ -65,7 +65,7 @@ export function Navigation() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
@@ -76,6 +76,15 @@ export function Navigation() {
               {link.name}
             </Link>
           ))}
+          
+          {/* Language Switcher Placeholder */}
+          <div className="flex items-center gap-2 text-xs font-mono border border-slate-700 rounded px-2 py-1 text-slate-400 hover:border-gold transition-colors cursor-pointer group">
+            <Globe size={14} className="group-hover:text-gold" />
+            <span className="text-white font-bold">EN</span>
+            <span className="text-slate-600">|</span>
+            <Link href="/es" className="hover:text-gold transition-colors">ES</Link>
+          </div>
+
           <Link 
             href="/#contact"
             onClick={(e) => handleLinkClick(e, "/#contact")}
@@ -115,6 +124,15 @@ export function Navigation() {
                   {link.name}
                 </Link>
               ))}
+              
+              <div className="flex items-center gap-4 py-4 border-t border-white/5">
+                <span className="text-sm font-mono text-slate-400">Language:</span>
+                <div className="flex gap-4 font-bold text-white">
+                  <span>EN</span>
+                  <Link href="/es" className="text-slate-500 hover:text-gold">ES</Link>
+                </div>
+              </div>
+
               <Link 
                 href="/#contact"
                 onClick={(e) => handleLinkClick(e, "/#contact")}
