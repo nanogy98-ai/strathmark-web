@@ -6,6 +6,7 @@ import { ArrowRight, BarChart, Server, Lock } from "lucide-react";
 export function Services() {
   const pillars = [
     {
+      shortTitle: "The Audit",
       title: "Strategic Digital & Commercial Advisory",
       icon: <BarChart className="text-gold" size={32} />,
       for: "For leadership teams needing oversight.",
@@ -20,6 +21,7 @@ export function Services() {
       link: "#contact"
     },
     {
+      shortTitle: "The Fix",
       title: "Platform & Infrastructure Consulting",
       icon: <Server className="text-gold" size={32} />,
       for: "For technical teams facing scale issues.",
@@ -34,6 +36,7 @@ export function Services() {
       link: "#contact"
     },
     {
+      shortTitle: "The Partner",
       title: "Retained Execution (By Invitation)",
       icon: <Lock className="text-gold" size={32} />,
       for: "For organizations requiring ongoing precision.",
@@ -76,13 +79,21 @@ export function Services() {
             transition={{ delay: i * 0.1 }}
             className="bg-white/[0.02] border border-white/5 p-8 md:p-10 flex flex-col hover:border-gold/30 transition-colors group"
           >
-            <div className="mb-8 p-4 bg-white/5 w-fit rounded-sm group-hover:bg-gold/10 transition-colors">
-              {pillar.icon}
+            <div className="flex justify-between items-start mb-8">
+              <div className="p-4 bg-white/5 w-fit rounded-sm group-hover:bg-gold/10 transition-colors">
+                {pillar.icon}
+              </div>
+              <div className="text-slate-600 font-mono text-4xl font-bold opacity-20 group-hover:opacity-40 group-hover:text-gold transition-all">
+                0{i+1}
+              </div>
             </div>
             
-            <h3 className="text-2xl font-serif font-bold text-white mb-4 min-h-[64px]">
-              {pillar.title}
+            <h3 className="text-3xl font-serif font-bold text-white mb-2">
+              {pillar.shortTitle}
             </h3>
+            <div className="text-slate-500 text-xs uppercase tracking-wider font-bold mb-6 h-8">
+              {pillar.title}
+            </div>
             
             <div className="text-gold/80 font-mono text-xs uppercase mb-2 tracking-wide">Who it is for</div>
             <p className="text-slate-400 text-sm mb-6 pb-6 border-b border-white/5">
@@ -115,4 +126,3 @@ export function Services() {
     </section>
   );
 }
-

@@ -43,8 +43,8 @@ export function About() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-8 items-start">
-            <div className="md:w-1/3 flex-shrink-0">
+          <div className="flex flex-col md:flex-row gap-8 items-start relative">
+            <div className="md:w-1/3 flex-shrink-0 relative">
               <div className="relative group w-full max-w-[200px]">
                 <div className="absolute inset-0 bg-gold/10 transform translate-x-2 translate-y-2 rounded-none group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-500 ease-out"></div>
                 <div className="relative aspect-[3/4] w-full transition-all duration-700 ease-in-out bg-slate-900 overflow-hidden">
@@ -61,16 +61,20 @@ export function About() {
             </div>
             
             <div className="md:w-2/3">
-              <h3 className="text-xl font-serif font-bold text-white mb-4">Principal-Led Advisory</h3>
+              <div className="absolute -top-6 -left-6 md:left-auto md:right-0 text-6xl text-gold/20 font-serif italic z-0">
+                “
+              </div>
+              <blockquote className="relative z-10 text-xl md:text-2xl font-serif text-white italic leading-relaxed mb-6">
+                Most agencies profit from confusion. <br/><span className="text-gold">We profit from clarity.</span>
+              </blockquote>
+              
+              <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-2">Principal-Led Advisory</h3>
               <div className="space-y-4 text-sm text-slate-400 leading-relaxed">
                 <p>
                   Strathmark is led by Graeme, a principal consultant with over a decade of experience across agency, contracting, and in-house roles for major international brands.
                 </p>
                 <p>
-                  Starting in technical support for SMEs at 17, Graeme's career evolved through building digital products, managing complex agency projects for finance and automotive clients, and leading in-house growth teams for high-velocity brands.
-                </p>
-                <p>
-                  He founded Strathmark to solve a specific problem: too many organisations spend significantly on digital marketing without clarity on what works. Strathmark exists to remove that noise and restore commercial focus.
+                  He founded Strathmark to solve a specific problem: too many organisations spend significantly on digital marketing without clarity on what works.
                 </p>
               </div>
             </div>

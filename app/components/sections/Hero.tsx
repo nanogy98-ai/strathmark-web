@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 export function Hero() {
   return (
@@ -16,85 +17,112 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="lg:col-span-8 space-y-8"
+          className="lg:col-span-7 space-y-8"
         >
           <div className="inline-block px-3 py-1 border border-gold/30 bg-gold/5 text-gold text-xs font-mono tracking-widest uppercase mb-4">
             Strategic Digital Consulting
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight max-w-4xl">
-            Strategic Digital Consulting for Organisations Where <span className="text-gold italic">Spend</span>, <span className="text-gold italic">Scale</span>, and <span className="text-gold italic">Search</span> Matter.
+            Stop Paying for Traffic That Doesn't Buy.
           </h1>
           
           <p className="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
-            Advisory and selective execution across digital architecture, performance spend, and technical search strategy. Built for organisations where mistakes are expensive.
+            Technical architecture for commercial growth. We fix the structural failures that bleed revenue in high-liability industries.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <a 
-              href="#contact" 
-              className="bg-gold text-strath-navy px-8 py-4 font-bold text-base tracking-wide uppercase hover:bg-white transition-all flex items-center justify-center gap-2 group"
-            >
-              Request a Review 
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a 
-              href="#approach" 
-              className="px-8 py-4 border border-slate-700 text-white font-medium text-base tracking-wide uppercase hover:border-gold hover:text-gold transition-colors flex items-center justify-center"
-            >
-              See How We Work
-            </a>
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <a 
+                href="#contact" 
+                className="bg-gold text-strath-navy px-8 py-4 font-bold text-base tracking-wide uppercase hover:bg-white transition-all flex items-center justify-center gap-2 group"
+              >
+                Request a Review 
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a 
+                href="#approach" 
+                className="px-8 py-4 border border-slate-700 text-white font-medium text-base tracking-wide uppercase hover:border-gold hover:text-gold transition-colors flex items-center justify-center"
+              >
+                See How We Work
+              </a>
+            </div>
+            <div className="text-xs text-slate-500 font-mono flex items-center gap-4 pl-1">
+              <span>// Fixed fees.</span>
+              <span>// 14-day turnaround.</span>
+              <span>// No lock-in.</span>
+            </div>
           </div>
 
-          <div className="pt-8 border-t border-white/5 flex flex-wrap gap-x-12 gap-y-4 text-sm text-slate-400 font-mono">
-            <div className="flex items-center gap-3">
-              <div className="w-1.5 h-1.5 bg-gold rounded-full"></div> Senior-led engagements
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-1.5 h-1.5 bg-gold rounded-full"></div> Platform & spend oversight
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-1.5 h-1.5 bg-gold rounded-full"></div> Selective retainers
+          <div className="pt-8 border-t border-white/5">
+            <p className="text-xs text-slate-500 font-mono uppercase tracking-widest mb-4">Trusted Architecture & Partners</p>
+            <div className="flex flex-wrap gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+               {/* Using existing assets and simple text/svg for tech stack logos as trust signals */}
+               <Image src="/next.svg" alt="Next.js" width={90} height={20} className="invert" />
+               <Image src="/vercel.svg" alt="Vercel" width={90} height={20} className="invert" />
+               {/* Simple SVG for Google Partner */}
+               <svg viewBox="0 0 24 24" className="h-6 w-auto fill-current text-white" aria-label="Google">
+                 <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
+               </svg>
             </div>
           </div>
         </motion.div>
 
-        {/* Right Column: Engagement Overview Card */}
+        {/* Right Column: Visual Engagement Diagram */}
         <motion.div 
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="lg:col-span-4"
+          className="lg:col-span-5"
         >
-          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 rounded-none relative">
-            <h3 className="text-white font-serif text-xl mb-6 border-b border-white/10 pb-4">Engagement Protocol</h3>
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 rounded-none relative overflow-hidden">
+            {/* Diagram Background Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] pointer-events-none"></div>
             
-            <div className="space-y-6">
-              {[
-                { step: "01", title: "Audit & Review", desc: "Deep-dive analysis of infrastructure." },
-                { step: "02", title: "Findings & Priorities", desc: "Commercial impact assessment." },
-                { step: "03", title: "Strategic Roadmap", desc: "12-month execution plan." },
-                { step: "04", title: "Execution (Optional)", desc: "Implementation support where needed." }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-4 items-start group">
-                  <span className="font-mono text-gold/50 text-xs pt-1 group-hover:text-gold transition-colors">{item.step}</span>
-                  <div>
-                    <h4 className="text-white font-medium text-sm group-hover:text-gold transition-colors">{item.title}</h4>
-                    <p className="text-slate-500 text-xs mt-1 leading-relaxed">{item.desc}</p>
-                  </div>
+            <h3 className="text-white font-serif text-xl mb-8 border-b border-white/10 pb-4 relative z-10">Protocol</h3>
+            
+            <div className="relative z-10 space-y-0">
+              {/* Step 1: Input */}
+              <div className="flex items-center gap-4 relative">
+                <div className="w-12 h-12 rounded-full border border-white/20 bg-strath-navy flex items-center justify-center shrink-0 z-10 shadow-[0_0_15px_rgba(197,160,89,0.1)]">
+                  <span className="font-mono text-white/50 text-xs">01</span>
                 </div>
-              ))}
+                <div className="bg-white/5 border border-white/10 p-4 w-full">
+                  <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Diagnosis</div>
+                  <div className="text-white font-bold">Audit & Review</div>
+                </div>
+                {/* Connector Line */}
+                <div className="absolute left-6 top-12 h-full w-px bg-gradient-to-b from-white/20 to-gold/50 -z-0"></div>
+              </div>
+
+              {/* Step 2: Process */}
+              <div className="flex items-center gap-4 relative pt-8">
+                <div className="w-12 h-12 rounded-full border border-gold bg-gold/10 flex items-center justify-center shrink-0 z-10 shadow-[0_0_20px_rgba(197,160,89,0.3)]">
+                  <span className="font-mono text-gold text-xs">02</span>
+                </div>
+                <div className="bg-gold/10 border border-gold/30 p-4 w-full">
+                  <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Strategy</div>
+                  <div className="text-white font-bold">The Roadmap</div>
+                </div>
+                {/* Connector Line */}
+                <div className="absolute left-6 top-20 h-full w-px bg-gradient-to-b from-gold/50 to-white/20 -z-0"></div>
+              </div>
+
+              {/* Step 3: Output */}
+              <div className="flex items-center gap-4 relative pt-8">
+                <div className="w-12 h-12 rounded-full border border-white/20 bg-strath-navy flex items-center justify-center shrink-0 z-10">
+                  <span className="font-mono text-white/50 text-xs">03</span>
+                </div>
+                <div className="bg-white/5 border border-white/10 p-4 w-full">
+                  <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Outcome</div>
+                  <div className="text-white font-bold">Execution & Scale</div>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-8 bg-black/20 p-4 border border-white/5 text-xs text-slate-400 space-y-2 font-mono">
-              <div className="flex items-center gap-2">
-                <ChevronRight size={12} className="text-gold" />
-                Fixed-fee entry points
-              </div>
-              <div className="flex items-center gap-2">
-                <ChevronRight size={12} className="text-gold" />
-                Clear priorities in 7-14 days
-              </div>
+            <div className="mt-8 pt-6 border-t border-white/10 flex justify-between items-center text-xs font-mono text-slate-500">
+              <span>STATUS: ACTIVE</span>
+              <span className="text-gold animate-pulse">● LIVE MONITORING</span>
             </div>
           </div>
         </motion.div>
