@@ -25,6 +25,8 @@ function getEmailDomain(email: string) {
   return email.split("@").pop()?.toLowerCase().trim() ?? "";
 }
 
+const DEFAULT_FORMSPREE_ENDPOINT = "https://formspree.io/f/xvgeyopw";
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email address").refine((value) => {
@@ -101,12 +103,7 @@ export function Contact() {
       return;
     }
 
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
-    if (!endpoint) {
-      setIsSubmitting(false);
-      setSubmitError("Form is not configured yet. Add NEXT_PUBLIC_FORMSPREE_ENDPOINT to enable submissions.");
-      return;
-    }
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || DEFAULT_FORMSPREE_ENDPOINT;
 
     // Formspree accepts JSON and forwards to your configured inbox.
     // We include a readable "summary" field for fast scanning.
