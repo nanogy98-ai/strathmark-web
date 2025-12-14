@@ -42,7 +42,7 @@ export function CookieBanner() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[60] p-4 md:p-6">
-      <div className="mx-auto max-w-7xl border border-white/10 bg-strath-navy/95 backdrop-blur-md shadow-xl">
+      <div className="mx-auto max-w-7xl border border-white/10 bg-strath-navy/95 supports-[backdrop-filter]:backdrop-blur-sm shadow-xl transform-gpu">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 md:p-5">
           <div className="text-sm text-slate-300 leading-relaxed">
             <span className="font-semibold text-white">Cookies.</span>{" "}

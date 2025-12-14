@@ -11,11 +11,19 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    let raf = 0;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (raf) return;
+      raf = window.requestAnimationFrame(() => {
+        raf = 0;
+        setScrolled(window.scrollY > 20);
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
   }, []);
 
   const navLinks = [
@@ -48,9 +56,9 @@ export function Navigation() {
   return (
     <nav 
       className={clsx(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b",
+        "fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b transform-gpu",
         scrolled 
-          ? "bg-strath-navy/95 backdrop-blur-md border-slate-800 py-4 shadow-lg" 
+          ? "bg-strath-navy/95 supports-[backdrop-filter]:backdrop-blur-sm border-slate-800 py-4 shadow-lg" 
           : "bg-transparent border-transparent py-6"
       )}
     >
