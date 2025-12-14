@@ -1,29 +1,38 @@
 "use client";
 
 import Script from "next/script";
-import { useSyncExternalStore } from "react";
+import { useEffect } from "react";
 
 const CONSENT_KEY = "strathmark_cookie_consent_v1";
 const GA_MEASUREMENT_ID = "G-6W1G9FJ5TV";
 
-function getConsentValue() {
-  try {
-    return window.localStorage.getItem(CONSENT_KEY);
-  } catch {
-    return null;
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
 export function Analytics() {
-  const consent = useSyncExternalStore(
-    () => () => {
-      // No-op subscription: consent changes cause reload or state change elsewhere.
-    },
-    () => getConsentValue(),
-    () => null
-  );
+  // If the user has already consented, upgrade analytics storage on mount.
+  useEffect(() => {
+    let stored: string | null = null;
+    try {
+      stored = window.localStorage.getItem(CONSENT_KEY);
+    } catch {
+      stored = null;
+    }
 
-  if (consent !== "analytics") return null;
+    if (stored === "analytics" && typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        analytics_storage: "granted",
+        // Keep ad-related consent denied unless you explicitly add advertising products.
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -35,6 +44,14 @@ export function Analytics() {
         {`
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
+// Consent Mode: deny by default until user grants analytics in the cookie banner.
+gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  wait_for_update: 500
+});
 gtag('js', new Date());
 gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
         `}

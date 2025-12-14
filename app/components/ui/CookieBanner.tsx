@@ -7,6 +7,12 @@ import { clsx } from "clsx";
 const CONSENT_KEY = "strathmark_cookie_consent_v1";
 type ConsentValue = "analytics" | "essential";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export function CookieBanner() {
   const [dismissed, setDismissed] = useState(false);
 
@@ -32,9 +38,16 @@ export function CookieBanner() {
     }
     setDismissed(true);
 
-    // Ensure analytics loader can run immediately without waiting for navigation.
     if (value === "analytics") {
-      window.location.reload();
+      // Consent Mode: upgrade analytics storage without requiring a reload.
+      if (typeof window.gtag === "function") {
+        window.gtag("consent", "update", {
+          analytics_storage: "granted",
+          ad_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+        });
+      }
     }
   };
 
