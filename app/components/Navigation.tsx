@@ -23,7 +23,7 @@ export function Navigation() {
     { name: "Services", href: "/#services" },
     { name: "Approach", href: "/#approach" },
     { name: "Case Studies", href: "/case-studies" },
-    { name: "Insights", href: "/#insights" },
+    { name: "Intelligence Log", href: "/#insights" },
     { name: "FAQs", href: "/#faq" },
   ];
 
@@ -65,7 +65,7 @@ export function Navigation() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
