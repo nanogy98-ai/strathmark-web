@@ -11,12 +11,17 @@ export function Insights() {
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
         <div>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Intelligence Log</h2>
-          <p className="text-slate-400 text-lg">Field notes from the front lines of digital engineering.</p>
+          <p className="text-slate-400 text-lg">Latest field notes and commercial breakdowns.</p>
+        </div>
+        <div className="hidden md:block">
+          <Link href="/insights" className="text-gold flex items-center gap-2 hover:gap-4 transition-all uppercase tracking-widest text-xs font-mono">
+            View Full Archive <ArrowRight size={14} />
+          </Link>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {notes.map((note, i) => (
+        {notes.slice(0, 4).map((note, i) => (
           <Link href={`/insights/${note.slug}`} key={i} className="block group h-full">
             <motion.article 
               initial={{ opacity: 0, y: 20 }}
@@ -39,7 +44,12 @@ export function Insights() {
           </Link>
         ))}
       </div>
+
+      <div className="mt-8 md:hidden text-center">
+        <Link href="/insights" className="text-gold inline-flex items-center gap-2 uppercase tracking-widest text-xs font-mono">
+          View Full Archive <ArrowRight size={14} />
+        </Link>
+      </div>
     </section>
   );
 }
-
