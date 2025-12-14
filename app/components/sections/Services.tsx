@@ -6,11 +6,11 @@ import { ArrowRight, BarChart, Server, Lock } from "lucide-react";
 export function Services() {
   const pillars = [
     {
-      shortTitle: "The Audit",
+      shortTitle: "The Marketing Audit",
       title: "Strategic Digital & Commercial Advisory",
       icon: <BarChart className="text-gold" size={32} />,
       for: "For leadership teams needing oversight.",
-      outcome: "Clarity on spend, performance, and priorities.",
+      outcome: "We check if your agencies are doing their job. We tell you where your budget is actually going.",
       includes: [
         "Performance spend audit",
         "Vendor & agency management",
@@ -21,11 +21,11 @@ export function Services() {
       link: "#contact"
     },
     {
-      shortTitle: "The Fix",
+      shortTitle: "The Technical Fix",
       title: "Platform & Infrastructure Consulting",
       icon: <Server className="text-gold" size={32} />,
       for: "For technical teams facing scale issues.",
-      outcome: "Remediation of debt, speed, and scalability.",
+      outcome: "If your website is slow, broken, or not appearing in Google, we coordinate the repairs.",
       includes: [
         "Next.js / Headless architecture",
         "Core Web Vitals engineering",
@@ -36,11 +36,11 @@ export function Services() {
       link: "#contact"
     },
     {
-      shortTitle: "The Partner",
+      shortTitle: "The Ongoing Advisor",
       title: "Retained Execution (By Invitation)",
       icon: <Lock className="text-gold" size={32} />,
       for: "For organizations requiring ongoing precision.",
-      outcome: "Continuous architectural evolution.",
+      outcome: "We sit on your side of the table to manage your digital vendors so you don't have to.",
       includes: [
         "Limited client roster",
         "Direct senior engineer access",

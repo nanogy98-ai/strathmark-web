@@ -28,7 +28,7 @@ export function Hero() {
           </h1>
           
           <p className="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
-            Technical architecture for commercial growth. We fix the structural failures that bleed revenue in high-liability industries.
+            We audit your digital marketing agencies and internal teams to stop wasted spend and fix broken websites. Independent advice for business owners.
           </p>
           
           <div className="space-y-4">
@@ -55,15 +55,13 @@ export function Hero() {
           </div>
 
           <div className="pt-8 border-t border-white/5">
-            <p className="text-xs text-slate-500 font-mono uppercase tracking-widest mb-4">Trusted Architecture & Partners</p>
-            <div className="flex flex-wrap gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-               {/* Using existing assets and simple text/svg for tech stack logos as trust signals */}
-               <Image src="/next.svg" alt="Next.js" width={90} height={20} className="invert" />
-               <Image src="/vercel.svg" alt="Vercel" width={90} height={20} className="invert" />
-               {/* Simple SVG for Google Partner */}
-               <svg viewBox="0 0 24 24" className="h-6 w-auto fill-current text-white" aria-label="Google">
-                 <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
-               </svg>
+            <p className="text-xs text-slate-500 font-mono uppercase tracking-widest mb-4">Advisory Experience Includes</p>
+            <div className="flex flex-wrap gap-8 items-center opacity-50 grayscale hover:grayscale-0 transition-all duration-500 text-white text-sm font-serif tracking-widest">
+               {/* Replacing tech logos with prestigious text-based logotypes as placeholders for actual client logos to maintain "expensive" feel without fake logos */}
+               <span>JAGUAR</span>
+               <span>VOLKSWAGEN</span>
+               <span>LAND ROVER</span>
+               <span>WATERSTONES</span>
             </div>
           </div>
         </motion.div>
@@ -79,7 +77,7 @@ export function Hero() {
             {/* Diagram Background Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] pointer-events-none"></div>
             
-            <h3 className="text-white font-serif text-xl mb-8 border-b border-white/10 pb-4 relative z-10">Protocol</h3>
+            <h3 className="text-white font-serif text-xl mb-8 border-b border-white/10 pb-4 relative z-10">How We Work</h3>
             
             <div className="relative z-10 space-y-0">
               {/* Step 1: Input */}
@@ -89,7 +87,7 @@ export function Hero() {
                 </div>
                 <div className="bg-white/5 border border-white/10 p-4 w-full">
                   <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Diagnosis</div>
-                  <div className="text-white font-bold">Audit & Review</div>
+                  <div className="text-white font-bold">Audit (We Check)</div>
                 </div>
                 {/* Connector Line */}
                 <div className="absolute left-6 top-12 h-full w-px bg-gradient-to-b from-white/20 to-gold/50 -z-0"></div>
@@ -102,7 +100,7 @@ export function Hero() {
                 </div>
                 <div className="bg-gold/10 border border-gold/30 p-4 w-full">
                   <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Strategy</div>
-                  <div className="text-white font-bold">The Roadmap</div>
+                  <div className="text-white font-bold">Truth (We Report)</div>
                 </div>
                 {/* Connector Line */}
                 <div className="absolute left-6 top-20 h-full w-px bg-gradient-to-b from-gold/50 to-white/20 -z-0"></div>
@@ -115,14 +113,13 @@ export function Hero() {
                 </div>
                 <div className="bg-white/5 border border-white/10 p-4 w-full">
                   <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Outcome</div>
-                  <div className="text-white font-bold">Execution & Scale</div>
+                  <div className="text-white font-bold">Fix (We Solve)</div>
                 </div>
               </div>
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/10 flex justify-between items-center text-xs font-mono text-slate-500">
-              <span>STATUS: ACTIVE</span>
-              <span className="text-gold animate-pulse">● LIVE MONITORING</span>
+              <span>TIMELINE: 2 WEEKS</span>
             </div>
           </div>
         </motion.div>

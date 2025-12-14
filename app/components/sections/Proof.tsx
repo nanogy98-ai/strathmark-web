@@ -13,10 +13,10 @@ export function Proof() {
   ];
 
   const goodLooksLike = [
-    "Clear attribution linked to revenue",
-    "Fast, high-converting digital infrastructure",
+    "You know exactly what each £1 of spend generates",
+    "Your website actually brings in qualified leads",
     "Predictable, qualified lead flow",
-    "Clean reporting that the Board understands",
+    "Your agency reports make sense",
     "Accountable vendors and internal clarity"
   ];
 
@@ -72,4 +72,3 @@ export function Proof() {
     </section>
   );
 }
-
