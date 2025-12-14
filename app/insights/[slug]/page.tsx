@@ -38,7 +38,7 @@ export default async function NotePage({ params }: PageProps) {
       
       <article className="max-w-3xl mx-auto px-6 py-32 md:py-48 flex-1 w-full">
         <header className="mb-12 border-b border-white/5 pb-12">
-          <Link href="/#insights" className="text-slate-500 hover:text-gold transition-colors inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest mb-8">
+          <Link href="/insights" className="text-slate-500 hover:text-gold transition-colors inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest mb-8">
             <ArrowLeft size={14} /> Return to Intelligence Log
           </Link>
           
