@@ -34,7 +34,7 @@ export default function CaseStudiesIndex() {
               <div className="bg-white/[0.02] border border-white/10 p-8 h-full hover:border-gold/30 transition-colors flex flex-col">
                 <div className="flex gap-3 text-xs font-mono uppercase tracking-widest mb-6">
                   <span className="text-gold">{study.industry}</span>
-                  <span className="text-slate-600">//</span>
+                  <span className="text-slate-600">{"//"}</span>
                   <span className="text-slate-400">{study.region}</span>
                 </div>
                 

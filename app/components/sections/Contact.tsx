@@ -19,12 +19,29 @@ const contactSchema = z.object({
   honeypot: z.string().optional()
 });
 
-type FormData = z.infer<typeof contactSchema>;
+type ContactFormData = z.infer<typeof contactSchema>;
+type ContactFormErrors = Partial<Record<keyof ContactFormData, string[]>>;
+
+type InputFieldProps = {
+  label: string;
+  name: keyof ContactFormData;
+  type?: React.HTMLInputTypeAttribute;
+  placeholder?: string;
+  error?: string[];
+};
+
+type SelectOption = { label: string; value: string };
+type SelectFieldProps = {
+  label: string;
+  name: keyof ContactFormData;
+  options: SelectOption[];
+  error?: string[];
+};
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const [errors, setErrors] = useState<ContactFormErrors>({});
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -204,13 +221,13 @@ export function Contact() {
   );
 }
 
-function InputField({ label, name, type = "text", placeholder, error }: any) {
+function InputField({ label, name, type = "text", placeholder, error }: InputFieldProps) {
   return (
     <div className="space-y-2">
       <label className="text-xs font-mono text-gold uppercase tracking-wider block">{label}</label>
       <input 
         type={type} 
-        name={name}
+        name={name as string}
         placeholder={placeholder}
         className={clsx(
           "w-full bg-black/30 border p-4 text-white focus:border-gold outline-none transition-colors placeholder:text-slate-600",
@@ -226,13 +243,13 @@ function InputField({ label, name, type = "text", placeholder, error }: any) {
   );
 }
 
-function SelectField({ label, name, options, error }: any) {
+function SelectField({ label, name, options, error }: SelectFieldProps) {
   return (
     <div className="space-y-2">
       <label className="text-xs font-mono text-gold uppercase tracking-wider block">{label}</label>
       <div className="relative">
         <select 
-          name={name}
+          name={name as string}
           defaultValue=""
           className={clsx(
             "w-full bg-black/30 border p-4 text-white focus:border-gold outline-none transition-colors appearance-none cursor-pointer",
@@ -240,7 +257,7 @@ function SelectField({ label, name, options, error }: any) {
           )}
         >
           <option value="" disabled className="text-slate-500">Select...</option>
-          {options.map((opt: any) => (
+          {options.map((opt) => (
             <option key={opt.value} value={opt.value} className="bg-strath-navy text-white">{opt.label}</option>
           ))}
         </select>

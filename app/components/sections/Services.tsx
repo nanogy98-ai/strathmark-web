@@ -65,7 +65,7 @@ export function Services() {
           Advisory First. Execution Second.
         </h2>
         <p className="text-slate-400 text-lg leading-relaxed">
-          We separate strategy from implementation. Most "agencies" profit from confusion; we profit from clarity. Our three engagement models are designed to solve specific organizational failures.
+          We separate strategy from implementation. Most agencies profit from confusion; we profit from clarity. Our three engagement models are designed to solve specific organizational failures.
         </p>
       </motion.div>
 

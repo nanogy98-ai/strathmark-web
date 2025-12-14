@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   return (
@@ -24,7 +23,7 @@ export function Hero() {
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight max-w-4xl">
-            Stop Paying for Traffic That Doesn't Buy.
+            Stop Paying for Traffic That Doesn&apos;t Buy.
           </h1>
           
           <p className="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
@@ -48,9 +47,9 @@ export function Hero() {
               </a>
             </div>
             <div className="text-xs text-slate-500 font-mono flex items-center gap-4 pl-1">
-              <span>// Fixed fees.</span>
-              <span>// 14-day turnaround.</span>
-              <span>// No lock-in.</span>
+              <span>{"// Fixed fees."}</span>
+              <span>{"// 14-day turnaround."}</span>
+              <span>{"// No lock-in."}</span>
             </div>
           </div>
 

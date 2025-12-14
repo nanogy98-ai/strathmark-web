@@ -1,9 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, BarChart3 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 
 export function ProvenOutcomes() {
@@ -27,7 +26,7 @@ export function ProvenOutcomes() {
         <div className="space-y-6">
           <div className="flex gap-3 text-xs font-mono uppercase tracking-widest">
             <span className="text-gold">{featured.industry}</span>
-            <span className="text-slate-600">//</span>
+            <span className="text-slate-600">{"//"}</span>
             <span className="text-slate-400">{featured.region}</span>
           </div>
           
@@ -61,6 +60,7 @@ export function ProvenOutcomes() {
             alt="Performance Graph"
             fill
             className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-strath-navy/80 via-transparent to-transparent opacity-60"></div>
         </div>
