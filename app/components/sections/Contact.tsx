@@ -5,17 +5,41 @@ import { z } from "zod";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { clsx } from "clsx";
 
+const FREE_EMAIL_DOMAINS = new Set([
+  "gmail.com",
+  "googlemail.com",
+  "yahoo.com",
+  "yahoo.co.uk",
+  "hotmail.com",
+  "hotmail.co.uk",
+  "outlook.com",
+  "icloud.com",
+  "aol.com",
+  "live.com",
+  "msn.com",
+  "proton.me",
+  "protonmail.com",
+]);
+
+function getEmailDomain(email: string) {
+  return email.split("@").pop()?.toLowerCase().trim() ?? "";
+}
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email address"),
+  email: z.string().email("Invalid email address").refine((value) => {
+    const domain = getEmailDomain(value);
+    return domain.length > 0 && !FREE_EMAIL_DOMAINS.has(domain);
+  }, "Please use a work email address (free email domains are blocked)"),
   company: z.string().min(2, "Company name is required"),
-  website: z.string().url("Invalid URL").optional().or(z.literal("")),
+  website: z.string().url("Invalid URL"),
   country: z.string().min(2, "Country is required"),
   serviceType: z.string().min(1, "Please select an engagement type"),
   situation: z.string().min(1, "Please select a situation"),
   spend: z.string().min(1, "Please select a spend range"),
   timeline: z.string().min(1, "Please select a timeline"),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  heardFrom: z.string().optional().or(z.literal("")),
   honeypot: z.string().optional()
 });
 
@@ -41,12 +65,23 @@ type SelectFieldProps = {
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [errors, setErrors] = useState<ContactFormErrors>({});
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrors({});
+    setSubmitError(null);
+
+    // Basic client-side rate limiting (static export safe).
+    const now = Date.now();
+    const last = Number(window.localStorage.getItem("strathmark_last_submit_ts") ?? "0");
+    if (last && now - last < 60_000) {
+      setIsSubmitting(false);
+      setSubmitError("Please wait 60 seconds before submitting again.");
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
@@ -66,16 +101,56 @@ export function Contact() {
       return;
     }
 
-    // SIMULATION: In a real implementation, you would fetch() to an API endpoint here.
-    // e.g. await fetch("https://api.strathmark.com/contact", { method: "POST", body: JSON.stringify(result.data) })
-    
-    console.log("Valid Submission (Client Side Log):", result.data);
-    
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+    if (!endpoint) {
+      setIsSubmitting(false);
+      setSubmitError("Form is not configured yet. Add NEXT_PUBLIC_FORMSPREE_ENDPOINT to enable submissions.");
+      return;
+    }
 
-    setIsSuccess(true);
-    setIsSubmitting(false);
+    // Formspree accepts JSON and forwards to your configured inbox.
+    // We include a readable "summary" field for fast scanning.
+    const payload = {
+      ...result.data,
+      summary: [
+        `Name: ${result.data.name}`,
+        `Email: ${result.data.email}`,
+        `Company: ${result.data.company}`,
+        `Website: ${result.data.website}`,
+        `Country: ${result.data.country}`,
+        `Looking for: ${result.data.serviceType}`,
+        `Situation: ${result.data.situation}`,
+        `Spend: ${result.data.spend}`,
+        `Timeline: ${result.data.timeline}`,
+        result.data.heardFrom ? `Heard from: ${result.data.heardFrom}` : null,
+        `Message: ${result.data.message}`,
+      ].filter(Boolean).join("\n"),
+      source: "strathmarkconsulting.com",
+      submittedAt: new Date().toISOString(),
+    };
+
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(text || `Submission failed (${res.status})`);
+      }
+
+      window.localStorage.setItem("strathmark_last_submit_ts", String(Date.now()));
+      setIsSuccess(true);
+    } catch {
+      setSubmitError("We could not submit your request. Please try again in a moment.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSuccess) {
@@ -119,7 +194,7 @@ export function Contact() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InputField label="Company Name" name="company" placeholder="Acme Corp Ltd." error={errors.company} />
-            <InputField label="Website URL" name="website" placeholder="https://..." error={errors.website} />
+                  <InputField label="Website URL" name="website" placeholder="https://example.com" error={errors.website} />
           </div>
           <InputField label="Country of Operation" name="country" placeholder="United Kingdom" error={errors.country} />
         </div>
@@ -200,6 +275,32 @@ export function Contact() {
             </p>
           )}
         </div>
+
+        {/* Attribution (optional) */}
+        <div className="space-y-2 pt-2">
+          <label className="text-xs font-mono text-gold uppercase tracking-wider block">How did you hear about us? (Optional)</label>
+          <input
+            type="text"
+            name="heardFrom"
+            placeholder="Referral, LinkedIn, Google, etc."
+            className={clsx(
+              "w-full bg-black/30 border p-4 text-white focus:border-gold outline-none transition-colors placeholder:text-slate-600",
+              errors.heardFrom ? "border-red-500" : "border-white/10"
+            )}
+          />
+          {errors.heardFrom && (
+            <p className="text-red-500 text-xs flex items-center gap-1 mt-1">
+              <AlertCircle size={12} /> {errors.heardFrom[0]}
+            </p>
+          )}
+        </div>
+
+        {submitError && (
+          <div className="border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200 flex items-start gap-2">
+            <AlertCircle size={16} className="mt-0.5 shrink-0" />
+            <div>{submitError}</div>
+          </div>
+        )}
 
         <button 
           type="submit" 
