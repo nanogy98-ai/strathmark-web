@@ -25,6 +25,22 @@ function getEmailDomain(email: string) {
   return email.split("@").pop()?.toLowerCase().trim() ?? "";
 }
 
+function normalizeWebsiteInput(website: string) {
+  const trimmed = website.trim();
+  if (!trimmed) return "";
+  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+}
+
+function isValidWebsite(website: string) {
+  try {
+    const normalized = normalizeWebsiteInput(website);
+    const url = new URL(normalized);
+    return ["http:", "https:"].includes(url.protocol) && url.hostname.includes(".");
+  } catch {
+    return false;
+  }
+}
+
 const DEFAULT_FORMSPREE_ENDPOINT = "https://formspree.io/f/xvgeyopw";
 declare global {
   interface Window {
@@ -41,7 +57,12 @@ const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email address"),
   company: z.string().min(2, "Company name is required"),
-  website: z.string().url("Invalid URL"),
+  website: z
+    .string()
+    .trim()
+    .min(1, "Website is required")
+    .refine(isValidWebsite, "Invalid URL")
+    .transform(normalizeWebsiteInput),
   country: z.string().min(2, "Country is required"),
   serviceType: z.string().min(1, "Please select an engagement type"),
   situation: z.string().min(1, "Please select a situation"),
@@ -250,7 +271,7 @@ export function Contact() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InputField label="Company Name" name="company" placeholder="Acme Corp Ltd." error={errors.company} />
-                  <InputField label="Website URL" name="website" placeholder="https://example.com" error={errors.website} />
+                  <InputField label="Website URL" name="website" placeholder="example.com" error={errors.website} />
           </div>
           <InputField label="Country of Operation" name="country" placeholder="United Kingdom" error={errors.country} />
         </div>
@@ -430,4 +451,3 @@ function SelectField({ label, name, options, error }: SelectFieldProps) {
     </div>
   );
 }
-

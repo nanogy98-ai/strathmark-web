@@ -85,7 +85,7 @@ export default async function CaseStudyDetail({ params }: PageProps) {
              />
           </div>
           <figcaption className="text-xs text-slate-500 font-mono mt-4">
-            Figure 1: Google Search Console performance (client name withheld).
+            Figure 1: Google Search Console performance for First Vehicle Leasing.
           </figcaption>
         </figure>
 

@@ -14,7 +14,6 @@ export function Footer() {
             height={60} 
             className="h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
           />
-          <div className="text-xs text-slate-500">System Active // v1.2</div>
         </div>
         
         <div className="flex gap-8 text-sm">
@@ -31,4 +30,3 @@ export function Footer() {
     </footer>
   );
 }
-
