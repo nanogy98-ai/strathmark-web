@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { z } from "zod";
-import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { clsx } from "clsx";
 
 const FREE_EMAIL_DOMAINS = new Set([
@@ -44,6 +44,7 @@ function isValidWebsite(website: string) {
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY = "7673741a-3e33-4912-96b3-bd1a31729185";
 const WEB3FORMS_FROM_NAME = "Strathmark Consulting";
+const LEAD_SESSION_STORAGE_KEY = "strathmark_pending_lead";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -72,7 +73,7 @@ const contactSchema = z.object({
   timeline: z.string().min(1, "Please select a timeline"),
   message: z.string().min(10, "Message must be at least 10 characters"),
   heardFrom: z.string().optional().or(z.literal("")),
-  honeypot: z.string().optional()
+  botcheck: z.boolean().optional()
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -96,7 +97,6 @@ type SelectFieldProps = {
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [emailWarning, setEmailWarning] = useState<string | null>(null);
   const [errors, setErrors] = useState<ContactFormErrors>({});
@@ -119,14 +119,10 @@ export function Contact() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    // Honeypot check
-    if (data.honeypot) {
-      setIsSuccess(true); // Silent success
-      setIsSubmitting(false);
-      return;
-    }
-
-    const result = contactSchema.safeParse(data);
+    const result = contactSchema.safeParse({
+      ...data,
+      botcheck: data.botcheck === "on"
+    });
 
     if (!result.success) {
       setErrors(result.error.flatten().fieldErrors);
@@ -157,70 +153,45 @@ export function Contact() {
       ].filter(Boolean).join("\n"),
       source: "strathmarkconsulting.com",
       submittedAt: new Date().toISOString(),
+      redirect: `${window.location.origin}/contact-success`,
     };
 
     try {
-      const res = await fetch(WEB3FORMS_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
+      window.sessionStorage.setItem(
+        LEAD_SESSION_STORAGE_KEY,
+        JSON.stringify({
+          form_id: "contact",
+          serviceType: result.data.serviceType,
+          situation: result.data.situation,
+          spend: result.data.spend,
+          timeline: result.data.timeline,
+        })
+      );
+
+      const submitForm = document.createElement("form");
+      submitForm.method = "POST";
+      submitForm.action = WEB3FORMS_ENDPOINT;
+      submitForm.style.display = "none";
+
+      Object.entries(payload).forEach(([name, value]) => {
+        if (value === undefined || value === null || value === "") return;
+        if (typeof value === "boolean" && value === false) return;
+
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = String(value);
+        submitForm.appendChild(input);
       });
 
-      const response = await res.json().catch(() => null);
-
-      if (!res.ok || !response?.success) {
-        throw new Error(response?.message || `Submission failed (${res.status})`);
-      }
-
-      window.localStorage.setItem("strathmark_last_submit_ts", String(Date.now()));
-
-      // Tracking hook (GA4): fire a non-PII lead event on successful submission.
-      // Note: do not include email/name/message in analytics payloads.
-      try {
-        if (typeof window.gtag === "function") {
-          window.gtag("event", "generate_lead", {
-            form_id: "contact",
-            serviceType: result.data.serviceType,
-            situation: result.data.situation,
-            spend: result.data.spend,
-            timeline: result.data.timeline,
-          });
-        }
-      } catch {
-        // ignore tracking errors
-      }
-
-      setIsSuccess(true);
+      document.body.appendChild(submitForm);
+      submitForm.submit();
     } catch (error) {
       const message = error instanceof Error ? error.message : "We could not submit your request. Please try again in a moment.";
       setSubmitError(message);
-    } finally {
       setIsSubmitting(false);
     }
   };
-
-  if (isSuccess) {
-    return (
-      <section className="w-full max-w-3xl px-6 py-24 mx-auto text-center" id="contact">
-        <div className="bg-white/5 border border-gold/30 p-12 flex flex-col items-center gap-6">
-          <CheckCircle2 className="text-gold w-16 h-16" />
-          <h3 className="text-2xl font-serif font-bold text-white">Application Received</h3>
-          <p className="text-slate-300">
-            We have received your brief. We will review your requirements and response within 2 business days if we believe we can add material value.
-          </p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="text-sm text-gold hover:text-white underline underline-offset-4"
-          >
-            Submit another request
-          </button>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="w-full max-w-4xl px-6 py-24 mx-auto" id="contact">
@@ -232,7 +203,7 @@ export function Contact() {
       <form onSubmit={handleSubmit} className="bg-white/[0.02] border border-white/10 p-8 md:p-12 space-y-8 backdrop-blur-sm">
         
         {/* Honeypot */}
-        <input type="text" name="honeypot" className="hidden" tabIndex={-1} autoComplete="off" />
+        <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
 
         {/* Core Identity */}
         <div className="space-y-6">
