@@ -41,7 +41,8 @@ function isValidWebsite(website: string) {
   }
 }
 
-const DEFAULT_FORMSPREE_ENDPOINT = "https://formspree.io/f/xvgeyopw";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY = "7673741a-3e33-4912-96b3-bd1a31729185";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -132,10 +133,6 @@ export function Contact() {
       return;
     }
 
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || DEFAULT_FORMSPREE_ENDPOINT;
-
-    // Formspree accepts JSON and forwards to your configured inbox.
-    // We include a readable "summary" field for fast scanning.
     const payload = {
       ...result.data,
       emailDomain: getEmailDomain(result.data.email),
@@ -158,18 +155,22 @@ export function Contact() {
     };
 
     try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify(payload),
+      const submission = new FormData();
+      submission.append("access_key", WEB3FORMS_ACCESS_KEY);
+
+      Object.entries(payload).forEach(([key, value]) => {
+        submission.append(key, String(value));
       });
 
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || `Submission failed (${res.status})`);
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        body: submission,
+      });
+
+      const response = await res.json().catch(() => null);
+
+      if (!res.ok || !response?.success) {
+        throw new Error(response?.message || `Submission failed (${res.status})`);
       }
 
       window.localStorage.setItem("strathmark_last_submit_ts", String(Date.now()));
