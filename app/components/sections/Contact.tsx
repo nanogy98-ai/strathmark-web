@@ -43,6 +43,7 @@ function isValidWebsite(website: string) {
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY = "7673741a-3e33-4912-96b3-bd1a31729185";
+const WEB3FORMS_FROM_NAME = "Strathmark Consulting";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -135,6 +136,10 @@ export function Contact() {
 
     const payload = {
       ...result.data,
+      access_key: WEB3FORMS_ACCESS_KEY,
+      from_name: WEB3FORMS_FROM_NAME,
+      subject: `New enquiry from ${result.data.company}`,
+      replyto: result.data.email,
       emailDomain: getEmailDomain(result.data.email),
       emailIsFreeDomain: isFreeEmailDomain(result.data.email),
       summary: [
@@ -155,16 +160,13 @@ export function Contact() {
     };
 
     try {
-      const submission = new FormData();
-      submission.append("access_key", WEB3FORMS_ACCESS_KEY);
-
-      Object.entries(payload).forEach(([key, value]) => {
-        submission.append(key, String(value));
-      });
-
       const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
-        body: submission,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
       });
 
       const response = await res.json().catch(() => null);
@@ -192,8 +194,9 @@ export function Contact() {
       }
 
       setIsSuccess(true);
-    } catch {
-      setSubmitError("We could not submit your request. Please try again in a moment.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "We could not submit your request. Please try again in a moment.";
+      setSubmitError(message);
     } finally {
       setIsSubmitting(false);
     }
