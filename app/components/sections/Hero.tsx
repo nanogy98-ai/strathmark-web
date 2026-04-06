@@ -76,7 +76,7 @@ export function Hero() {
             {/* Diagram Background Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] pointer-events-none"></div>
             
-            <h3 className="text-white font-serif text-xl mb-8 border-b border-white/10 pb-4 relative z-10">How We Work</h3>
+            <div className="text-white font-serif text-xl mb-8 border-b border-white/10 pb-4 relative z-10">How We Work</div>
             
             <div className="relative z-10 space-y-0">
               {/* Step 1: Input */}
