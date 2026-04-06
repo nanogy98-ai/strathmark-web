@@ -3,12 +3,13 @@ import Link from "next/link";
 import { Navigation } from "@/app/components/Navigation";
 import { Footer } from "@/app/components/sections/Footer";
 import { CookieResetButton } from "@/app/components/ui/CookieResetButton";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy & Cookies | Strathmark Consulting",
   description: "Privacy and cookie information for Strathmark Consulting.",
   alternates: {
-    canonical: "https://strathmark.com/privacy",
+    canonical: `${SITE_URL}/privacy`,
   },
   robots: {
     index: true,
@@ -70,5 +71,4 @@ export default function PrivacyPage() {
     </main>
   );
 }
-
 

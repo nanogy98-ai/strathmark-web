@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { notes } from "@/lib/notes-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Intelligence Log | Strathmark Consulting",
@@ -11,7 +12,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Intelligence Log | Strathmark Consulting",
     description: "Field notes and commercial breakdowns from the front lines of digital engineering.",
-    url: "https://strathmark.com/insights",
+    url: `${SITE_URL}/insights`,
+  },
+  alternates: {
+    canonical: `${SITE_URL}/insights`,
   },
 };
 
@@ -54,4 +58,3 @@ export default function InsightsIndex() {
     </main>
   );
 }
-

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/app/components/ui/CookieBanner";
 import { Analytics } from "@/app/components/ui/Analytics";
+import { SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,29 +22,30 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Strathmark Consulting | Strategic Digital Advisory",
+  metadataBase: new URL(SITE_URL),
+  title: `${SITE_NAME} | Strategic Digital Advisory`,
   description: "Independent strategic digital consulting for organizations where spend, scale, and search matter. Commercial accountability and technical precision.",
   openGraph: {
-    title: "Strathmark Consulting",
+    title: SITE_NAME,
     description: "Independent strategic digital consulting for high-liability industries. Commercial accountability and technical precision.",
-    url: "https://strathmark.com",
-    siteName: "Strathmark Consulting",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: "en_GB",
     type: "website",
     images: [
       {
-        url: "https://strathmark.com/logo.png",
+        url: SHARE_IMAGE_PATH,
         width: 1200,
         height: 630,
-        alt: "Strathmark Consulting",
+        alt: SITE_NAME,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Strathmark Consulting",
+    title: SITE_NAME,
     description: "Independent strategic digital consulting for high-liability industries.",
-    images: ["https://strathmark.com/logo.png"],
+    images: [SHARE_IMAGE_PATH],
   },
   robots: {
     index: true,
@@ -62,7 +64,7 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   alternates: {
-    canonical: "https://strathmark.com",
+    canonical: SITE_URL,
   },
 };
 
@@ -81,9 +83,9 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "name": "Strathmark Consulting",
-              "url": "https://strathmark.com",
-              "logo": "https://strathmark.com/logo.png",
+              "name": SITE_NAME,
+              "url": SITE_URL,
+              "logo": `${SITE_URL}${SHARE_IMAGE_PATH}`,
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Edinburgh",

@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { notes } from "@/lib/notes-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
+import { SITE_URL } from "@/lib/site";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -21,6 +22,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: note ? `${note.title} | Strathmark` : "Entry Not Found",
     description: note?.excerpt,
+    openGraph: {
+      title: note ? `${note.title} | Strathmark` : "Entry Not Found",
+      description: note?.excerpt,
+      type: "article",
+      url: note ? `${SITE_URL}/insights/${note.slug}` : `${SITE_URL}/insights`,
+    },
+    alternates: {
+      canonical: note ? `${SITE_URL}/insights/${note.slug}` : `${SITE_URL}/insights`,
+    },
   };
 }
 
@@ -74,4 +84,3 @@ export default async function NotePage({ params }: PageProps) {
     </main>
   );
 }
-

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Case Studies | Strathmark Consulting",
@@ -11,7 +12,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Case Studies | Strathmark Consulting",
     description: "Selected engagements and real commercial impact.",
-    url: "https://strathmark.com/case-studies",
+    url: `${SITE_URL}/case-studies`,
+  },
+  alternates: {
+    canonical: `${SITE_URL}/case-studies`,
   },
 };
 
@@ -65,4 +69,3 @@ export default function CaseStudiesIndex() {
     </main>
   );
 }
-
