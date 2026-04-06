@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { notes } from "@/lib/notes-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
-import { SITE_URL } from "@/lib/site";
+import { SHARE_IMAGE_PATH, SITE_URL } from "@/lib/site";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: note?.excerpt,
       type: "article",
       url: note ? `${SITE_URL}/insights/${note.slug}` : `${SITE_URL}/insights`,
+      images: [SHARE_IMAGE_PATH],
     },
     alternates: {
       canonical: note ? `${SITE_URL}/insights/${note.slug}` : `${SITE_URL}/insights`,

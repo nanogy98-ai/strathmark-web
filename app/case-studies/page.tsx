@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
-import { SITE_URL } from "@/lib/site";
+import { SHARE_IMAGE_PATH, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Case Studies | Strathmark Consulting",
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: "Case Studies | Strathmark Consulting",
     description: "Selected engagements and real commercial impact.",
     url: `${SITE_URL}/case-studies`,
+    images: [SHARE_IMAGE_PATH],
   },
   alternates: {
     canonical: `${SITE_URL}/case-studies`,

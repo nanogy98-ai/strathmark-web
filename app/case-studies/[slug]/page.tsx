@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
-import { SITE_URL } from "@/lib/site";
+import { SHARE_IMAGE_PATH, SITE_URL } from "@/lib/site";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: study?.excerpt,
       type: "article",
       url: study ? `${SITE_URL}/case-studies/${study.slug}` : `${SITE_URL}/case-studies`,
+      images: [SHARE_IMAGE_PATH],
     },
     alternates: {
       canonical: study ? `${SITE_URL}/case-studies/${study.slug}` : `${SITE_URL}/case-studies`,

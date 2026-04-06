@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/app/components/ui/CookieBanner";
 import { Analytics } from "@/app/components/ui/Analytics";
-import { SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
+import { LOGO_PATH, SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -85,7 +85,7 @@ export default function RootLayout({
               "@type": "ProfessionalService",
               "name": SITE_NAME,
               "url": SITE_URL,
-              "logo": `${SITE_URL}${SHARE_IMAGE_PATH}`,
+              "logo": `${SITE_URL}${LOGO_PATH}`,
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Edinburgh",

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { notes } from "@/lib/notes-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
-import { SITE_URL } from "@/lib/site";
+import { SHARE_IMAGE_PATH, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Intelligence Log | Strathmark Consulting",
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: "Intelligence Log | Strathmark Consulting",
     description: "Field notes and commercial breakdowns from the front lines of digital engineering.",
     url: `${SITE_URL}/insights`,
+    images: [SHARE_IMAGE_PATH],
   },
   alternates: {
     canonical: `${SITE_URL}/insights`,
