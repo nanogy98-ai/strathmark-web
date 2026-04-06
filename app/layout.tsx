@@ -23,10 +23,10 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: `SEO & Digital Growth Consultant | ${SITE_NAME}`,
+  title: `Independent Digital Advisory & Agency Oversight | Strathmark`,
   description: "Independent strategic digital consulting for organizations where spend, scale, and search matter. Commercial accountability and technical precision.",
   openGraph: {
-    title: `SEO & Digital Growth Consultant | ${SITE_NAME}`,
+    title: `Independent Digital Advisory & Agency Oversight | Strathmark`,
     description: "Independent strategic digital consulting for high-liability industries. Commercial accountability and technical precision.",
     url: SITE_URL,
     siteName: SITE_NAME,
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `SEO & Digital Growth Consultant | ${SITE_NAME}`,
+    title: `Independent Digital Advisory & Agency Oversight | Strathmark`,
     description: "Independent strategic digital consulting for high-liability industries.",
     images: [SHARE_IMAGE_PATH],
   },
