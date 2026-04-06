@@ -61,9 +61,9 @@ export function Services() {
         className="mb-16 md:mb-24 max-w-3xl"
       >
         <div className="text-gold font-mono text-xs uppercase tracking-widest mb-4">Core Pillars</div>
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
+        <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
           Advisory First. Execution Second.
-        </h2>
+        </h3>
         <p className="text-slate-400 text-lg leading-relaxed">
           We separate strategy from implementation. Most agencies profit from confusion; we profit from clarity. Our three engagement models are designed to solve specific organizational failures.
         </p>
@@ -88,9 +88,9 @@ export function Services() {
               </div>
             </div>
             
-            <h3 className="text-3xl font-serif font-bold text-white mb-2">
+            <h4 className="text-3xl font-serif font-bold text-white mb-2">
               {pillar.shortTitle}
-            </h3>
+            </h4>
             <div className="text-slate-500 text-xs uppercase tracking-wider font-bold mb-6 h-8">
               {pillar.title}
             </div>

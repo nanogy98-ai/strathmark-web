@@ -38,10 +38,10 @@ export function ContactSuccessClient() {
         <div className="flex flex-col items-center gap-6">
           <CheckCircle2 className="w-16 h-16 text-gold" />
           <div className="space-y-4">
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-gold">Application Received</p>
             <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
               Your brief is with us.
             </h1>
+            <h2 className="text-xs font-mono uppercase tracking-[0.3em] text-gold">Application Received</h2>
             <p className="text-slate-300 text-lg leading-relaxed">
               We have received your enquiry and will review it carefully. If we believe we can add material value,
               we will respond within 2 business days.

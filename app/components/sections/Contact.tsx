@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { z } from "zod";
-import { AlertCircle, Loader2 } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { clsx } from "clsx";
 
 const FREE_EMAIL_DOMAINS = new Set([
@@ -44,7 +44,6 @@ function isValidWebsite(website: string) {
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY = "7673741a-3e33-4912-96b3-bd1a31729185";
 const WEB3FORMS_FROM_NAME = "Strathmark Consulting";
-const LEAD_SESSION_STORAGE_KEY = "strathmark_pending_lead";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -73,7 +72,7 @@ const contactSchema = z.object({
   timeline: z.string().min(1, "Please select a timeline"),
   message: z.string().min(10, "Message must be at least 10 characters"),
   heardFrom: z.string().optional().or(z.literal("")),
-  botcheck: z.boolean().optional()
+  honeypot: z.string().optional()
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -97,6 +96,7 @@ type SelectFieldProps = {
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [emailWarning, setEmailWarning] = useState<string | null>(null);
   const [errors, setErrors] = useState<ContactFormErrors>({});
@@ -119,10 +119,14 @@ export function Contact() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    const result = contactSchema.safeParse({
-      ...data,
-      botcheck: data.botcheck === "on"
-    });
+    // Honeypot check
+    if (data.honeypot) {
+      setIsSuccess(true); // Silent success
+      setIsSubmitting(false);
+      return;
+    }
+
+    const result = contactSchema.safeParse(data);
 
     if (!result.success) {
       setErrors(result.error.flatten().fieldErrors);
@@ -153,112 +157,137 @@ export function Contact() {
       ].filter(Boolean).join("\n"),
       source: "strathmarkconsulting.com",
       submittedAt: new Date().toISOString(),
-      redirect: `${window.location.origin}/contact-success`,
     };
 
     try {
-      window.sessionStorage.setItem(
-        LEAD_SESSION_STORAGE_KEY,
-        JSON.stringify({
-          form_id: "contact",
-          serviceType: result.data.serviceType,
-          situation: result.data.situation,
-          spend: result.data.spend,
-          timeline: result.data.timeline,
-        })
-      );
-
-      const submitForm = document.createElement("form");
-      submitForm.method = "POST";
-      submitForm.action = WEB3FORMS_ENDPOINT;
-      submitForm.style.display = "none";
-
-      Object.entries(payload).forEach(([name, value]) => {
-        if (value === undefined || value === null || value === "") return;
-        if (typeof value === "boolean" && value === false) return;
-
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = name;
-        input.value = String(value);
-        submitForm.appendChild(input);
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
       });
 
-      document.body.appendChild(submitForm);
-      submitForm.submit();
+      const response = await res.json().catch(() => null);
+
+      if (!res.ok || !response?.success) {
+        throw new Error(response?.message || `Submission failed (${res.status})`);
+      }
+
+      window.localStorage.setItem("strathmark_last_submit_ts", String(Date.now()));
+
+      // Tracking hook (GA4): fire a non-PII lead event on successful submission.
+      // Note: do not include email/name/message in analytics payloads.
+      try {
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", {
+            form_id: "contact",
+            serviceType: result.data.serviceType,
+            situation: result.data.situation,
+            spend: result.data.spend,
+            timeline: result.data.timeline,
+          });
+        }
+      } catch {
+        // ignore tracking errors
+      }
+
+      setIsSuccess(true);
     } catch (error) {
       const message = error instanceof Error ? error.message : "We could not submit your request. Please try again in a moment.";
       setSubmitError(message);
+    } finally {
       setIsSubmitting(false);
     }
   };
 
+  if (isSuccess) {
+    return (
+      <section className="w-full max-w-3xl px-6 py-24 mx-auto text-center" id="contact">
+        <div className="bg-white/5 border border-gold/30 p-12 flex flex-col items-center gap-6">
+          <CheckCircle2 className="text-gold w-16 h-16" />
+          <h4 className="text-2xl font-serif font-bold text-white">Application Received</h4>
+          <p className="text-slate-300">
+            We have received your brief. We will review your requirements and response within 2 business days if we believe we can add material value.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="text-sm text-gold hover:text-white underline underline-offset-4"
+          >
+            Submit another request
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="w-full max-w-4xl px-6 py-24 mx-auto" id="contact">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Request an Independent Review</h2>
+        <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Request an Independent Review</h3>
         <p className="text-slate-400 text-lg">Tell us about your commercial goals and current infrastructure.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="bg-white/[0.02] border border-white/10 p-8 md:p-12 space-y-8 backdrop-blur-sm">
-        
+
         {/* Honeypot */}
-        <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
+        <input type="text" name="honeypot" className="hidden" tabIndex={-1} autoComplete="off" />
 
         {/* Core Identity */}
         <div className="space-y-6">
-          <h3 className="text-white font-serif border-b border-white/10 pb-2 mb-6">Identity</h3>
+          <h4 className="text-white font-serif border-b border-white/10 pb-2 mb-6">Identity</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InputField label="Full Name" name="name" placeholder="John Doe" error={errors.name} />
-                  <div className="space-y-2">
-                    <label className="text-xs font-mono text-gold uppercase tracking-wider block">Work Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="john@company.com"
-                      className={clsx(
-                        "w-full bg-black/30 border p-4 text-white focus:border-gold outline-none transition-colors placeholder:text-slate-600",
-                        errors.email ? "border-red-500" : "border-white/10"
-                      )}
-                      onChange={(e) => {
-                        const value = e.currentTarget.value;
-                        if (value && isFreeEmailDomain(value)) {
-                          setEmailWarning(
-                            "Free email domains are allowed, but we prioritise enquiries from company addresses. If you are early-stage, add a short note in the brief."
-                          );
-                        } else {
-                          setEmailWarning(null);
-                        }
-                      }}
-                    />
-                    {errors.email && (
-                      <p className="text-red-500 text-xs flex items-center gap-1 mt-1">
-                        <AlertCircle size={12} /> {errors.email[0]}
-                      </p>
-                    )}
-                    {emailWarning && !errors.email && (
-                      <p className="text-amber-200/90 text-xs flex items-start gap-2 mt-1">
-                        <AlertCircle size={12} className="mt-0.5 shrink-0 text-amber-300" />
-                        <span>{emailWarning}</span>
-                      </p>
-                    )}
-                  </div>
+            <div className="space-y-2">
+              <label className="text-xs font-mono text-gold uppercase tracking-wider block">Work Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="john@company.com"
+                className={clsx(
+                  "w-full bg-black/30 border p-4 text-white focus:border-gold outline-none transition-colors placeholder:text-slate-600",
+                  errors.email ? "border-red-500" : "border-white/10"
+                )}
+                onChange={(e) => {
+                  const value = e.currentTarget.value;
+                  if (value && isFreeEmailDomain(value)) {
+                    setEmailWarning(
+                      "Free email domains are allowed, but we prioritise enquiries from company addresses. If you are early-stage, add a short note in the brief."
+                    );
+                  } else {
+                    setEmailWarning(null);
+                  }
+                }}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs flex items-center gap-1 mt-1">
+                  <AlertCircle size={12} /> {errors.email[0]}
+                </p>
+              )}
+              {emailWarning && !errors.email && (
+                <p className="text-amber-200/90 text-xs flex items-start gap-2 mt-1">
+                  <AlertCircle size={12} className="mt-0.5 shrink-0 text-amber-300" />
+                  <span>{emailWarning}</span>
+                </p>
+              )}
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InputField label="Company Name" name="company" placeholder="Acme Corp Ltd." error={errors.company} />
-                  <InputField label="Website URL" name="website" placeholder="example.com" error={errors.website} />
+            <InputField label="Website URL" name="website" placeholder="example.com" error={errors.website} />
           </div>
           <InputField label="Country of Operation" name="country" placeholder="United Kingdom" error={errors.country} />
         </div>
 
         {/* Qualification */}
         <div className="space-y-6 pt-6">
-          <h3 className="text-white font-serif border-b border-white/10 pb-2 mb-6">Qualification</h3>
-          
+          <h4 className="text-white font-serif border-b border-white/10 pb-2 mb-6">Qualification</h4>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <SelectField 
-              label="Engagement Type" 
-              name="serviceType" 
+            <SelectField
+              label="Engagement Type"
+              name="serviceType"
               options={[
                 { label: "Independent Digital & Spend Review", value: "strategic-review" },
                 { label: "Strategic Advisory (Ongoing)", value: "advisory" },
@@ -267,9 +296,9 @@ export function Contact() {
               ]}
               error={errors.serviceType}
             />
-            <SelectField 
-              label="Primary Challenge" 
-              name="situation" 
+            <SelectField
+              label="Primary Challenge"
+              name="situation"
               options={[
                 { label: "Growth has stalled", value: "stalled" },
                 { label: "Paid spend feels inefficient", value: "inefficient-spend" },
@@ -283,9 +312,9 @@ export function Contact() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <SelectField 
-              label="Approx Monthly Marketing Spend" 
-              name="spend" 
+            <SelectField
+              label="Approx Monthly Marketing Spend"
+              name="spend"
               options={[
                 { label: "Under £5k", value: "under-5k" },
                 { label: "£5k - £20k", value: "5k-20k" },
@@ -295,9 +324,9 @@ export function Contact() {
               ]}
               error={errors.spend}
             />
-            <SelectField 
-              label="Timeline" 
-              name="timeline" 
+            <SelectField
+              label="Timeline"
+              name="timeline"
               options={[
                 { label: "Immediate (0-30 days)", value: "immediate" },
                 { label: "1 to 3 months", value: "1-3-months" },
@@ -312,7 +341,7 @@ export function Contact() {
         {/* Brief */}
         <div className="space-y-2 pt-6">
           <label className="text-xs font-mono text-gold uppercase tracking-wider block">Brief</label>
-          <textarea 
+          <textarea
             name="message"
             rows={5}
             className={clsx(
@@ -354,8 +383,8 @@ export function Contact() {
           </div>
         )}
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={isSubmitting}
           className="w-full bg-gold text-strath-navy font-bold text-lg py-4 flex items-center justify-center gap-2 hover:bg-white transition-all disabled:opacity-70 disabled:cursor-not-allowed"
         >
@@ -365,7 +394,7 @@ export function Contact() {
             "Submit Application"
           )}
         </button>
-        
+
         <p className="text-center text-slate-500 text-xs mt-4">
           By submitting, you confirm you represent the entity above.
         </p>
@@ -378,8 +407,8 @@ function InputField({ label, name, type = "text", placeholder, error }: InputFie
   return (
     <div className="space-y-2">
       <label className="text-xs font-mono text-gold uppercase tracking-wider block">{label}</label>
-      <input 
-        type={type} 
+      <input
+        type={type}
         name={name as string}
         placeholder={placeholder}
         className={clsx(
@@ -401,7 +430,7 @@ function SelectField({ label, name, options, error }: SelectFieldProps) {
     <div className="space-y-2">
       <label className="text-xs font-mono text-gold uppercase tracking-wider block">{label}</label>
       <div className="relative">
-        <select 
+        <select
           name={name as string}
           defaultValue=""
           className={clsx(

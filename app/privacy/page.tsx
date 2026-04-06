@@ -32,18 +32,19 @@ export default function PrivacyPage() {
         </header>
 
         <section className="space-y-6 text-slate-300 leading-relaxed">
-          <h2 className="text-2xl font-serif font-bold text-white">Cookies and local storage</h2>
+          <h2 className="sr-only">Privacy Policy Sections</h2>
+          <h3 className="text-2xl font-serif font-bold text-white">Cookies and local storage</h3>
           <p>
             We use essential storage to remember site preferences, such as your cookie choices.
           </p>
 
-          <h2 className="text-2xl font-serif font-bold text-white">Analytics</h2>
+          <h3 className="text-2xl font-serif font-bold text-white">Analytics</h3>
           <p>
             With your permission, we use Google Analytics (GA4) to understand how the site is used and to improve performance and clarity.
             If you reject analytics cookies, Google Analytics will not load.
           </p>
 
-          <h2 className="text-2xl font-serif font-bold text-white">Contact form submissions</h2>
+          <h3 className="text-2xl font-serif font-bold text-white">Contact form submissions</h3>
           <p>
             When you submit the contact form, the information you provide is sent to Strathmark Consulting for the purpose of responding to your enquiry.
           </p>
@@ -52,7 +53,7 @@ export default function PrivacyPage() {
             <CookieResetButton />
           </div>
 
-          <h2 className="text-2xl font-serif font-bold text-white">Contact</h2>
+          <h3 className="text-2xl font-serif font-bold text-white">Contact</h3>
           <p>
             If you have questions about privacy or data handling, please use the{" "}
             <Link href="/#contact" className="text-gold hover:text-white underline underline-offset-4">
@@ -71,4 +72,3 @@ export default function PrivacyPage() {
     </main>
   );
 }
-

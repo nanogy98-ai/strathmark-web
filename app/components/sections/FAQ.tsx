@@ -30,7 +30,7 @@ export function FAQ() {
 
   return (
     <section className="w-full max-w-3xl px-6 py-24 mx-auto border-t border-white/5" id="faq">
-      <h2 className="text-3xl font-serif font-bold text-white mb-12 text-center">Questions & Answers</h2>
+      <h3 className="text-3xl font-serif font-bold text-white mb-12 text-center">Questions & Answers</h3>
       
       <div className="space-y-4">
         {faqs.map((item, i) => (
@@ -72,4 +72,3 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     </div>
   );
 }
-

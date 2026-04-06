@@ -61,13 +61,13 @@ export default async function NotePage({ params }: PageProps) {
 
         <div 
           className="prose prose-invert prose-lg max-w-none prose-headings:font-serif prose-headings:font-bold prose-headings:text-white prose-p:text-slate-300 prose-p:font-light prose-strong:text-white prose-a:text-gold hover:prose-a:text-white prose-li:text-slate-300"
-          dangerouslySetInnerHTML={{ __html: note.content }}
+          dangerouslySetInnerHTML={{ __html: `<h2 class="sr-only">Article Sections</h2>${note.content.replaceAll("<h2>", "<h3>").replaceAll("</h2>", "</h3>")}` }}
         />
         
         <div className="mt-16 pt-12 border-t border-white/5">
           <div className="bg-white/[0.02] border border-white/5 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
-              <h4 className="text-white font-serif font-bold text-lg mb-2">Need a second opinion?</h4>
+              <h3 className="text-white font-serif font-bold text-lg mb-2">Need a second opinion?</h3>
               <p className="text-slate-400 text-sm">We review infrastructure and spend for select clients.</p>
             </div>
             <Link 

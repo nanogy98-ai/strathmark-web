@@ -12,7 +12,7 @@ export function ProvenOutcomes() {
     <section className="w-full max-w-7xl px-6 py-24 mx-auto border-t border-white/5" id="outcomes">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
         <div>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Proven Outcomes</h2>
+          <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Proven Outcomes</h3>
           <p className="text-slate-400 text-lg">Case studies in structural remediation and growth.</p>
         </div>
         <div className="hidden md:block">
@@ -30,9 +30,9 @@ export function ProvenOutcomes() {
             <span className="text-slate-400">{featured.region}</span>
           </div>
           
-          <h3 className="text-2xl md:text-3xl font-serif font-bold text-white leading-tight group-hover:text-gold transition-colors">
+          <h4 className="text-2xl md:text-3xl font-serif font-bold text-white leading-tight group-hover:text-gold transition-colors">
             {featured.title}
-          </h3>
+          </h4>
           
           <div className="grid grid-cols-3 gap-6 py-6 border-y border-white/5">
             {featured.metrics.map((m, i) => (

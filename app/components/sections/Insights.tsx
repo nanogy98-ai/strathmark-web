@@ -10,7 +10,7 @@ export function Insights() {
     <section className="w-full max-w-7xl px-6 py-24 mx-auto border-t border-white/5" id="insights">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
         <div>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Intelligence Log</h2>
+          <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Intelligence Log</h3>
           <p className="text-slate-400 text-lg">Latest field notes and commercial breakdowns.</p>
         </div>
         <div className="hidden md:block">
@@ -31,9 +31,9 @@ export function Insights() {
               className="bg-white/[0.02] border border-white/5 p-8 h-full hover:border-gold/30 transition-colors flex flex-col"
             >
               <div className="text-xs font-mono text-gold mb-4 uppercase tracking-widest">{note.category}</div>
-              <h3 className="text-lg font-bold text-white mb-4 group-hover:text-gold transition-colors leading-snug">
+              <h4 className="text-lg font-bold text-white mb-4 group-hover:text-gold transition-colors leading-snug">
                 {note.title}
-              </h3>
+              </h4>
               <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-4 flex-1">
                 {note.excerpt}
               </p>

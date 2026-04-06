@@ -32,6 +32,7 @@ export default function CaseStudiesIndex() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 py-24 w-full flex-1">
+        <h2 className="sr-only">Selected Case Studies</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {caseStudies.map((study, i) => (
             <Link href={`/case-studies/${study.slug}`} key={i} className="group block">

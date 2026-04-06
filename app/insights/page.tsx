@@ -32,6 +32,7 @@ export default function InsightsIndex() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 py-24 w-full flex-1">
+        <h2 className="sr-only">Insight Entries</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {notes.map((note, i) => (
             <Link href={`/insights/${note.slug}`} key={i} className="block group h-full">

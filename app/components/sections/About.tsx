@@ -7,9 +7,9 @@ export function About() {
     <section className="w-full max-w-7xl px-6 py-24 mx-auto border-t border-white/5" id="about">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
         <div className="lg:col-span-5">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 leading-tight">
+          <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 leading-tight">
             Independent Advisory.<br/>Global Reach.
-          </h2>
+          </h3>
           <div className="h-1 w-20 bg-gold mb-8"></div>
           
           <div className="space-y-6 text-slate-300 text-lg leading-relaxed font-light">
@@ -67,7 +67,7 @@ export function About() {
                 Most agencies profit from confusion. <br/><span className="text-gold">We profit from clarity.</span>
               </blockquote>
               
-              <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-2">Principal-Led Advisory</h3>
+              <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-2">Principal-Led Advisory</h4>
               <div className="space-y-4 text-sm text-slate-400 leading-relaxed">
                 <p>
                   Strathmark is led by Graeme, a principal consultant with over a decade of experience across agency, contracting, and in-house roles for major international brands.

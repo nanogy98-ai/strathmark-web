@@ -33,7 +33,7 @@ export function Approach() {
   return (
     <section className="w-full max-w-7xl px-6 py-24 mx-auto bg-white/[0.02]" id="approach">
       <div className="mb-16 text-center">
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">The Methodology</h2>
+        <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">The Methodology</h3>
         <p className="text-slate-400">Predictable. Transparent. Commercial.</p>
       </div>
 
@@ -51,7 +51,7 @@ export function Approach() {
               {step.num}
             </span>
             <div className="text-gold font-mono text-xs mb-3">{step.time}</div>
-            <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+            <h4 className="text-xl font-bold text-white mb-3">{step.title}</h4>
             <p className="text-slate-400 text-sm">{step.desc}</p>
           </motion.div>
         ))}
@@ -59,4 +59,3 @@ export function Approach() {
     </section>
   );
 }
-

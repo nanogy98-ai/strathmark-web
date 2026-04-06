@@ -14,6 +14,7 @@ export default function Home() {
     <main className="min-h-screen flex flex-col items-center bg-strath-navy text-slate-200 overflow-x-hidden selection:bg-gold selection:text-strath-navy">
       <Navigation />
       <Hero />
+      <h2 className="sr-only">Homepage Sections</h2>
       <About />
       <Services />
       <Approach />

@@ -96,7 +96,7 @@ export default async function CaseStudyDetail({ params }: PageProps) {
 
         <div 
           className="prose prose-invert prose-lg max-w-none prose-headings:font-serif prose-headings:font-bold prose-headings:text-white prose-p:text-slate-300 prose-p:font-light prose-strong:text-white prose-ul:text-slate-300 prose-li:marker:text-gold"
-          dangerouslySetInnerHTML={{ __html: study.content }}
+          dangerouslySetInnerHTML={{ __html: `<h2 class="sr-only">Case Study Sections</h2>${study.content.replaceAll("<h2>", "<h3>").replaceAll("</h2>", "</h3>")}` }}
         />
         
         {/* CTA Block */}
