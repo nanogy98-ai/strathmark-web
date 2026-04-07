@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Clock, Calendar, User } from "lucide-react";
 import { notes } from "@/lib/notes-data";
@@ -142,6 +143,37 @@ export default async function NotePage({ params }: PageProps) {
           className="prose prose-invert prose-lg max-w-none prose-headings:font-serif prose-headings:font-bold prose-headings:text-white prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-slate-300 prose-p:font-light prose-p:leading-relaxed prose-strong:text-white prose-a:text-gold hover:prose-a:text-white prose-li:text-slate-300 prose-ul:my-4 prose-li:my-1 prose-code:text-gold prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm"
           dangerouslySetInnerHTML={{ __html: note.content }}
         />
+
+        {/* Author Bio */}
+        <div className="mt-16 pt-12 border-t border-white/5">
+          <div className="flex flex-col sm:flex-row gap-6 items-start">
+            <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden">
+              <Image
+                src="/founder.png"
+                alt={note.author}
+                fill
+                className="object-cover object-center"
+                sizes="80px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-strath-navy/30 to-transparent" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <h2 className="text-white font-serif font-bold text-lg">{note.author}</h2>
+                <span className="text-xs font-mono text-gold uppercase tracking-widest">Principal Consultant</span>
+              </div>
+              <p className="text-slate-400 text-sm leading-relaxed mb-3">
+                Graeme is the founder and principal consultant at Strathmark Consulting. With over a decade of experience across agency, contracting, and in-house roles for major international brands, he advises leadership teams on digital strategy, agency oversight, and marketing infrastructure across the UK, US, UAE, and Europe.
+              </p>
+              <Link
+                href="/#about"
+                className="text-xs font-mono text-slate-500 hover:text-gold transition-colors uppercase tracking-widest inline-flex items-center gap-1.5"
+              >
+                More about Graeme <ArrowRight size={10} />
+              </Link>
+            </div>
+          </div>
+        </div>
 
         {/* CTA */}
         <div className="mt-16 pt-12 border-t border-white/5">
