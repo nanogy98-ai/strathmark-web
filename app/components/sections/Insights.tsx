@@ -3,7 +3,19 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { notes } from "@/lib/notes-data";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, Calendar } from "lucide-react";
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+const sortedNotes = [...notes].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
 
 export function Insights() {
   return (
@@ -21,9 +33,9 @@ export function Insights() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {notes.slice(0, 4).map((note, i) => (
+        {sortedNotes.slice(0, 4).map((note, i) => (
           <Link href={`/insights/${note.slug}`} key={i} className="block group h-full">
-            <motion.article 
+            <motion.article
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -34,11 +46,19 @@ export function Insights() {
               <h4 className="text-lg font-bold text-white mb-4 group-hover:text-gold transition-colors leading-snug">
                 {note.title}
               </h4>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-4 flex-1">
+              <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
                 {note.excerpt}
               </p>
-              <div className="text-xs text-slate-500 font-mono flex items-center gap-2 group-hover:text-white transition-colors mt-auto">
-                Read Entry <ArrowRight size={12} />
+              <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-slate-500 font-mono flex items-center gap-1">
+                    <Calendar size={9} /> {formatDate(note.date)}
+                  </span>
+                  <span className="text-xs text-slate-500 font-mono flex items-center gap-1">
+                    <Clock size={9} /> {note.readingTime}
+                  </span>
+                </div>
+                <ArrowRight size={12} className="text-slate-500 group-hover:text-gold transition-colors" />
               </div>
             </motion.article>
           </Link>
