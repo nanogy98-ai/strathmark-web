@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: note?.excerpt,
       type: "article",
       url: note ? `${SITE_URL}/insights/${note.slug}` : `${SITE_URL}/insights`,
-      images: [SHARE_IMAGE_PATH],
+      images: [note?.shareImage || SHARE_IMAGE_PATH],
       ...(note && {
         publishedTime: note.date,
         authors: [note.author],
@@ -125,17 +125,39 @@ export default async function NotePage({ params }: PageProps) {
             {note.excerpt}
           </p>
 
-          {/* Author & Meta Bar */}
-          <div className="flex flex-wrap items-center gap-6 text-xs font-mono text-slate-500">
-            <span className="flex items-center gap-1.5">
-              <User size={12} /> {note.author}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Calendar size={12} /> {formatDate(note.date)}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Clock size={12} /> {note.readingTime}
-            </span>
+          {/* Author Bio & Meta */}
+          <div className="mt-8 pt-8 border-t border-white/5">
+            <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start text-center sm:text-left">
+              <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden rounded-full border border-white/10">
+                <Image
+                  src="/founder.png"
+                  alt={note.author}
+                  fill
+                  className="object-cover object-center"
+                  sizes="64px"
+                />
+              </div>
+              <div className="flex-1">
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 mb-2">
+                  <Link href="/#about" className="text-white font-serif font-bold text-lg hover:text-gold transition-colors">
+                    {note.author}
+                  </Link>
+                  <span className="hidden sm:inline text-slate-600 font-serif">•</span>
+                  <span className="text-xs font-mono text-gold uppercase tracking-widest">Principal Consultant</span>
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed mb-4 max-w-2xl">
+                  Graeme is the founder and principal consultant at Strathmark Consulting. With over a decade of experience across agency, contracting, and in-house roles for major international brands, he advises leadership teams on digital strategy, agency oversight, and marketing infrastructure across the UK, US, UAE, and Europe.
+                </p>
+                <div className="flex justify-center sm:justify-start flex-wrap items-center gap-6 text-xs font-mono text-slate-500">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={12} /> {formatDate(note.date)}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={12} /> {note.readingTime}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </header>
 
@@ -144,36 +166,7 @@ export default async function NotePage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: note.content }}
         />
 
-        {/* Author Bio */}
-        <div className="mt-16 pt-12 border-t border-white/5">
-          <div className="flex flex-col sm:flex-row gap-6 items-start">
-            <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden">
-              <Image
-                src="/founder.png"
-                alt={note.author}
-                fill
-                className="object-cover object-center"
-                sizes="80px"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-strath-navy/30 to-transparent" />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-white font-serif font-bold text-lg">{note.author}</h2>
-                <span className="text-xs font-mono text-gold uppercase tracking-widest">Principal Consultant</span>
-              </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-3">
-                Graeme is the founder and principal consultant at Strathmark Consulting. With over a decade of experience across agency, contracting, and in-house roles for major international brands, he advises leadership teams on digital strategy, agency oversight, and marketing infrastructure across the UK, US, UAE, and Europe.
-              </p>
-              <Link
-                href="/#about"
-                className="text-xs font-mono text-slate-500 hover:text-gold transition-colors uppercase tracking-widest inline-flex items-center gap-1.5"
-              >
-                More about Graeme <ArrowRight size={10} />
-              </Link>
-            </div>
-          </div>
-        </div>
+
 
         {/* CTA */}
         <div className="mt-16 pt-12 border-t border-white/5">

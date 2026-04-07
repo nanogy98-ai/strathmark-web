@@ -7,6 +7,7 @@ export interface Note {
   readingTime: string;
   author: string;
   tags: string[];
+  shareImage?: string;
   content: string;
 }
 
@@ -19,6 +20,7 @@ export const notes: Note[] = [
     readingTime: "9 min read",
     author: "Graeme Wakelin",
     tags: ["agency", "retainers", "commercial", "strategy"],
+    shareImage: "/insights/og-marketing.png",
     excerpt: "The incentive structure of a standard agency retainer is designed to maximise margin by minimising activity. Here is why it breaks down.",
     content: `
       <h2>The Uncomfortable Truth About Retainer Economics</h2>
@@ -85,6 +87,7 @@ export const notes: Note[] = [
     readingTime: "8 min read",
     author: "Graeme Wakelin",
     tags: ["seo", "analytics", "strategy", "commercial"],
+    shareImage: "/insights/og-revenue.png",
     excerpt: "Any engineer can double your traffic in 30 days by targeting irrelevant keywords. It looks great on a report and adds zero to your bottom line.",
     content: `
       <h2>The Vanity Metrics Epidemic</h2>
@@ -147,6 +150,7 @@ export const notes: Note[] = [
     readingTime: "10 min read",
     author: "Graeme Wakelin",
     tags: ["ppc", "google-ads", "paid-media", "audit"],
+    shareImage: "/insights/og-ad-audit.png",
     excerpt: "Three settings in your Google Ads account reveal whether your PPC agency is optimising or coasting. Here is how to check.",
     content: `
       <h2>Why Most Ad Accounts Leak Money</h2>
@@ -217,6 +221,7 @@ export const notes: Note[] = [
     readingTime: "9 min read",
     author: "Graeme Wakelin",
     tags: ["technical-seo", "infrastructure", "architecture", "performance"],
+    shareImage: "/insights/og-tech.png",
     excerpt: "Choosing a JavaScript-heavy framework for a content site is a six-figure mistake. Here is how technical decisions silently erode search performance.",
     content: `
       <h2>The Render Tax</h2>
@@ -276,6 +281,7 @@ export const notes: Note[] = [
     readingTime: "12 min read",
     author: "Graeme Wakelin",
     tags: ["seo", "technical-seo", "audit", "enterprise"],
+    shareImage: "/insights/og-seo.png",
     excerpt: "Most SEO audits check the wrong things. Here are 12 infrastructure-level checks that separate performant sites from expensive liabilities.",
     content: `
       <h2>Why Most SEO Audits Are Useless</h2>
@@ -337,6 +343,7 @@ export const notes: Note[] = [
     readingTime: "10 min read",
     author: "Graeme Wakelin",
     tags: ["ppc", "google-ads", "paid-media", "commercial", "audit"],
+    shareImage: "/insights/og-waste.png",
     excerpt: "The six most expensive Google Ads mistakes are all silent. They do not trigger alerts, produce errors, or appear on standard reports.",
     content: `
       <h2>The Silent Bleed</h2>
@@ -388,6 +395,7 @@ export const notes: Note[] = [
     readingTime: "11 min read",
     author: "Graeme Wakelin",
     tags: ["agency", "consultant", "commercial", "strategy"],
+    shareImage: "/insights/og-agency.png",
     excerpt: "Agencies and independent consultants serve different functions. Choosing the wrong model for your situation costs more than the fee difference.",
     content: `
       <h2>The False Equivalence</h2>
@@ -459,6 +467,7 @@ export const notes: Note[] = [
     readingTime: "11 min read",
     author: "Graeme Wakelin",
     tags: ["due-diligence", "strategy", "commercial", "acquisition"],
+    shareImage: "/insights/og-diligence.png",
     excerpt: "Acquirers scrutinise financials, legal, and operations. They almost never audit digital infrastructure — and it costs them millions post-close.",
     content: `
       <h2>The Blind Spot in M&A</h2>
