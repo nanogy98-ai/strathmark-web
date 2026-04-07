@@ -8,10 +8,12 @@ import { Insights } from "@/app/components/sections/Insights";
 import { FAQ } from "@/app/components/sections/FAQ";
 import { Contact } from "@/app/components/sections/Contact";
 import { Footer } from "@/app/components/sections/Footer";
+import { ReadingProgress } from "@/app/components/ReadingProgress";
 
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center bg-strath-navy text-slate-200 overflow-x-hidden selection:bg-gold selection:text-strath-navy">
+      <ReadingProgress />
       <Navigation />
       <Hero />
       <h2 className="sr-only">Homepage Sections</h2>

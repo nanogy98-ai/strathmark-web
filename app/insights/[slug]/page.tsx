@@ -6,7 +6,7 @@ import { notes } from "@/lib/notes-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
 import { SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
-import { ReadingProgress } from "./ReadingProgress";
+import { ReadingProgress } from "@/app/components/ReadingProgress";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
