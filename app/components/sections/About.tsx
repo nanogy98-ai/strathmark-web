@@ -77,23 +77,42 @@ export function About() {
                 </p>
               </div>
 
-              <div className="mt-6 border border-white/10 bg-white/[0.03] p-5">
-                <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-gold mb-3">
-                  Active Operating Brand
+              <div className="mt-6 space-y-4">
+                <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-gold">
+                  Specialist Brands & Public Work
                 </p>
-                <p className="text-white font-serif text-lg mb-2">Apex Aesthetics</p>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  Graeme also operates{" "}
-                  <a
-                    href="https://www.apexaesthetics.co.uk/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
-                  >
-                    Apex Aesthetics
-                  </a>
-                  , a specialist growth brand for UK aesthetic clinics. Running a live sector-specific brand keeps Strathmark&apos;s advice grounded in real-world SEO, conversion, and commercial execution rather than theory alone.
-                </p>
+
+                <div className="border border-white/10 bg-white/[0.03] p-5">
+                  <p className="text-white font-serif text-lg mb-2">Apex Aesthetics</p>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Graeme also operates{" "}
+                    <a
+                      href="https://www.apexaesthetics.co.uk/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
+                    >
+                      Apex Aesthetics
+                    </a>
+                    , a specialist growth brand for UK aesthetic clinics. Running a live sector-specific brand keeps Strathmark&apos;s advice grounded in real-world SEO, conversion, and commercial execution rather than theory alone.
+                  </p>
+                </div>
+
+                <div className="border border-white/10 bg-white/[0.03] p-5">
+                  <p className="text-white font-serif text-lg mb-2">Ayrshire Tech Help</p>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    He also runs{" "}
+                    <a
+                      href="https://www.ayrshiretechhelp.co.uk/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
+                    >
+                      Ayrshire Tech Help
+                    </a>
+                    , a free local digital support service for people across Ayrshire who need help with computers, Wi-Fi, printers, phones, and everyday technology. That public-facing work reinforces the practical, plain-English mindset behind Strathmark and shows the consultancy is backed by active operator experience, not abstract theory.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
