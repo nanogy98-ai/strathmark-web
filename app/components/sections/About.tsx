@@ -20,6 +20,46 @@ export function About() {
               Headquartered in Edinburgh, Scotland, we operate globally, advising leadership teams in the US, UAE, and Europe. We believe that digital performance is a structural function of your business, not a marketing add-on. We fix the machine first, then we fuel it.
             </p>
           </div>
+
+          <div className="mt-10 space-y-4">
+            <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-gold">
+              Specialist Brands & Public Work
+            </p>
+
+            <div className="space-y-4">
+              <div className="border border-white/10 bg-white/[0.03] p-5">
+                <p className="text-white font-serif text-lg mb-2">Apex Aesthetics</p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Graeme also operates{" "}
+                  <a
+                    href="https://www.apexaesthetics.co.uk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
+                  >
+                    Apex Aesthetics
+                  </a>
+                  , a specialist growth brand for UK aesthetic clinics. Running a live sector-specific brand keeps Strathmark&apos;s advice grounded in real-world SEO, conversion, and commercial execution rather than theory alone.
+                </p>
+              </div>
+
+              <div className="border border-white/10 bg-white/[0.03] p-5">
+                <p className="text-white font-serif text-lg mb-2">Ayrshire Tech Help</p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  He also runs{" "}
+                  <a
+                    href="https://www.ayrshiretechhelp.co.uk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
+                  >
+                    Ayrshire Tech Help
+                  </a>
+                  , a free local digital support service for people across Ayrshire who need help with computers, Wi-Fi, printers, phones, and everyday technology. That public-facing work reinforces the practical, plain-English mindset behind Strathmark and shows the consultancy is backed by active operator experience, not abstract theory.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="lg:col-span-7 space-y-12">
@@ -75,44 +115,6 @@ export function About() {
                 <p>
                   He founded Strathmark to solve a specific problem: too many organisations spend significantly on digital marketing without clarity on what works.
                 </p>
-              </div>
-
-              <div className="mt-6 space-y-4">
-                <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-gold">
-                  Specialist Brands & Public Work
-                </p>
-
-                <div className="border border-white/10 bg-white/[0.03] p-5">
-                  <p className="text-white font-serif text-lg mb-2">Apex Aesthetics</p>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    Graeme also operates{" "}
-                    <a
-                      href="https://www.apexaesthetics.co.uk/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
-                    >
-                      Apex Aesthetics
-                    </a>
-                    , a specialist growth brand for UK aesthetic clinics. Running a live sector-specific brand keeps Strathmark&apos;s advice grounded in real-world SEO, conversion, and commercial execution rather than theory alone.
-                  </p>
-                </div>
-
-                <div className="border border-white/10 bg-white/[0.03] p-5">
-                  <p className="text-white font-serif text-lg mb-2">Ayrshire Tech Help</p>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    He also runs{" "}
-                    <a
-                      href="https://www.ayrshiretechhelp.co.uk/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
-                    >
-                      Ayrshire Tech Help
-                    </a>
-                    , a free local digital support service for people across Ayrshire who need help with computers, Wi-Fi, printers, phones, and everyday technology. That public-facing work reinforces the practical, plain-English mindset behind Strathmark and shows the consultancy is backed by active operator experience, not abstract theory.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
