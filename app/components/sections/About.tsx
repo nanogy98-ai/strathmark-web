@@ -76,6 +76,25 @@ export function About() {
                   He founded Strathmark to solve a specific problem: too many organisations spend significantly on digital marketing without clarity on what works.
                 </p>
               </div>
+
+              <div className="mt-6 border border-white/10 bg-white/[0.03] p-5">
+                <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-gold mb-3">
+                  Active Operating Brand
+                </p>
+                <p className="text-white font-serif text-lg mb-2">Apex Aesthetics</p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Graeme also operates{" "}
+                  <a
+                    href="https://www.apexaesthetics.co.uk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
+                  >
+                    Apex Aesthetics
+                  </a>
+                  , a specialist growth brand for UK aesthetic clinics. Running a live sector-specific brand keeps Strathmark&apos;s advice grounded in real-world SEO, conversion, and commercial execution rather than theory alone.
+                </p>
+              </div>
             </div>
           </div>
         </div>
