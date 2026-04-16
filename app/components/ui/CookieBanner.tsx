@@ -57,7 +57,7 @@ export function CookieBanner() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 md:p-5">
           <div className="text-sm text-slate-300 leading-relaxed">
             <span className="font-semibold text-white">Cookies.</span>{" "}
-            We use essential storage to remember your preferences. With your permission, we also use Google Analytics to understand site usage.
+            We use essential storage to remember your preferences. With your permission, we also use Google Analytics and Microsoft Clarity to understand site usage.
             {" "}
             <Link href="/privacy" className="text-gold hover:text-white underline underline-offset-4">
               Learn more
@@ -92,5 +92,4 @@ export function CookieBanner() {
     </div>
   );
 }
-
 

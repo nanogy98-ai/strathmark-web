@@ -40,8 +40,8 @@ export default function PrivacyPage() {
 
           <h3 className="text-2xl font-serif font-bold text-white">Analytics</h3>
           <p>
-            With your permission, we use Google Analytics (GA4) to understand how the site is used and to improve performance and clarity.
-            If you reject analytics cookies, Google Analytics will not load.
+            With your permission, we use Google Analytics (GA4) and Microsoft Clarity to understand how the site is used and to improve performance, usability, and clarity.
+            If you reject analytics cookies, analytics storage remains denied and these tools are not enabled for full analytics tracking.
           </p>
 
           <h3 className="text-2xl font-serif font-bold text-white">Contact form submissions</h3>
