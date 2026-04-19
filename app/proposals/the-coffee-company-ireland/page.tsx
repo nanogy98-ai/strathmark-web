@@ -86,7 +86,7 @@ export default function CoffeeCompanyProposal() {
       <ReadingProgress />
       
       {/* 1. HERO */}
-      <section className="relative px-6 pt-32 pb-40 border-b border-white/5 overflow-hidden">
+      <section className="relative px-6 pt-10 md:pt-24 pb-16 md:pb-40 border-b border-white/5 overflow-hidden">
         {/* Subtle background glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full pointer-events-none">
           <div className="absolute -top-24 left-1/4 w-[500px] h-[500px] bg-gold/5 blur-[120px] rounded-full" />
