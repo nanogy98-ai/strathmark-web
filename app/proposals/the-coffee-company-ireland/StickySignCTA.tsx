@@ -38,7 +38,7 @@ export function StickySignCTA() {
       <div className="bg-strath-navy/80 backdrop-blur-xl border border-gold/30 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl flex items-center justify-between gap-4">
         <div className="hidden sm:block">
           <p className="text-white font-serif font-bold text-sm">Ready to grow?</p>
-          <p className="text-slate-400 text-[10px] uppercase tracking-widest mt-0.5">Authorize & Proceed</p>
+          <p className="text-slate-400 text-[10px] uppercase tracking-widest mt-0.5">Authorise &amp; Proceed</p>
         </div>
         <button
           onClick={scrollToApproval}

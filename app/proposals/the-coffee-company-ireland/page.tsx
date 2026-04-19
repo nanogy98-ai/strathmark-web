@@ -152,7 +152,7 @@ export default function CoffeeCompanyProposal() {
       </section>
 
       {/* 2. SITUATION */}
-      <MotionSection className="px-6 py-32 border-b border-white/5 relative overflow-hidden">
+      <MotionSection className="px-6 py-16 md:py-32 border-b border-white/5 relative overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight">
             A business with strong real-world value, <span className="text-slate-500">held back digitally</span>
@@ -162,7 +162,7 @@ export default function CoffeeCompanyProposal() {
             <p className="text-white font-medium border-l-2 border-gold pl-6 py-2 bg-gold/5">The core issue is digital. The current setup is not doing the business (trading as The Coffee Company) justice.</p>
           </div>
 
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-10 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               { icon: Sparkles, title: "Operational advantage", copy: "Your local position and rapid in-house response give you a genuine commercial edge against larger competitors." },
               { icon: Target, title: "Platform limitations", copy: "The present Squarespace setup is a brochure, not a foundation for authority-building or premium conversion." },
@@ -179,14 +179,14 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 3. WHY NOW */}
-      <MotionSection className="px-6 py-32 border-b border-white/5 bg-[#080d17]">
+      <MotionSection className="px-6 py-16 md:py-32 border-b border-white/5 bg-[#080d17]">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-white leading-tight">Why this matters now</h2>
           <p className="mt-8 text-xl text-slate-300 font-light leading-relaxed max-w-3xl">
             Digital growth is currently constrained by platform limitations and the absence of a proper content-led acquisition asset.
           </p>
 
-          <div className="mt-20 space-y-12">
+          <div className="mt-10 md:mt-20 space-y-10 md:space-y-12">
             {[
               { title: "Dependence on existing awareness", copy: "When most visibility comes from people who already know you, growth stays capped. New B2B prospects discover competitors first." },
               { title: "Site cannot carry the authority burden", copy: "You have valuable knowledge, but the current setup does not build authority or compound over time as a digital asset." },
@@ -205,12 +205,12 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 4. TWO ROUTES */}
-      <MotionSection id="routes" className="px-6 py-32 border-b border-white/5 bg-gradient-to-b from-[#080d17] to-strath-navy">
+      <MotionSection id="routes" className="px-6 py-16 md:py-32 border-b border-white/5 bg-gradient-to-b from-[#080d17] to-strath-navy">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight">Two sensible routes forward</h2>
           <p className="mt-8 text-xl text-slate-400 font-light max-w-3xl">Based on the current position of the business, there are two commercially sensible ways to proceed.</p>
 
-          <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="mt-10 md:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
             {/* Option A */}
             <article className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 to-gold/0 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
@@ -287,7 +287,7 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 5. RECOMMENDED */}
-      <MotionSection id="recommended" className="px-6 py-40 border-b border-white/5 bg-[#0a101d] overflow-hidden relative">
+      <MotionSection id="recommended" className="px-6 py-16 md:py-40 border-b border-white/5 bg-[#0a101d] overflow-hidden relative">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-20">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/10 blur-[160px] rounded-full" />
         </div>
@@ -315,13 +315,13 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 6. SCOPE */}
-      <MotionSection className="px-6 py-32 border-b border-white/5 bg-gradient-to-b from-[#0b1120] to-strath-navy relative overflow-hidden">
+      <MotionSection className="px-6 py-16 md:py-32 border-b border-white/5 bg-gradient-to-b from-[#0b1120] to-strath-navy relative overflow-hidden">
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[780px] h-[780px] bg-gold/5 blur-[140px] pointer-events-none" />
         <div className="max-w-6xl mx-auto relative z-10">
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold">Scope clarity</span>
           <h2 className="mt-8 text-3xl md:text-5xl font-serif font-bold text-white leading-tight">Exactly what the work covers</h2>
           
-          <div className="mt-20 grid grid-cols-1 xl:grid-cols-2 gap-12">
+          <div className="mt-10 md:mt-20 grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12">
             <article className="relative border border-gold/30 bg-white/[0.02] p-8 md:p-12 shadow-2xl">
               <div className="absolute top-0 right-0 bg-gold text-strath-navy text-[10px] font-mono uppercase tracking-widest px-4 py-1.5 font-bold">Recommended</div>
               <h3 className="font-serif text-3xl font-bold text-white">Route A scope</h3>
@@ -383,11 +383,11 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 7. PHASES */}
-      <MotionSection className="px-6 py-32 border-b border-white/5 bg-[#080d17]">
+      <MotionSection className="px-6 py-16 md:py-32 border-b border-white/5 bg-[#080d17]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight">Delivery timeline</h2>
 
-          <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-20">
+          <div className="mt-12 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
             <div>
               <div className="flex items-center gap-4 mb-10">
                 <div className="p-3 bg-gold/10 border border-gold/20 rounded-lg">
@@ -448,20 +448,21 @@ export default function CoffeeCompanyProposal() {
           </div>
 
           {/* SEO migration note */}
-          <div className="mt-24 group relative">
+          <div className="mt-12 md:mt-24 group relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 to-transparent blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-            <div className="relative bg-white/[0.02] border border-white/10 p-8 md:p-12">
-              <div className="flex items-start gap-8">
-                <div className="shrink-0 w-16 h-16 rounded-full bg-gold/5 border border-gold/20 flex items-center justify-center text-gold">
-                  <ShieldCheck size={32} strokeWidth={1} />
+            <div className="relative bg-white/[0.02] border border-white/10 p-6 md:p-12">
+              <div className="flex flex-col sm:flex-row items-start gap-6 md:gap-8">
+                <div className="shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-gold/5 border border-gold/20 flex items-center justify-center text-gold">
+                  <ShieldCheck size={22} strokeWidth={1.5} className="md:hidden" />
+                  <ShieldCheck size={32} strokeWidth={1} className="hidden md:block" />
                 </div>
                 <div>
-                  <h4 className="font-serif text-2xl font-bold text-white">Guaranteed SEO Continuity</h4>
-                  <p className="mt-4 text-slate-300 font-light leading-relaxed text-lg max-w-4xl">
-                    Moving from Squarespace to the new platform will be handled with full SEO best practice. 301 redirects will be implemented from all existing URLs, and the URL structure will be retained wherever appropriate to preserve every ounce of branded traffic you&apos;ve built.
+                  <h4 className="font-serif text-xl md:text-2xl font-bold text-white">Guaranteed SEO Continuity</h4>
+                  <p className="mt-3 text-slate-300 font-light leading-relaxed text-sm md:text-base max-w-3xl">
+                    Moving from Squarespace to the new platform will be handled with full SEO best practice. 301 redirects will be implemented from all existing URLs, and the URL structure retained wherever appropriate to preserve every ounce of branded traffic you&apos;ve built.
                   </p>
-                  <p className="mt-6 text-slate-500 font-light text-sm italic">
-                    I monitor Google Search Console closely post-launch to ensure the transition is seamless.
+                  <p className="mt-4 text-slate-500 font-light text-sm italic">
+                    Google Search Console is monitored closely post-launch to catch and correct any regressions before they compound.
                   </p>
                 </div>
               </div>
@@ -471,7 +472,7 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 8. INVESTMENT */}
-      <MotionSection className="px-6 py-32 border-b border-white/5 relative overflow-hidden">
+      <MotionSection className="px-6 py-16 md:py-32 border-b border-white/5 relative overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold">Commercial Investment</span>
           <h2 className="mt-8 text-3xl md:text-5xl font-serif font-bold text-white leading-tight">Clear pricing. <span className="text-slate-500">No surprises.</span></h2>
@@ -479,7 +480,7 @@ export default function CoffeeCompanyProposal() {
             Priced in euros so you pay exactly what is quoted. The rebuild and the retainer are costed separately—the retainer only begins once the site is live.
           </p>
 
-          <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="mt-10 md:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             {/* Route A Card */}
             <article className="relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-b from-gold/30 to-transparent blur-sm opacity-50 group-hover:opacity-100 transition duration-500"></div>
@@ -577,13 +578,13 @@ export default function CoffeeCompanyProposal() {
             </article>
           </div>
 
-          <div className="mt-20 flex flex-col items-center justify-center p-16 border border-gold/30 bg-gold/5 text-center relative overflow-hidden group">
+          <div className="mt-20 flex flex-col items-center justify-center px-8 py-12 border border-gold/30 bg-gold/5 text-center relative overflow-hidden group">
             <div className="absolute inset-0 bg-gold/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
-            <div className="relative z-10">
-              <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Secure your project start date</h3>
-              <p className="text-slate-400 text-lg font-light mb-10 max-w-xl mx-auto">Authorize the proposal to receive your itemized breakdown and bank details immediately.</p>
-              <a href="#approval" className="bg-gold text-strath-navy px-12 py-6 text-lg font-bold uppercase tracking-wider hover:bg-white hover:scale-105 transition-all inline-flex items-center gap-4 shadow-2xl">
-                Authorize & Proceed <PenLine size={24} />
+            <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6">
+              <p className="font-serif text-xl font-bold text-white">Secure your project start date</p>
+              <a href="#approval" className="bg-gold text-strath-navy px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-white transition-all inline-flex items-center gap-2 group/btn">
+                <PenLine size={16} className="group-hover/btn:rotate-12 transition-transform" />
+                Sign Now
               </a>
             </div>
           </div>
@@ -591,12 +592,12 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 8b. RETAINER DETAILS */}
-      <MotionSection className="px-6 py-32 border-b border-white/5 bg-[#080d17]">
+      <MotionSection className="px-6 py-16 md:py-32 border-b border-white/5 bg-[#080d17]">
         <div className="max-w-5xl mx-auto">
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold">Retainer transparency</span>
           <h2 className="mt-8 text-3xl md:text-5xl font-serif font-bold text-white leading-tight">What the monthly hours cover</h2>
           
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="mt-10 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <div className="relative p-8 md:p-12 bg-white/[0.02] border border-gold/20">
               <div className="flex items-baseline justify-between mb-8 pb-4 border-b border-white/5">
                 <h3 className="font-serif text-2xl font-bold text-white">Month 1</h3>
@@ -644,7 +645,7 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 9. TEAFORTE ADVISORY */}
-      <MotionSection className="px-6 py-32 border-b border-white/5 bg-[#09101c]">
+      <MotionSection className="px-6 py-16 md:py-32 border-b border-white/5 bg-[#09101c]">
         <div className="max-w-5xl mx-auto">
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold">Strategic advisory</span>
           <h2 className="mt-8 text-3xl md:text-5xl font-serif font-bold text-white leading-tight">Advisory: teaforte.ie</h2>
@@ -702,13 +703,13 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 10. APPROVAL */}
-      <MotionSection id="approval" className="px-6 py-40 border-b border-white/5 scroll-mt-20 bg-gradient-to-b from-strath-navy to-black">
+      <MotionSection id="approval" className="px-6 py-16 md:py-40 border-b border-white/5 scroll-mt-20 bg-gradient-to-b from-strath-navy to-black">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-3 bg-gold/10 border border-gold/20 px-4 py-1.5 mb-10">
             <PenLine size={14} className="text-gold" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold font-bold">Secure Authorization</span>
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold font-bold">Secure Authorisation</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-white leading-tight">Authorize and proceed</h2>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-white leading-tight">Authorise and proceed</h2>
           <p className="mt-8 text-xl text-slate-400 font-light leading-relaxed">
             Select your preferred route below and sign to confirm approval. A signed PDF will be generated immediately for your records.
           </p>
@@ -729,12 +730,12 @@ export default function CoffeeCompanyProposal() {
       </MotionSection>
 
       {/* 11. TERMS */}
-      <MotionSection className="px-6 py-32 border-b border-white/5 bg-[#080d17]">
+      <MotionSection className="px-6 py-16 md:py-32 border-b border-white/5 bg-[#080d17]">
         <div className="max-w-4xl mx-auto">
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold font-bold">Commercial terms</span>
           <h2 className="mt-8 text-3xl md:text-5xl font-serif font-bold text-white leading-tight">Professional standards. <span className="text-slate-500">Zero lock-in.</span></h2>
           
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+          <div className="mt-10 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-16 gap-y-8 md:gap-y-12">
             {termGroups.map((group, gi) => (
               <div key={gi}>
                 <h3 className="font-serif text-xl font-bold text-gold flex items-center gap-3">

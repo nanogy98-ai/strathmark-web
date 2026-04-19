@@ -2,6 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 
 const CONSENT_KEY = "strathmark_cookie_consent_v1";
@@ -14,7 +15,11 @@ declare global {
 }
 
 export function CookieBanner() {
+  const pathname = usePathname();
   const [dismissed, setDismissed] = useState(false);
+
+  // Private proposal pages are invite-only; no banner noise there.
+  if (pathname?.startsWith("/proposals/")) return null;
 
   const shouldShow = useSyncExternalStore(
     () => () => {
