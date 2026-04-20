@@ -67,6 +67,58 @@ gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
         `}
       </Script>
 
+      <Script id="clarity-stylesheet-unmask" strategy="beforeInteractive">
+        {`
+(function() {
+  function normaliseStylesheetLink(link) {
+    if (!(link instanceof HTMLLinkElement)) return;
+    if (link.rel !== 'stylesheet' || !link.getAttribute('href')) return;
+
+    link.setAttribute('data-clarity-unmask', 'true');
+
+    var rawHref = link.getAttribute('href');
+    if (!rawHref) return;
+
+    if (rawHref.startsWith('/')) {
+      link.setAttribute('href', new URL(rawHref, window.location.origin).toString());
+    }
+  }
+
+  function normaliseExistingStylesheets(root) {
+    root.querySelectorAll('link[rel="stylesheet"][href]').forEach(normaliseStylesheetLink);
+  }
+
+  function watchHead() {
+    if (!document.head) return;
+
+    normaliseExistingStylesheets(document);
+
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        mutation.addedNodes.forEach(function(node) {
+          if (!(node instanceof Element)) return;
+
+          if (node.matches('link[rel="stylesheet"][href]')) {
+            normaliseStylesheetLink(node);
+          }
+
+          normaliseExistingStylesheets(node);
+        });
+      });
+    });
+
+    observer.observe(document.head, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', watchHead, { once: true });
+  } else {
+    watchHead();
+  }
+})();
+        `}
+      </Script>
+
       <Script id="microsoft-clarity" strategy="beforeInteractive">
         {`
 (function(c,l,a,r,i,t,y){
@@ -79,4 +131,3 @@ gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
     </>
   );
 }
-
