@@ -73,7 +73,7 @@ export function Navigation() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8 pl-8 xl:gap-10 xl:pl-10">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 

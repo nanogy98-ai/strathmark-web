@@ -7,32 +7,32 @@ export function Approach() {
     {
       num: "01",
       title: "Review & Diagnosis",
-      desc: "We analyze your spend, infrastructure, and team capabilities. 7-14 day turnaround.",
+      desc: "I analyse your spend, infrastructure, and team capabilities. 7-14 day turnaround.",
       time: "Fixed Fee"
     },
     {
       num: "02",
       title: "Findings & Priorities",
-      desc: "You get a prioritized roadmap of what to fix, what to stop, and where to double down.",
+      desc: "You get a prioritised roadmap of what to fix, what to stop, and where to double down.",
       time: "Delivery Meeting"
     },
     {
       num: "03",
       title: "Execution Plan",
-      desc: "We architect the solution. Your team executes, or we bring in specialists.",
+      desc: "I architect the solution. Your team executes, or I bring in specialists.",
       time: "Strategic Roadmap"
     },
     {
       num: "04",
       title: "Oversight & Accountability",
-      desc: "Ongoing advisory to ensure the plan is followed and ROI is realized.",
+      desc: "Ongoing advisory to ensure the plan is followed and ROI is realised.",
       time: "Optional Retainer"
     }
   ];
 
   return (
-    <section className="w-full max-w-7xl px-6 py-24 mx-auto bg-white/[0.02]" id="approach">
-      <div className="mb-16 text-center">
+    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto bg-white/[0.02]" id="approach">
+      <div className="mb-10 md:mb-16 text-center">
         <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">The Methodology</h3>
         <p className="text-slate-400">Predictable. Transparent. Commercial.</p>
       </div>

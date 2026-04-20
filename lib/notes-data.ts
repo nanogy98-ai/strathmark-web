@@ -92,10 +92,10 @@ export const notes: Note[] = [
     content: `
       <h2>The Vanity Metrics Epidemic</h2>
       <p>I once audited a site with 500,000 monthly visitors. The marketing team was celebrating what they called "record growth." The CMO had presented it to the board as proof of digital momentum.</p>
-      <p>When we dug into the data, 90% of that traffic was landing on a single blog post about "how to tie a tie." Their product was B2B enterprise software. The traffic was utterly worthless — hundreds of thousands of people who would never, under any circumstances, become customers.</p>
+      <p>When I dug into the data, 90% of that traffic was landing on a single blog post about "how to tie a tie." Their product was B2B enterprise software. The traffic was utterly worthless — hundreds of thousands of people who would never, under any circumstances, become customers.</p>
       <p>But it looked spectacular on a dashboard. And that is precisely the problem.</p>
 
-      <h2>How We Got Here</h2>
+      <h2>How This Happened</h2>
       <p>The digital marketing industry has spent two decades optimising for the wrong metrics. Traffic, impressions, click-through rates, social shares — these are all <em>activity</em> metrics. They measure movement. They do not measure value.</p>
       <p>The reason they persist is simple: they are easy to grow. Any competent SEO can increase organic traffic by targeting high-volume, low-competition keywords. Any paid media manager can increase impressions by broadening targeting. Any content team can increase page views by publishing listicles.</p>
       <p>None of this requires the work to be commercially relevant. And that is where the disconnect begins.</p>
@@ -231,7 +231,7 @@ export const notes: Note[] = [
 
       <h2>The Scale Problem</h2>
       <p>For a 50-page brochure site, this barely matters. Google will eventually render everything, and the indexing delay is measured in days, not months.</p>
-      <p>For an enterprise site with 10,000+ pages — product catalogues, location pages, service variations, blog archives — the impact is catastrophic. We routinely audit large sites where 30–40% of the page inventory is not indexed by Google. Not because the content is bad. Not because there are technical errors. Simply because the bot ran out of patience waiting for JavaScript to render.</p>
+      <p>For an enterprise site with 10,000+ pages — product catalogues, location pages, service variations, blog archives — the impact is catastrophic. I routinely audit large sites where 30–40% of the page inventory is not indexed by Google. Not because the content is bad. Not because there are technical errors. Simply because the bot ran out of patience waiting for JavaScript to render.</p>
       <p>Each unindexed page represents lost visibility, lost traffic, and lost revenue. Multiply that across thousands of pages and the cost becomes staggering.</p>
 
       <h2>How This Happens</h2>
@@ -372,7 +372,7 @@ export const notes: Note[] = [
       <p>Check your campaign settings. If any search campaign has "Google Search Partners" or "Display Network" enabled, it is spending money outside of Google's core search results. In my audits, disabling these options typically saves 10–15% of total spend with no measurable impact on conversion volume.</p>
 
       <h2>5. Geographic Overspend</h2>
-      <p>As discussed in our ad account audit guide, the default location targeting setting — "Presence or interest" — is silently draining budgets. But the problem goes deeper than a single setting.</p>
+      <p>As discussed in my ad account audit guide, the default location targeting setting — "Presence or interest" — is silently draining budgets. But the problem goes deeper than a single setting.</p>
       <p>Enterprise accounts often target entire countries when their actual service area is regional. A facilities management company that operates in the Midlands does not need to show ads in Northern Scotland. A recruitment firm specialising in London financial services does not need visibility in rural Wales.</p>
       <p>Run a geographic performance report segmented by city or region. You will almost certainly find areas consuming meaningful budget with zero conversions. The fix is surgical: create location bid adjustments or exclusions based on actual commercial performance, not assumptions about where your customers might be.</p>
 
@@ -422,7 +422,7 @@ export const notes: Note[] = [
       <p>An independent consultant is, at their best, a domain-specific expert who sells judgement rather than labour. Their value is not in doing the work — it is in knowing what work needs to be done, in what order, and to what standard.</p>
       <p>This model works well when you need:</p>
       <ul>
-        <li><strong>Strategic clarity:</strong> What should we be doing? Where should we be spending? What is our agency doing wrong? What are we missing?</li>
+        <li><strong>Strategic clarity:</strong> What should I be doing? Where should I be spending? What is my agency doing wrong? What am I missing?</li>
         <li><strong>Vendor oversight:</strong> An independent party who sits between you and your agencies, validating their work, challenging their recommendations, and holding them accountable for commercial outcomes.</li>
         <li><strong>Diagnostic expertise:</strong> Technical audits, infrastructure reviews, and objective assessments of your current capabilities and gaps.</li>
         <li><strong>Decision-making support:</strong> For high-stakes choices — platform migrations, agency selection, budget allocation, tech stack decisions — where the wrong decision has long-term consequences.</li>

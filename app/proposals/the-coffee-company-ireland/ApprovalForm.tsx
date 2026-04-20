@@ -683,7 +683,7 @@ export function ApprovalForm() {
           <div>
             <strong className="block text-red-200">Submission failed</strong>
             <span>{submitError}</span>
-            <span className="block mt-2 text-xs text-red-300/80">Please try again. If this keeps happening, email graeme@strathmarkconsulting.com and we will proceed manually.</span>
+            <span className="block mt-2 text-xs text-red-300/80">Please try again. If this keeps happening, email graeme@strathmarkconsulting.com and I will proceed manually.</span>
           </div>
         </div>
       )}

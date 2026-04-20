@@ -21,7 +21,7 @@ export function CookieBanner() {
 
   const shouldShow = useSyncExternalStore(
     () => () => {
-      // No-op subscription: we re-render on accept via setDismissed().
+      // No-op subscription: I re-render on accept via setDismissed().
     },
     () => {
       try {
@@ -61,7 +61,7 @@ export function CookieBanner() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 md:p-5">
           <div className="text-sm text-slate-300 leading-relaxed">
             <span className="font-semibold text-white">Cookies.</span>{" "}
-            We use essential storage to remember your preferences. With your permission, we also use Google Analytics and Microsoft Clarity to understand site usage.
+            I use essential storage to remember your preferences. With your permission, I also use Google Analytics and Microsoft Clarity to understand site usage.
             {" "}
             <Link href="/privacy" className="text-gold hover:text-white underline underline-offset-4">
               Learn more

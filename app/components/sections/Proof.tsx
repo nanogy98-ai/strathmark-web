@@ -21,7 +21,7 @@ export function Proof() {
   ];
 
   return (
-    <section className="w-full max-w-7xl px-6 py-24 mx-auto" id="proof">
+    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto" id="proof">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
         
         {/* The Problem */}

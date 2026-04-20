@@ -63,7 +63,7 @@ const termGroups: { title: string; items: string[] }[] = [
       "Every account and login created during this project is registered in your company name. You own them outright from day one — not Strathmark.",
       "This includes Google Analytics 4, Google Search Console, GitHub (source code), Vercel (hosting), Microsoft Clarity (session analytics), and any other platform accounts set up as part of the engagement.",
       "If the email migration add-on is taken, the Zoho Mail account is also registered to your company and handed to you at project completion.",
-      "While the retainer is active, Strathmark maintains the working access needed to manage and update your platforms on your behalf. If you ever choose to end the arrangement, a full credentials handover takes place immediately — you walk away with complete control of every account, every file, and every login. Nothing is withheld, and nothing is structured to keep you reliant on us.",
+      "While the retainer is active, Strathmark maintains the working access needed to manage and update your platforms on your behalf. If you ever choose to end the arrangement, a full credentials handover takes place immediately — you walk away with complete control of every account, every file, and every login. Nothing is withheld, and nothing is structured to keep you reliant on Strathmark.",
     ],
   },
 ];
@@ -119,7 +119,7 @@ export default function CoffeeCompanyProposal() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="mt-12 space-y-6 text-lg text-slate-400 font-light leading-relaxed max-w-2xl"
           >
-            <p>Following our consultation, this proposal sets out the two most commercially sensible routes forward.</p>
+            <p>Following the consultation, this proposal sets out the two most commercially sensible routes forward.</p>
             <div className="flex flex-col gap-4 mt-8">
               <div className="flex items-start gap-3 bg-white/[0.03] border border-white/5 p-4">
                 <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-1">
@@ -572,7 +572,7 @@ export default function CoffeeCompanyProposal() {
 
                 <div className="pt-8 border-t border-white/5">
                   <p className="text-sm text-slate-300 leading-relaxed italic">
-                    Note: This route prioritizes paid traffic over long-term asset value. The €3,400 rebuild can be triggered at any time.
+                    Note: This route prioritises paid traffic over long-term asset value. The €3,400 rebuild can be triggered at any time.
                   </p>
                 </div>
               </div>
@@ -608,7 +608,7 @@ export default function CoffeeCompanyProposal() {
                 {[
                   ["Facebook Architecture", "Audience research, conversion tracking & initial creative deployment."],
                   ["SEO Foundations", "Metadata mapping, internal link structure & Search Console sync."],
-                  ["Authority Content", "First high-intent B2B piece drafted & optimized in-house."],
+                  ["Authority Content", "First high-intent B2B piece drafted & optimised in-house."],
                   ["Strategy Baseline", "Commercial reporting setup & 45-minute kickoff call."]
                 ].map(([title, copy], i) => (
                   <li key={i} className="group">
@@ -640,7 +640,7 @@ export default function CoffeeCompanyProposal() {
             </div>
           </div>
           <p className="mt-16 text-slate-500 text-sm italic text-center">
-            If a month demands extra hours (e.g. a seasonal push), we agree them in writing first at the same €60 rate. No surprise invoices.
+            If a month demands extra hours (e.g. a seasonal push), I agree them in writing first at the same €60 rate. No surprise invoices.
           </p>
         </div>
       </MotionSection>

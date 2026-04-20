@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center pt-32 pb-20 px-6 bg-gradient-to-br from-strath-navy via-[#152336] to-[#0a101d] overflow-hidden">
+    <section className="relative w-full min-h-screen flex items-center justify-center pt-28 pb-16 md:pt-32 md:pb-20 px-6 bg-gradient-to-br from-strath-navy via-[#152336] to-[#0a101d] overflow-hidden">
       {/* Subtle Noise Texture */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
       
@@ -27,7 +27,7 @@ export function Hero() {
           </h1>
           
           <p className="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
-            We audit your digital marketing agencies and internal teams to stop wasted spend and fix broken websites. Independent advice for business owners.
+            I audit your digital marketing agencies and internal teams to stop wasted spend and fix broken websites. Independent advice for business owners.
           </p>
           
           <div className="space-y-4">
@@ -43,7 +43,7 @@ export function Hero() {
                 href="#approach" 
                 className="px-8 py-4 border border-slate-700 text-white font-medium text-base tracking-wide uppercase hover:border-gold hover:text-gold transition-colors flex items-center justify-center"
               >
-                See How We Work
+                See How I Work
               </a>
             </div>
             <div className="text-xs text-slate-500 font-mono flex items-center gap-4 pl-1">
@@ -76,7 +76,7 @@ export function Hero() {
             {/* Diagram Background Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] pointer-events-none"></div>
             
-            <div className="text-white font-serif text-xl mb-8 border-b border-white/10 pb-4 relative z-10">How We Work</div>
+            <div className="text-white font-serif text-xl mb-8 border-b border-white/10 pb-4 relative z-10">How I Work</div>
             
             <div className="relative z-10 space-y-0">
               {/* Step 1: Input */}
@@ -86,7 +86,7 @@ export function Hero() {
                 </div>
                 <div className="bg-white/5 border border-white/10 p-4 w-full">
                   <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Diagnosis</div>
-                  <div className="text-white font-bold">Audit (We Check)</div>
+                  <div className="text-white font-bold">Audit (I Check)</div>
                 </div>
                 {/* Connector Line */}
                 <div className="absolute left-6 top-12 h-full w-px bg-gradient-to-b from-white/20 to-gold/50 -z-0"></div>
@@ -99,7 +99,7 @@ export function Hero() {
                 </div>
                 <div className="bg-gold/10 border border-gold/30 p-4 w-full">
                   <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Strategy</div>
-                  <div className="text-white font-bold">Truth (We Report)</div>
+                  <div className="text-white font-bold">Truth (I Report)</div>
                 </div>
                 {/* Connector Line */}
                 <div className="absolute left-6 top-20 h-full w-px bg-gradient-to-b from-gold/50 to-white/20 -z-0"></div>
@@ -112,7 +112,7 @@ export function Hero() {
                 </div>
                 <div className="bg-white/5 border border-white/10 p-4 w-full">
                   <div className="text-gold text-xs font-mono uppercase tracking-wider mb-1">Outcome</div>
-                  <div className="text-white font-bold">Fix (We Solve)</div>
+                  <div className="text-white font-bold">Fix (I Solve)</div>
                 </div>
               </div>
             </div>

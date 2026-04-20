@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Clock, Calendar, User } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 import { notes } from "@/lib/notes-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
@@ -176,7 +176,7 @@ export default async function NotePage({ params }: PageProps) {
                 Need a second opinion?
               </h2>
               <p className="text-slate-400 text-sm">
-                We review infrastructure and spend for select clients.
+                I review infrastructure and spend for select clients.
               </p>
             </div>
             <Link

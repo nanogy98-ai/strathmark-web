@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function About() {
   return (
-    <section className="w-full max-w-7xl px-6 py-24 mx-auto border-t border-white/5" id="about">
+    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto border-t border-white/5" id="about">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
         <div className="lg:col-span-5">
           <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 leading-tight">
@@ -14,10 +14,10 @@ export function About() {
           
           <div className="space-y-6 text-slate-300 text-lg leading-relaxed font-light">
             <p>
-              Strathmark Consulting is an independent advisory firm built on the principles of commercial accountability and technical precision. We are not a volume agency.
+              Strathmark Consulting is an independent advisory firm built on the principles of commercial accountability and technical precision. I am not a volume agency.
             </p>
             <p>
-              Headquartered in Edinburgh, Scotland, we operate globally, advising leadership teams in the US, UAE, and Europe. We believe that digital performance is a structural function of your business, not a marketing add-on. We fix the machine first, then we fuel it.
+              Headquartered in Edinburgh, Scotland, I operate globally, advising leadership teams in the US, UAE, and Europe. I believe digital performance is a structural function of your business, not a marketing add-on. I fix the machine first, then I fuel it.
             </p>
           </div>
 
@@ -42,22 +42,6 @@ export function About() {
                   , a specialist growth brand for UK aesthetic clinics. Running a live sector-specific brand keeps Strathmark&apos;s advice grounded in real-world SEO, conversion, and commercial execution rather than theory alone.
                 </p>
               </div>
-
-              <div className="border border-white/10 bg-white/[0.03] p-5">
-                <p className="text-white font-serif text-lg mb-2">Ayrshire Tech Help</p>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  He also runs{" "}
-                  <a
-                    href="https://www.ayrshiretechhelp.co.uk/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white underline decoration-gold/60 underline-offset-4 hover:text-gold transition-colors"
-                  >
-                    Ayrshire Tech Help
-                  </a>
-                  , a free local digital support service for people across Ayrshire who need help with computers, Wi-Fi, printers, phones, and everyday technology. That public-facing work reinforces the practical, plain-English mindset behind Strathmark and shows the consultancy is backed by active operator experience, not abstract theory.
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -66,11 +50,11 @@ export function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-b border-white/5 pb-12">
             <div>
               <h4 className="text-white font-bold mb-2">Unbiased Oversight</h4>
-              <p className="text-sm text-slate-400 leading-relaxed">We audit your agencies and internal teams without conflict of interest. Pure strategic clarity.</p>
+              <p className="text-sm text-slate-400 leading-relaxed">I audit your agencies and internal teams without conflict of interest. Pure strategic clarity.</p>
             </div>
             <div>
               <h4 className="text-white font-bold mb-2">Commercial Focus</h4>
-              <p className="text-sm text-slate-400 leading-relaxed">We prioritise revenue impact and profit over vanity traffic metrics. ROI is the only KPI.</p>
+              <p className="text-sm text-slate-400 leading-relaxed">I prioritise revenue impact and profit over vanity traffic metrics. ROI is the only KPI.</p>
             </div>
             <div>
               <h4 className="text-white font-bold mb-2">Technical Depth</h4>
@@ -78,7 +62,7 @@ export function About() {
             </div>
             <div>
               <h4 className="text-white font-bold mb-2">Selective Client Roster</h4>
-              <p className="text-sm text-slate-400 leading-relaxed">We cap our active engagements to ensure senior-led attention on every account.</p>
+              <p className="text-sm text-slate-400 leading-relaxed">I cap my active engagements to ensure senior-led attention on every account.</p>
             </div>
           </div>
 
@@ -104,7 +88,7 @@ export function About() {
                 “
               </div>
               <blockquote className="relative z-10 text-xl md:text-2xl font-serif text-white italic leading-relaxed mb-6">
-                Most agencies profit from confusion. <br/><span className="text-gold">We profit from clarity.</span>
+                Most agencies profit from confusion. <br/><span className="text-gold">I profit from clarity.</span>
               </blockquote>
               
               <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-2">Principal-Led Advisory</h4>

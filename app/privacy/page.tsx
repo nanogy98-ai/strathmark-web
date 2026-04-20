@@ -35,12 +35,12 @@ export default function PrivacyPage() {
           <h2 className="sr-only">Privacy Policy Sections</h2>
           <h3 className="text-2xl font-serif font-bold text-white">Cookies and local storage</h3>
           <p>
-            We use essential storage to remember site preferences, such as your cookie choices.
+            I use essential storage to remember site preferences, such as your cookie choices.
           </p>
 
           <h3 className="text-2xl font-serif font-bold text-white">Analytics</h3>
           <p>
-            With your permission, we use Google Analytics (GA4) and Microsoft Clarity to understand how the site is used and to improve performance, usability, and clarity.
+            With your permission, I use Google Analytics (GA4) and Microsoft Clarity to understand how the site is used and to improve performance, usability, and clarity.
             If you reject analytics cookies, analytics storage remains denied and these tools are not enabled for full analytics tracking.
           </p>
 

@@ -5,6 +5,7 @@ import { Services } from "@/app/components/sections/Services";
 import { Approach } from "@/app/components/sections/Approach";
 import { ProvenOutcomes } from "@/app/components/sections/ProvenOutcomes";
 import { Insights } from "@/app/components/sections/Insights";
+import { LeadMagnet } from "@/app/components/sections/LeadMagnet";
 import { FAQ } from "@/app/components/sections/FAQ";
 import { Contact } from "@/app/components/sections/Contact";
 import { Footer } from "@/app/components/sections/Footer";
@@ -21,6 +22,7 @@ export default function Home() {
       <Services />
       <Approach />
       <ProvenOutcomes />
+      <LeadMagnet />
       <Insights />
       <FAQ />
       <Contact />

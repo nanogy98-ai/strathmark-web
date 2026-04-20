@@ -19,8 +19,8 @@ const sortedNotes = [...notes].sort(
 
 export function Insights() {
   return (
-    <section className="w-full max-w-7xl px-6 py-24 mx-auto border-t border-white/5" id="insights">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto border-t border-white/5" id="insights">
+      <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-12 gap-4">
         <div>
           <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Intelligence Log</h3>
           <p className="text-slate-400 text-lg">Latest field notes and commercial breakdowns.</p>

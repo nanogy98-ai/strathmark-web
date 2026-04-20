@@ -195,7 +195,7 @@ export function Contact() {
 
       setIsSuccess(true);
     } catch (error) {
-      const message = error instanceof Error ? error.message : "We could not submit your request. Please try again in a moment.";
+      const message = error instanceof Error ? error.message : "The request could not be submitted. Please try again in a moment.";
       setSubmitError(message);
     } finally {
       setIsSubmitting(false);
@@ -204,12 +204,12 @@ export function Contact() {
 
   if (isSuccess) {
     return (
-      <section className="w-full max-w-3xl px-6 py-24 mx-auto text-center" id="contact">
+      <section className="w-full max-w-3xl px-6 py-16 md:py-24 mx-auto text-center" id="contact">
         <div className="bg-white/5 border border-gold/30 p-12 flex flex-col items-center gap-6">
           <CheckCircle2 className="text-gold w-16 h-16" />
           <h4 className="text-2xl font-serif font-bold text-white">Application Received</h4>
           <p className="text-slate-300">
-            We have received your brief. We will review your requirements and response within 2 business days if we believe we can add material value.
+            I have received your brief. I will review your requirements and respond within 2 business days if I can add material value.
           </p>
           <button
             onClick={() => window.location.reload()}
@@ -223,10 +223,10 @@ export function Contact() {
   }
 
   return (
-    <section className="w-full max-w-4xl px-6 py-24 mx-auto" id="contact">
+    <section className="w-full max-w-4xl px-6 py-16 md:py-24 mx-auto" id="contact">
       <div className="text-center mb-12">
         <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Request an Independent Review</h3>
-        <p className="text-slate-400 text-lg">Tell us about your commercial goals and current infrastructure.</p>
+        <p className="text-slate-400 text-lg">Tell me about your commercial goals and current infrastructure.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="bg-white/[0.02] border border-white/10 p-8 md:p-12 space-y-8 backdrop-blur-sm">
@@ -253,7 +253,7 @@ export function Contact() {
                   const value = e.currentTarget.value;
                   if (value && isFreeEmailDomain(value)) {
                     setEmailWarning(
-                      "Free email domains are allowed, but we prioritise enquiries from company addresses. If you are early-stage, add a short note in the brief."
+                      "Free email domains are allowed, but I prioritise enquiries from company addresses. If you are early-stage, add a short note in the brief."
                     );
                   } else {
                     setEmailWarning(null);
@@ -359,7 +359,7 @@ export function Contact() {
 
         {/* Attribution (optional) */}
         <div className="space-y-2 pt-2">
-          <label className="text-xs font-mono text-gold uppercase tracking-wider block">How did you hear about us? (Optional)</label>
+          <label className="text-xs font-mono text-gold uppercase tracking-wider block">How did you hear about me? (Optional)</label>
           <input
             type="text"
             name="heardFrom"

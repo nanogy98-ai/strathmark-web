@@ -10,7 +10,7 @@ export function Services() {
       title: "Strategic Digital & Commercial Advisory",
       icon: <BarChart className="text-gold" size={32} />,
       for: "For leadership teams needing oversight.",
-      outcome: "We check if your agencies are doing their job. We tell you where your budget is actually going.",
+      outcome: "I verify whether your agencies are doing their job and report exactly where your budget is actually going.",
       includes: [
         "Performance spend audit",
         "Vendor & agency management",
@@ -25,7 +25,7 @@ export function Services() {
       title: "Platform & Infrastructure Consulting",
       icon: <Server className="text-gold" size={32} />,
       for: "For technical teams facing scale issues.",
-      outcome: "If your website is slow, broken, or not appearing in Google, we coordinate the repairs.",
+      outcome: "If your website is slow, broken, or not appearing in Google, I coordinate the recovery work.",
       includes: [
         "Next.js / Headless architecture",
         "Core Web Vitals engineering",
@@ -40,7 +40,7 @@ export function Services() {
       title: "Retained Execution (By Invitation)",
       icon: <Lock className="text-gold" size={32} />,
       for: "For organizations requiring ongoing precision.",
-      outcome: "We sit on your side of the table to manage your digital vendors so you don't have to.",
+      outcome: "I sit on your side of the table to manage your digital vendors so you stay focused on the business.",
       includes: [
         "Limited client roster",
         "Direct senior engineer access",
@@ -53,19 +53,19 @@ export function Services() {
   ];
 
   return (
-    <section className="w-full max-w-7xl px-6 py-24 mx-auto" id="services">
+    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto" id="services">
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="mb-16 md:mb-24 max-w-3xl"
+        className="mb-10 md:mb-24 max-w-3xl"
       >
         <div className="text-gold font-mono text-xs uppercase tracking-widest mb-4">Core Pillars</div>
         <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
           Advisory First. Execution Second.
         </h3>
         <p className="text-slate-400 text-lg leading-relaxed">
-          We separate strategy from implementation. Most agencies profit from confusion; we profit from clarity. Our three engagement models are designed to solve specific organizational failures.
+          I separate strategy from implementation. Most agencies profit from confusion; I profit from clarity. My three engagement models are designed to solve specific organizational failures.
         </p>
       </motion.div>
 
