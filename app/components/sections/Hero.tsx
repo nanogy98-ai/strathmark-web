@@ -46,21 +46,10 @@ export function Hero() {
                 See How I Work
               </a>
             </div>
-            <div className="text-xs text-slate-500 font-mono flex items-center gap-4 pl-1">
+          <div className="text-xs text-slate-500 font-mono flex items-center gap-4 pl-1">
               <span>{"// Fixed fees."}</span>
               <span>{"// 14-day turnaround."}</span>
               <span>{"// No lock-in."}</span>
-            </div>
-          </div>
-
-          <div className="pt-8 border-t border-white/5">
-            <p className="text-xs text-slate-500 font-mono uppercase tracking-widest mb-4">Advisory Experience Includes</p>
-            <div className="flex flex-wrap gap-8 items-center opacity-50 grayscale hover:grayscale-0 transition-all duration-500 text-white text-sm font-serif tracking-widest">
-               {/* Replacing tech logos with prestigious text-based logotypes as placeholders for actual client logos to maintain "expensive" feel without fake logos */}
-               <span>JAGUAR</span>
-               <span>VOLKSWAGEN</span>
-               <span>LAND ROVER</span>
-               <span>WATERSTONES</span>
             </div>
           </div>
         </motion.div>
