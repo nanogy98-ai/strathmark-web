@@ -17,9 +17,7 @@ declare global {
 export function CookieBanner() {
   const pathname = usePathname();
   const [dismissed, setDismissed] = useState(false);
-
-  // Private proposal pages are invite-only; no banner noise there.
-  if (pathname?.startsWith("/proposals/")) return null;
+  const isProposalPage = pathname?.startsWith("/proposals/") ?? false;
 
   const shouldShow = useSyncExternalStore(
     () => () => {
@@ -54,7 +52,8 @@ export function CookieBanner() {
     }
   };
 
-  if (!shouldShow || dismissed) return null;
+  // Private proposal pages are invite-only; no banner noise there.
+  if (isProposalPage || !shouldShow || dismissed) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[60] p-4 md:p-6">
@@ -97,4 +96,3 @@ export function CookieBanner() {
     </div>
   );
 }
-
