@@ -4,10 +4,12 @@ import { useState } from "react";
 import { AlertCircle, CheckCircle2, Download, Loader2 } from "lucide-react";
 import { clsx } from "clsx";
 import { ProposalRouteKey, ROUTE_CONTENT } from "./proposal-content";
+import { ctaPrimaryClass, ctaSecondaryClass } from "./cta";
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY = "7673741a-3e33-4912-96b3-bd1a31729185";
 const CLIENT_NAME = "Ethical Coffee Ltd";
+const EMAIL_MIGRATION_ADD_ON_FEE = 350;
 
 type FormState = {
   route: ProposalRouteKey;
@@ -47,6 +49,53 @@ function formatSelectedDate(dateString: string) {
     month: "long",
     day: "numeric",
   });
+}
+
+function formatEuro(amount: number) {
+  return new Intl.NumberFormat("en-IE", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+function getInitialPayment(routeKey: ProposalRouteKey) {
+  return routeKey === "A" ? 1700 : 1080;
+}
+
+function getPaymentSummary(state: FormState) {
+  const addOnAmount = state.addOnEmailMigration ? EMAIL_MIGRATION_ADD_ON_FEE : 0;
+  const amountDueNow = getInitialPayment(state.route) + addOnAmount;
+  const addOnSuffix = state.addOnEmailMigration ? " + Zoho Mail migration" : "";
+
+  if (state.route === "A") {
+    return {
+      label: state.addOnEmailMigration ? "Deposit to commence the rebuild + Zoho Mail migration" : "Deposit to commence the rebuild",
+      amount: formatEuro(amountDueNow),
+      reference: `TCC Ireland — Route A deposit${addOnSuffix}`,
+      followOn: state.addOnEmailMigration
+        ? `This total includes the ${formatEuro(EMAIL_MIGRATION_ADD_ON_FEE)} Zoho Mail migration add-on. Balance of €1,700 is still due on launch — the site goes live on receipt of that payment. Retainer begins on launch at €1,080 for month 1 (18 hrs), then €600 per month thereafter (10 hrs).`
+        : "Balance of €1,700 is due on launch — the site goes live on receipt of this payment. Retainer begins on launch at €1,080 for month 1 (18 hrs), then €600 per month thereafter (10 hrs).",
+      breakdown: [
+        `Route A deposit: ${formatEuro(getInitialPayment("A"))}`,
+        ...(state.addOnEmailMigration ? [`Zoho Mail migration add-on: ${formatEuro(EMAIL_MIGRATION_ADD_ON_FEE)}`] : []),
+      ],
+    };
+  }
+
+  return {
+    label: state.addOnEmailMigration ? "Month 1 retainer + Zoho Mail migration" : "Month 1 retainer to commence",
+    amount: formatEuro(amountDueNow),
+    reference: `TCC Ireland — Route B month 1${addOnSuffix}`,
+    followOn: state.addOnEmailMigration
+      ? `This total includes the ${formatEuro(EMAIL_MIGRATION_ADD_ON_FEE)} Zoho Mail migration add-on. Each subsequent month remains €600, due on the same calendar day each month.`
+      : "Each subsequent month is €600, due on the same calendar day each month.",
+    breakdown: [
+      `Route B month 1 retainer: ${formatEuro(getInitialPayment("B"))}`,
+      ...(state.addOnEmailMigration ? [`Zoho Mail migration add-on: ${formatEuro(EMAIL_MIGRATION_ADD_ON_FEE)}`] : []),
+    ],
+  };
 }
 
 async function buildSignedPdf(state: FormState, acceptedAt: Date): Promise<Blob> {
@@ -97,6 +146,7 @@ async function buildSignedPdf(state: FormState, acceptedAt: Date): Promise<Blob>
 
   // Selected route block
   const route = ROUTE_CONTENT[state.route];
+  const payment = getPaymentSummary(state);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
   doc.setTextColor(gold);
@@ -129,7 +179,7 @@ async function buildSignedPdf(state: FormState, acceptedAt: Date): Promise<Blob>
   y += 10;
 
   const addOns: string[] = [];
-  if (state.addOnEmailMigration) addOns.push("Email migration to Zoho Mail — €350 one-off (up to 5 mailboxes)");
+  if (state.addOnEmailMigration) addOns.push(`Email migration to Zoho Mail — ${formatEuro(EMAIL_MIGRATION_ADD_ON_FEE)} one-off (up to 5 mailboxes)`);
   if (addOns.length > 0) {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9);
@@ -246,7 +296,7 @@ async function buildSignedPdf(state: FormState, acceptedAt: Date): Promise<Blob>
   y += 28;
 
   // Amount due now — prominent block
-  const due = route.paymentDueNow;
+  const due = payment;
 
   doc.setFillColor(248, 246, 240);
   doc.rect(marginX, y, pageWidth - marginX * 2, 84, "F");
@@ -270,6 +320,21 @@ async function buildSignedPdf(state: FormState, acceptedAt: Date): Promise<Blob>
   doc.text(due.amount, marginX + 16, y + 72);
 
   y += 100;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.setTextColor(gold);
+  doc.text("PAYMENT BREAKDOWN", marginX, y);
+  y += 14;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10.5);
+  doc.setTextColor(ink);
+  due.breakdown.forEach((line) => {
+    doc.text(`• ${line}`, marginX, y);
+    y += 14;
+  });
+  y += 10;
 
   // Follow-on note
   doc.setFont("helvetica", "normal");
@@ -377,6 +442,7 @@ export function ApprovalForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [accepted, setAccepted] = useState<{ at: Date; filename: string; blob: Blob } | null>(null);
+  const payment = getPaymentSummary(state);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setState((s) => ({ ...s, [key]: value }));
@@ -415,6 +481,8 @@ export function ApprovalForm() {
         submittedAt: acceptedAt.toISOString(),
         route: `Route ${state.route} — ${ROUTE_CONTENT[state.route].title}`,
         addOnEmailMigration: state.addOnEmailMigration ? "Yes" : "No",
+        amountDueNow: payment.amount,
+        paymentReference: payment.reference,
         fullName: state.fullName,
         company: state.company,
         email: state.email,
@@ -426,6 +494,8 @@ export function ApprovalForm() {
           ``,
           `Route chosen: Route ${state.route} — ${ROUTE_CONTENT[state.route].title}`,
           `Add-on — Email migration to Zoho Mail (€350): ${state.addOnEmailMigration ? "Yes" : "No"}`,
+          `Amount due now: ${payment.amount}`,
+          `Payment reference: ${payment.reference}`,
           ``,
           `Signatory full name: ${state.fullName}`,
           `Company: ${state.company}`,
@@ -480,7 +550,7 @@ export function ApprovalForm() {
           <button
             type="button"
             onClick={() => downloadBlob(accepted.blob, accepted.filename)}
-            className="inline-flex items-center gap-2 bg-gold text-strath-navy px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-white transition-colors"
+            className={ctaSecondaryClass}
           >
             <Download size={16} /> Download signed PDF again
           </button>
@@ -550,11 +620,30 @@ export function ApprovalForm() {
             className="mt-1 w-5 h-5 accent-gold shrink-0"
           />
           <span>
-            <span className="text-white font-medium">Email migration to Zoho Mail — €350</span>
-            <span className="block text-sm text-slate-400 font-light mt-1">One-off migration away from Register365. Covers up to 5 mailboxes. Your team administers the mailbox after handover.</span>
+            <span className="text-white font-medium">Email migration to Zoho Mail — {formatEuro(EMAIL_MIGRATION_ADD_ON_FEE)}</span>
+            <span className="block text-sm text-slate-400 font-light mt-1">One-off migration away from Register365. Covers up to 5 mailboxes and is added to the initial payment shown below and inside the PDF.</span>
           </span>
         </label>
       </fieldset>
+
+      <div className="bg-gold/5 border border-gold/20 p-5">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-[10px] font-mono uppercase tracking-widest text-gold">Amount due now</p>
+            <p className="mt-2 font-serif text-3xl font-bold text-white">{payment.amount}</p>
+          </div>
+          <div className="max-w-sm">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Payment reference</p>
+            <p className="mt-2 text-sm text-slate-200 font-light">{payment.reference}</p>
+          </div>
+        </div>
+        <div className="mt-4 space-y-2 text-sm text-slate-300 font-light">
+          {payment.breakdown.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </div>
+        <p className="mt-4 text-sm text-slate-400 font-light leading-relaxed">{payment.followOn}</p>
+      </div>
 
       {/* Signatory fields */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -604,10 +693,10 @@ export function ApprovalForm() {
           type="submit"
           disabled={submitting}
           className={clsx(
-            "inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-wider transition-all",
+            ctaPrimaryClass,
             submitting
               ? "bg-slate-700 text-slate-400 cursor-wait"
-              : "bg-gold text-strath-navy hover:bg-white",
+              : "",
           )}
         >
           {submitting ? (
@@ -615,7 +704,7 @@ export function ApprovalForm() {
               <Loader2 size={16} className="animate-spin" /> Submitting…
             </>
           ) : (
-            <>Accept proposal &amp; send signed PDF</>
+            <>Accept proposal &amp; issue signed PDF</>
           )}
         </button>
         <p className="text-xs font-mono uppercase tracking-widest text-slate-500">Secure digital acceptance</p>

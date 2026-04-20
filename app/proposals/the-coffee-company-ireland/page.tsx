@@ -16,6 +16,7 @@ import {
   routeBIncludes,
   routeBPhases,
 } from "./proposal-content";
+import { ctaPrimaryClass, ctaPrimaryLargeClass, ctaSecondaryClass } from "./cta";
 
 const termGroups: { title: string; items: string[] }[] = [
   {
@@ -141,10 +142,10 @@ export default function CoffeeCompanyProposal() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
             className="mt-14 flex flex-wrap gap-5"
           >
-            <a href="#recommended" className="group bg-gold text-strath-navy px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-white transition-all inline-flex items-center gap-3 shadow-lg shadow-gold/10">
+            <a href="#recommended" className={`${ctaPrimaryLargeClass} group shadow-lg shadow-gold/10`}>
               View Recommended Route <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="#approval" className="group border border-white/10 text-white px-10 py-5 text-sm font-bold uppercase tracking-wider hover:border-gold/50 hover:text-gold transition-all inline-flex items-center gap-3">
+            <a href="#approval" className={`${ctaSecondaryClass} group`}>
               Sign Proposal <PenLine size={18} className="group-hover:rotate-12 transition-transform" />
             </a>
           </motion.div>
@@ -307,7 +308,7 @@ export default function CoffeeCompanyProposal() {
               <span className="absolute -right-8 -bottom-12 text-6xl text-gold/20 font-serif leading-none">”</span>
             </blockquote>
             
-            <a href="#approval" className="group mt-12 bg-gold text-strath-navy px-12 py-6 text-base font-bold uppercase tracking-wider hover:bg-white transition-all inline-flex items-center gap-3 shadow-2xl shadow-gold/20">
+            <a href="#approval" className={`${ctaPrimaryLargeClass} group mt-12 shadow-2xl shadow-gold/20`}>
               Accept Recommendation & Sign <PenLine size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
@@ -582,9 +583,9 @@ export default function CoffeeCompanyProposal() {
             <div className="absolute inset-0 bg-gold/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
             <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6">
               <p className="font-serif text-xl font-bold text-white">Secure your project start date</p>
-              <a href="#approval" className="bg-gold text-strath-navy px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-white transition-all inline-flex items-center gap-2 group/btn">
+              <a href="#approval" className={`${ctaPrimaryClass} group/btn`}>
                 <PenLine size={16} className="group-hover/btn:rotate-12 transition-transform" />
-                Sign Now
+                Sign proposal
               </a>
             </div>
           </div>
@@ -721,7 +722,7 @@ export default function CoffeeCompanyProposal() {
                 <span className="text-sm font-serif font-bold text-white">Zoho Mail Migration · €350 one-off</span>
               </div>
               <p className="mt-3 text-sm text-slate-300 font-light leading-relaxed">
-                If useful, this can be added here without needing a separate project line item. It covers migration away from Register365, DNS/MX setup, secure mailbox transfer for up to 5 users, and a clean handover once complete.
+                If useful, this can be added here without needing a separate project line item. It covers migration away from Register365, DNS/MX setup, secure mailbox transfer for up to 5 users, and a clean handover once complete. If selected, the €350 is added to the initial payment shown in the form and in the signed PDF.
               </p>
             </div>
             <ApprovalForm />
