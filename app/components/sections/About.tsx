@@ -23,14 +23,14 @@ export function About() {
 
           <div className="mt-10 space-y-4">
             <p className="text-[11px] font-mono uppercase tracking-[0.28em] text-gold">
-              Specialist Brands & Public Work
+              Specialist Brand
             </p>
 
             <div className="space-y-4">
               <div className="border border-white/10 bg-white/[0.03] p-5">
                 <p className="text-white font-serif text-lg mb-2">Apex Aesthetics</p>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  Graeme also operates{" "}
+                  I run{" "}
                   <a
                     href="https://www.apexaesthetics.co.uk/"
                     target="_blank"
@@ -39,7 +39,7 @@ export function About() {
                   >
                     Apex Aesthetics
                   </a>
-                  , a specialist growth brand for UK aesthetic clinics. Running a live sector-specific brand keeps Strathmark&apos;s advice grounded in real-world SEO, conversion, and commercial execution rather than theory alone.
+                  , my specialist growth brand for UK aesthetic clinics. Operating this live niche brand keeps my Strathmark marketing and advisory work grounded in real-world SEO, conversions, and commercial execution — not theory.
                 </p>
               </div>
             </div>

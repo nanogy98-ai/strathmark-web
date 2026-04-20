@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { 
   AlertCircle, 
@@ -279,126 +279,185 @@ export function LeadMagnet() {
               </div>
             </motion.div>
           ) : (
-            <motion.div
-              key="unlocked"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-12"
-            >
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-12">
-                <div className="max-w-2xl">
-                  <div className="flex items-center gap-2 mb-4">
-                    <CheckCircle2 size={16} className="text-gold" />
-                    <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-gold">Briefing Unlocked</span>
-                  </div>
-                  <h3 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
-                    {name ? `${name.split(' ')[0]}, here it is.` : "Here it is."}
-                  </h3>
-                  <p className="text-slate-400 text-lg font-light leading-relaxed">
-                    Swipe through or scroll to explore the structural problems that silently bleed revenue. Each card shows the leak, the loss, and the priority action.
-                  </p>
-                </div>
-                
-                <div className="hidden md:flex gap-4 mb-4">
-                  <div className="text-right">
-                    <p className="text-[10px] font-mono uppercase text-slate-500 tracking-widest mb-1">Status</p>
-                    <p className="text-[11px] font-mono uppercase text-white font-bold">Independent Review v1.0</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Cards Container - Swipe on mobile / Grid on desktop */}
-              <div className="relative group">
-                <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 no-scrollbar scroll-smooth -mx-6 px-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:snap-none md:mx-0 md:px-0">
-                   {/* Custom CSS for hidden scrollbar */}
-                   <style jsx>{`
-                    .no-scrollbar::-webkit-scrollbar {
-                      display: none;
-                    }
-                    .no-scrollbar {
-                      -ms-overflow-style: none;
-                      scrollbar-width: none;
-                    }
-                  `}</style>
-
-                  {BRIEFING_CARDS.map((card, index) => (
-                    <motion.div
-                      key={card.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 * index }}
-                      className="min-w-[85vw] md:min-w-0 snap-center bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 flex flex-col items-start transition-all duration-300 hover:bg-white/[0.05] hover:border-gold/30 hover:-translate-y-1"
-                    >
-                      <div className="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center mb-8">
-                        {card.icon}
-                      </div>
-                      
-                      <div className="mb-auto">
-                        <p className="text-[10px] font-mono text-gold uppercase tracking-[0.2em] mb-4">Finding {index + 1}</p>
-                        <h4 className="text-xl md:text-2xl font-serif font-bold text-white mb-6 leading-tight min-h-[3.5rem]">
-                          {card.title}
-                        </h4>
-                        
-                        <div className="bg-white/5 border-l-2 border-gold p-4 mb-8">
-                          <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2 font-bold italic">Revenue Impact</p>
-                          <p className="text-sm text-slate-200 font-medium">{card.loss}</p>
-                        </div>
-                        
-                        <div className="space-y-4 mb-8 text-sm leading-relaxed text-slate-400 font-light">
-                          <p>{card.why}</p>
-                        </div>
-                      </div>
-
-                      <div className="w-full pt-8 border-t border-white/5 mt-auto">
-                         <p className="text-[10px] font-mono text-gold uppercase tracking-widest mb-3">Principal Correction</p>
-                         <p className="text-xs text-slate-300 leading-relaxed italic">
-                           &quot;{card.fix}&quot;
-                         </p>
-                      </div>
-                    </motion.div>
-                  ))}
-
-                  {/* CTA Card */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * 5 }}
-                    className="min-w-[85vw] md:min-w-0 snap-center bg-gold p-8 flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="w-12 h-12 bg-strath-navy/10 flex items-center justify-center mb-8">
-                        <Clock3 className="text-strath-navy" size={24} />
-                      </div>
-                      <h4 className="text-3xl font-serif font-bold text-strath-navy mb-6 leading-tight">
-                        Need an Independent Review?
-                      </h4>
-                      <p className="text-strath-navy/80 text-base leading-relaxed mb-8">
-                        The fastest way to stop technical and commercial waste is an external audit. I can find your leaks in 14 days.
-                      </p>
-                    </div>
-
-                    <Link
-                      href="#contact"
-                      className="w-full bg-strath-navy text-gold py-4 font-bold uppercase tracking-[0.2em] text-xs text-center transition-all hover:bg-white hover:text-strath-navy"
-                    >
-                      Request A Consultation
-                    </Link>
-                  </motion.div>
-                </div>
-                
-                {/* Mobile Scroll Indicator */}
-                <div className="flex md:hidden justify-center items-center gap-2 mt-4">
-                  {BRIEFING_CARDS.map((_, i) => (
-                    <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
-                  ))}
-                  <div className="w-1.5 h-1.5 rounded-full bg-gold"></div>
-                </div>
-              </div>
-            </motion.div>
+            <UnlockedContent name={name} />
           )}
         </AnimatePresence>
       </div>
     </section>
+  );
+}
+
+function UnlockedContent({ name }: { name: string }) {
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const cardsScrollerRef = useRef<HTMLDivElement | null>(null);
+  const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  useEffect(() => {
+    const scroller = cardsScrollerRef.current;
+    if (!scroller) return;
+
+    const updateActiveCard = () => {
+      if (window.innerWidth >= 768) return;
+
+      const slides = slideRefs.current.filter(Boolean) as HTMLDivElement[];
+      if (slides.length === 0) return;
+
+      const scrollerRect = scroller.getBoundingClientRect();
+      const scrollerCentre = scrollerRect.left + scrollerRect.width / 2;
+
+      let nextActiveIndex = 0;
+      let nearestDistance = Number.POSITIVE_INFINITY;
+
+      slides.forEach((slide, index) => {
+        const slideRect = slide.getBoundingClientRect();
+        const slideCentre = slideRect.left + slideRect.width / 2;
+        const distance = Math.abs(slideCentre - scrollerCentre);
+
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nextActiveIndex = index;
+        }
+      });
+
+      setActiveCardIndex(nextActiveIndex);
+    };
+
+    scroller.addEventListener("scroll", updateActiveCard, { passive: true });
+    window.addEventListener("resize", updateActiveCard);
+
+    // Initial check
+    updateActiveCard();
+
+    return () => {
+      scroller.removeEventListener("scroll", updateActiveCard);
+      window.removeEventListener("resize", updateActiveCard);
+    };
+  }, []);
+
+  return (
+    <motion.div
+      key="unlocked"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="space-y-12"
+    >
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-12">
+        <div className="max-w-2xl">
+          <div className="flex items-center gap-2 mb-4">
+            <CheckCircle2 size={16} className="text-gold" />
+            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-gold">Briefing Unlocked</span>
+          </div>
+          <h3 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
+            {name ? `${name.split(' ')[0]}, here it is.` : "Here it is."}
+          </h3>
+          <p className="text-slate-400 text-lg font-light leading-relaxed">
+            Swipe through or scroll to explore the structural problems that silently bleed revenue. Each card shows the leak, the loss, and the priority action.
+          </p>
+        </div>
+        
+        <div className="hidden md:flex gap-4 mb-4">
+          <div className="text-right">
+            <p className="text-[10px] font-mono uppercase text-slate-500 tracking-widest mb-1">Status</p>
+            <p className="text-[11px] font-mono uppercase text-white font-bold">Independent Review v1.0</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative group">
+        <div
+          ref={cardsScrollerRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 no-scrollbar scroll-smooth -mx-6 px-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:snap-none md:mx-0 md:px-0"
+        >
+          <style jsx>{`
+            .no-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+            .no-scrollbar {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          `}</style>
+
+          {BRIEFING_CARDS.map((card, index) => (
+            <motion.div
+              key={card.title}
+              ref={(node) => {
+                slideRefs.current[index] = node;
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * index }}
+              className="min-w-[85vw] md:min-w-0 snap-center bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 flex flex-col items-start transition-all duration-300 hover:bg-white/[0.05] hover:border-gold/30 hover:-translate-y-1"
+            >
+              <div className="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center mb-8">
+                {card.icon}
+              </div>
+              
+              <div className="mb-auto">
+                <p className="text-[10px] font-mono text-gold uppercase tracking-[0.2em] mb-4">Finding {index + 1}</p>
+                <h4 className="text-xl md:text-2xl font-serif font-bold text-white mb-6 leading-tight min-h-[3.5rem]">
+                  {card.title}
+                </h4>
+                
+                <div className="bg-white/5 border-l-2 border-gold p-4 mb-8">
+                  <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2 font-bold italic">Revenue Impact</p>
+                  <p className="text-sm text-slate-200 font-medium">{card.loss}</p>
+                </div>
+                
+                <div className="space-y-4 mb-8 text-sm leading-relaxed text-slate-400 font-light">
+                  <p>{card.why}</p>
+                </div>
+              </div>
+
+              <div className="w-full pt-8 border-t border-white/5 mt-auto">
+                 <p className="text-[10px] font-mono text-gold uppercase tracking-widest mb-3">Principal Correction</p>
+                 <p className="text-xs text-slate-300 leading-relaxed italic">
+                   &quot;{card.fix}&quot;
+                 </p>
+              </div>
+            </motion.div>
+          ))}
+
+          <motion.div
+            ref={(node) => {
+              slideRefs.current[BRIEFING_CARDS.length] = node;
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * 5 }}
+            className="min-w-[85vw] md:min-w-0 snap-center bg-gold p-8 flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-12 h-12 bg-strath-navy/10 flex items-center justify-center mb-8">
+                <Clock3 className="text-strath-navy" size={24} />
+              </div>
+              <h4 className="text-3xl font-serif font-bold text-strath-navy mb-6 leading-tight">
+                Need an Independent Review?
+              </h4>
+              <p className="text-strath-navy/80 text-base leading-relaxed mb-8">
+                Within 48 hours, I can surface the biggest technical and commercial leaks, show you where margin is being lost, and tell you what to fix first.
+              </p>
+            </div>
+
+            <Link
+              href="#contact"
+              className="w-full bg-strath-navy text-gold py-4 font-bold uppercase tracking-[0.2em] text-xs text-center transition-all hover:bg-white hover:text-strath-navy"
+            >
+              Request A Consultation
+            </Link>
+          </motion.div>
+        </div>
+        
+        <div className="flex md:hidden justify-center items-center gap-2 mt-4">
+          {[...BRIEFING_CARDS, { title: "cta" }].map((_, i) => (
+            <div
+              key={i}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === activeCardIndex ? "bg-gold scale-110" : "bg-white/20"}`}
+            ></div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   );
 }
