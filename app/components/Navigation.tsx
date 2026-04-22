@@ -2,11 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 
 export function Navigation() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -36,21 +39,36 @@ export function Navigation() {
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (window.location.pathname === "/" && href.startsWith("/#")) {
-      e.preventDefault();
-      setIsOpen(false);
+    // Let modified clicks keep their default browser behavior.
+    if (
+      e.defaultPrevented ||
+      e.button !== 0 ||
+      e.metaKey ||
+      e.ctrlKey ||
+      e.shiftKey ||
+      e.altKey
+    ) {
+      return;
+    }
+
+    e.preventDefault();
+    setIsOpen(false);
+
+    if (pathname === "/" && href.startsWith("/#")) {
       const id = href.replace("/", "");
       const element = document.querySelector(id);
+
       if (element) {
         const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 100;
         window.scrollTo({
           top: offsetTop,
-          behavior: "smooth"
+          behavior: "smooth",
         });
+        return;
       }
-    } else {
-      setIsOpen(false);
     }
+
+    router.push(href);
   };
 
   return (
@@ -95,6 +113,7 @@ export function Navigation() {
 
         {/* Mobile Menu Toggle */}
         <button 
+          type="button"
           className="md:hidden text-white hover:text-gold transition-colors"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"

@@ -10,16 +10,16 @@ export function Footer() {
     ["/#about", "About"],
     ["/#services", "Services"],
     ["/#approach", "Approach"],
-    ["/#faq", "FAQ"],
     ["/#briefing", "5-Minute Briefing"],
+    ["/#faq", "FAQ"],
   ];
   const resourceLinks = [
     ["/case-studies", "Case Studies"],
     ["/insights", "Intelligence Log"],
   ];
   const supportLinks = [
-    ["/#contact", "Request Review"],
     ["/#briefing", "Read the 5-minute briefing"],
+    ["/#contact", "Request Review"],
     ["/privacy", "Privacy"],
   ];
 
