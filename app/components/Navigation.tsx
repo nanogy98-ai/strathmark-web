@@ -7,10 +7,27 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 
+function scrollToSection(href: string) {
+  if (!href.startsWith("/#")) return false;
+
+  const id = href.replace("/", "");
+  const element = document.querySelector(id);
+  if (!element) return false;
+
+  const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 100;
+  window.scrollTo({
+    top: offsetTop,
+    behavior: "smooth",
+  });
+
+  return true;
+}
+
 export function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -38,6 +55,19 @@ export function Navigation() {
     { name: "FAQs", href: "/#faq" },
   ];
 
+  useEffect(() => {
+    if (!pendingHref || isOpen) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      if (!(pathname === "/" && scrollToSection(pendingHref))) {
+        router.push(pendingHref);
+      }
+      setPendingHref(null);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [isOpen, pathname, pendingHref, router]);
+
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Let modified clicks keep their default browser behavior.
     if (
@@ -52,23 +82,15 @@ export function Navigation() {
     }
 
     e.preventDefault();
-    setIsOpen(false);
-
-    if (pathname === "/" && href.startsWith("/#")) {
-      const id = href.replace("/", "");
-      const element = document.querySelector(id);
-
-      if (element) {
-        const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 100;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: "smooth",
-        });
-        return;
-      }
+    if (isOpen) {
+      setPendingHref(href);
+      setIsOpen(false);
+      return;
     }
 
-    router.push(href);
+    if (!(pathname === "/" && scrollToSection(href))) {
+      router.push(href);
+    }
   };
 
   return (
