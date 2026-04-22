@@ -533,5 +533,87 @@ export const notes: Note[] = [
       <p>In aggregate, digital issues in an acquisition target typically represent 3–8% of the enterprise value in hidden costs and risks. On a £20 million deal, that is £600K–£1.6M. More than enough to justify a proper audit — and more than enough to negotiate a better price if issues are found.</p>
       <p>The acquirers who consistently get better returns on digital-dependent businesses are the ones who audit digital infrastructure with the same rigour they apply to financial statements. The rest discover the problems after they have already paid for them.</p>
     `
+  },
+  {
+    slug: "seo-industry-corruption-problem",
+    title: "The SEO Industry Has a Corruption Problem",
+    category: "Industry",
+    date: "2026-04-22",
+    readingTime: "10 min read",
+    author: "Graeme Tudhope",
+    tags: ["seo", "industry", "agency", "governance"],
+    excerpt: "Every trade has cowboys. In SEO, the difference is that the con is hidden behind jargon, dashboards, and promises no honest operator should make.",
+    content: `
+      <h2>Every Industry Has Cowboys. Ours Hides Them Better.</h2>
+      <p>Mechanics, builders, roofers, and tradespeople have a reputation for conning unsuspecting customers when the wrong people get hold of the job. The public understands this instinctively. If you know nothing about cars or boiler systems, you also know you could be taken for a ride.</p>
+      <p>That reputation exists because the damage is visible. You get charged for work you did not need. A repair mysteriously becomes three repairs. Someone disappears after taking the deposit. People know the risk, even if they cannot always prevent it.</p>
+      <p>Digital marketing, SEO in particular, has the same problem, but it is more insidious because it arrives in a suit. It arrives in a pitch deck, a dashboard, a monthly report, and a lot of technical language designed to sound impressive. The invoice says "strategy." The slide says "authority growth." The promise is "page one." And because it all looks professional, buyers assume it is professional.</p>
+      <p>That is what frustrates me. Not that bad actors exist. Every industry has them. It is that in SEO the bullshit is often dressed up so neatly that intelligent, serious business owners do not realise they are being conned until months later, sometimes years later, when they have burned budget, lost time, and learned absolutely nothing of value.</p>
+      <p>There are many capable, ethical people in this field. But there are also far too many bullshitters selling certainty where none exists, and the industry has tolerated them for far too long.</p>
+
+      <h2>Why SEO Is So Easy to Abuse</h2>
+      <p>SEO is fertile ground for grifters because the average client cannot independently verify what they are being told.</p>
+      <ul>
+        <li><strong>The work is difficult to inspect:</strong> Most business owners cannot audit a backlink profile, interpret crawl behaviour, assess page intent, or validate conversion tracking.</li>
+        <li><strong>The feedback loop is slow:</strong> Bad SEO decisions do not always hurt immediately. That gives the salesperson months of cover before the truth becomes obvious.</li>
+        <li><strong>The metrics are easy to manipulate:</strong> Traffic can be inflated. Rankings can be cherry-picked. Reports can be padded with vanity graphs that look impressive and prove nothing.</li>
+        <li><strong>The jargon creates deference:</strong> People assume technical language is evidence of expertise. Often it is just camouflage.</li>
+      </ul>
+      <p>That information asymmetry is where the corruption lives. Not always criminal corruption. Often something more ordinary and, in practice, just as damaging: misrepresentation, deliberate ambiguity, and promises made by people who know the client cannot properly challenge them.</p>
+
+      <h2>The Most Common Lie: "We Can Get You to Page One"</h2>
+      <p>Let me say this plainly: no honest SEO can guarantee page-one rankings.</p>
+      <p>They do not control Google. They do not control your competitors. They do not control algorithm updates, search intent shifts, SERP features, localisation, brand demand, or the countless variables that influence where a page lands.</p>
+      <p>An experienced operator can improve your probability of ranking. They can improve technical health, content quality, internal linking, information architecture, page speed, crawl efficiency, and strategic focus. They can absolutely increase your chances of better outcomes.</p>
+      <p>But a guarantee of page one is not expertise. It is either ignorance or dishonesty.</p>
+      <p>The professionals worth hiring will guarantee process, rigour, transparency, and honest reporting. They will not guarantee a position in a search engine they do not own.</p>
+
+      <h2>The Link-Selling Machine</h2>
+      <p>One of the grubbiest corners of the industry is link selling. Links are packaged like inventory: ten links per month, DR 60+, niche relevant, guaranteed turnaround, special relationship with publishers, and so on. It is presented as if authority can be bought from a clean rate card like office furniture.</p>
+      <p>Usually it is not clean. Usually it is a middleman, a spreadsheet, a network, a markup, and a story.</p>
+      <p>Sometimes those links are useless. Sometimes they are obviously manipulated. Sometimes they work for a while and create exactly the kind of fragile dependency that later collapses. In all cases, they are too often sold to clients as though this is a reliable, low-risk growth lever rather than a murky tactic with meaningful downside.</p>
+      <p>I am not saying every link acquisition effort is inherently bad. I am saying anyone selling links as a guaranteed product, with fixed quantities and guaranteed outcomes, should be treated with extreme scepticism. Good SEO is not bulk commodity purchasing. It is judgement.</p>
+
+      <h2>How to Spot the Cowboys</h2>
+      <p>If you want to avoid being taken in, look for these red flags:</p>
+      <ul>
+        <li><strong>They guarantee rankings:</strong> "Page one in 90 days" is not a sign of confidence. It is a sign to leave.</li>
+        <li><strong>They sell volume instead of thinking:</strong> X links, X blogs, X keywords, every month, regardless of your market or business model.</li>
+        <li><strong>They fixate on vanity metrics:</strong> Domain Rating, impressions, traffic spikes, ranking screenshots, and "visibility" with no serious connection to leads, pipeline, or revenue.</li>
+        <li><strong>They are vague about the work:</strong> Ask what they will actually do in the first 30 days. If the answer is fog, you are buying fog.</li>
+        <li><strong>They hide behind jargon:</strong> Real expertise makes complexity clearer. It does not use complexity to intimidate you into silence.</li>
+        <li><strong>They want control of your assets:</strong> Your Search Console, Analytics, ad accounts, CMS, domain, and data should not be held hostage inside someone else's setup.</li>
+        <li><strong>They push long contracts before proving anything:</strong> The weaker the value proposition, the harder the lock-in usually becomes.</li>
+        <li><strong>They never discuss risk:</strong> If every answer is upside, they are selling, not advising.</li>
+      </ul>
+
+      <h2>Questions Worth Asking Before You Hire Anyone</h2>
+      <p>If you are evaluating an SEO consultant or agency, ask these questions directly:</p>
+      <ul>
+        <li>What exactly will you do in the first 30 days?</li>
+        <li>How do you measure success beyond traffic and rankings?</li>
+        <li>What can you guarantee, and what can you not guarantee?</li>
+        <li>How do you approach link acquisition, and what risks do you believe it carries?</li>
+        <li>Who owns the accounts, data, content, and infrastructure if the relationship ends?</li>
+        <li>Can you show me reporting that ties activity to commercial outcomes?</li>
+        <li>What would make you tell a client not to invest in SEO yet?</li>
+      </ul>
+      <p>That final question matters enormously. Honest operators are capable of saying, "You have a measurement problem before you have an SEO problem," or "Your site architecture is broken," or "SEO is not your main bottleneck right now." Bullshitters never talk themselves out of a sale.</p>
+
+      <h2>What Good SEO Actually Sounds Like</h2>
+      <p>Good SEO is usually less glamorous than the pitch. It sounds more like this: we need to fix indexation, improve internal linking, tighten page intent, clean up tracking, publish content that maps to commercial demand, and make the site easier for both users and search engines to understand. It will take time. Some changes will outperform others. We will report honestly. There are no guarantees.</p>
+      <p>That answer is less seductive than "page one in twelve weeks." It is also far more trustworthy.</p>
+      <p>Competent practitioners understand probability. They understand trade-offs. They understand that a search strategy can be directionally right and still be affected by variables outside anyone's control. The moment someone starts speaking as though SEO is a vending machine where money goes in and rankings come out, you should assume you are listening to a salesperson, not an operator.</p>
+
+      <h2>The Real Damage</h2>
+      <p>The loss is not just the fee. It is the wasted quarter. The wasted year. The false confidence created by glossy reporting. The irrelevant content. The risky links. The polluted analytics. The internal trust that gets destroyed when leadership realises they have been paying for motion instead of progress.</p>
+      <p>Bad SEO does not merely waste money. It discredits the channel itself. It makes leadership cynical. It makes good work harder to sell later. It leaves businesses believing SEO "doesn't work" when what actually failed was the person selling it to them.</p>
+      <p>That is the part I find hardest to tolerate. This field, done properly, can be commercially transformative. Done badly, it becomes a highly professional-looking way to separate companies from their money.</p>
+
+      <h2>The Bottom Line</h2>
+      <p>If someone promises you guaranteed rankings, guaranteed links, or guaranteed outcomes in a system they do not control, treat that promise the same way you would treat a mechanic inventing work under the bonnet: with immediate scepticism.</p>
+      <p>Ask better questions. Demand specifics. Own your assets. Insist on commercial relevance. And remember this above all else: there are no guarantees in SEO. There is only sound process, intelligent prioritisation, honest communication, and work that earns the right to perform over time.</p>
+      <p>The real professionals in this industry will not be offended by that standard. The cowboys will.</p>
+    `
   }
 ];
