@@ -204,7 +204,7 @@ export function Contact() {
 
   if (isSuccess) {
     return (
-      <section className="w-full max-w-3xl px-6 py-16 md:py-24 mx-auto text-center" id="contact">
+      <section className="w-full max-w-3xl px-6 py-16 md:py-24 mx-auto text-center scroll-mt-28 md:scroll-mt-32" id="contact">
         <div className="bg-white/5 border border-gold/30 p-12 flex flex-col items-center gap-6">
           <CheckCircle2 className="text-gold w-16 h-16" />
           <h4 className="text-2xl font-serif font-bold text-white">Application Received</h4>
@@ -223,7 +223,7 @@ export function Contact() {
   }
 
   return (
-    <section className="w-full max-w-4xl px-6 py-16 md:py-24 mx-auto" id="contact">
+    <section className="w-full max-w-4xl px-6 py-16 md:py-24 mx-auto scroll-mt-28 md:scroll-mt-32" id="contact">
       <div className="text-center mb-12">
         <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Request an Independent Review</h3>
         <p className="text-slate-400 text-lg">Tell me about your commercial goals and current infrastructure.</p>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 
 export function Hero() {
   return (
@@ -32,19 +33,19 @@ export function Hero() {
           
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <a 
-                href="#contact" 
+              <SectionLink
+                href="/#contact"
                 className="bg-gold text-strath-navy px-8 py-4 font-bold text-base tracking-wide uppercase hover:bg-white transition-all flex items-center justify-center gap-2 group"
               >
                 Request a Review 
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a 
-                href="#approach" 
+              </SectionLink>
+              <SectionLink
+                href="/#approach"
                 className="px-8 py-4 border border-slate-700 text-white font-medium text-base tracking-wide uppercase hover:border-gold hover:text-gold transition-colors flex items-center justify-center"
               >
                 See How I Work
-              </a>
+              </SectionLink>
             </div>
           <div className="text-xs text-slate-500 font-mono flex items-center gap-4 pl-1">
               <span>{"// Fixed fees."}</span>

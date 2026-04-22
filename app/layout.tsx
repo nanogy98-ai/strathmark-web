@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/app/components/ui/CookieBanner";
 import { Analytics } from "@/app/components/ui/Analytics";
+import { ScrollBehaviorManager } from "@/app/components/ui/ScrollBehaviorManager";
 import { LOGO_PATH, SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
@@ -74,9 +75,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-strath-navy text-slate-200`}>
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-strath-navy text-slate-200`}
+        style={{ backgroundColor: "#0F172A", color: "#F8FAFC" }}
+      >
         <Analytics />
+        <ScrollBehaviorManager />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

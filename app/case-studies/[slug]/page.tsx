@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 import { SHARE_IMAGE_PATH, SITE_URL } from "@/lib/site";
 
 interface PageProps {
@@ -225,12 +226,12 @@ export default async function CaseStudyDetail({ params }: PageProps) {
             <p className="mx-auto mt-5 max-w-2xl text-sm font-light leading-relaxed text-slate-400">
               If spend is rising, visibility is flattening, or the site feels harder to govern than it should, the issue is usually structural before it is tactical.
             </p>
-            <Link
+            <SectionLink
               href="/#contact"
               className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gold px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-strath-navy transition-colors hover:bg-white"
             >
               Request a review <ArrowRight size={16} />
-            </Link>
+            </SectionLink>
           </section>
         </div>
       </article>

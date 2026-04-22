@@ -2,6 +2,7 @@ import Image from "next/image";
 import { caseStudies } from "@/lib/case-studies-data";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 
 export function Footer() {
   const featuredCaseStudies = caseStudies.filter((study) => study.featured).slice(0, 3);
@@ -42,12 +43,12 @@ export function Footer() {
               Independent advisory for commercial decision-makers who prefer commercial clarity over vanity numbers.
             </p>
             <div className="pt-3">
-              <Link
+              <SectionLink
                 href="/#briefing"
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] border border-white/10 px-4 py-3 hover:border-gold hover:text-gold transition-colors"
               >
                 5-Minute Briefing <ArrowRight size={12} />
-              </Link>
+              </SectionLink>
             </div>
           </div>
 
@@ -56,9 +57,9 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               {quickLinks.map(([href, label]) => (
                 <li key={label}>
-                  <Link href={href} className="hover:text-white transition-colors">
+                  <SectionLink href={href} className="hover:text-white transition-colors">
                     {label}
-                  </Link>
+                  </SectionLink>
                 </li>
               ))}
             </ul>
@@ -102,9 +103,9 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               {supportLinks.map(([href, label]) => (
                 <li key={label}>
-                  <Link href={href} className="hover:text-white transition-colors">
+                  <SectionLink href={href} className="hover:text-white transition-colors">
                     {label}
-                  </Link>
+                  </SectionLink>
                 </li>
               ))}
             </ul>

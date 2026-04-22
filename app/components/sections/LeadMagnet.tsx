@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { 
   AlertCircle, 
   CheckCircle2, 
@@ -17,6 +16,7 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY = "7673741a-3e33-4912-96b3-bd1a31729185";
@@ -146,7 +146,7 @@ export function LeadMagnet() {
   };
 
   return (
-    <section className="w-full py-20 md:py-32 bg-strath-navy relative overflow-hidden" id="briefing">
+    <section className="w-full py-20 md:py-32 bg-strath-navy relative overflow-hidden scroll-mt-28 md:scroll-mt-32" id="briefing">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[120px] -z-0 pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
       
@@ -439,12 +439,12 @@ function UnlockedContent({ name }: { name: string }) {
               </p>
             </div>
 
-            <Link
-              href="#contact"
+            <SectionLink
+              href="/#contact"
               className="w-full bg-strath-navy text-gold py-4 font-bold uppercase tracking-[0.2em] text-xs text-center transition-all hover:bg-white hover:text-strath-navy"
             >
               Request A Consultation
-            </Link>
+            </SectionLink>
           </motion.div>
         </div>
         

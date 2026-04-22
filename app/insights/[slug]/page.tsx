@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 import { notes } from "@/lib/notes-data";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 import { SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 import { ReadingProgress } from "@/app/components/ReadingProgress";
 
@@ -139,9 +140,9 @@ export default async function NotePage({ params }: PageProps) {
               </div>
               <div className="flex-1">
                 <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 mb-2">
-                  <Link href="/#about" className="text-white font-serif font-bold text-lg hover:text-gold transition-colors">
+                  <SectionLink href="/#about" className="text-white font-serif font-bold text-lg hover:text-gold transition-colors">
                     {note.author}
-                  </Link>
+                  </SectionLink>
                   <span className="hidden sm:inline text-slate-600 font-serif">•</span>
                   <span className="text-xs font-mono text-gold uppercase tracking-widest">Principal Consultant</span>
                 </div>
@@ -179,12 +180,12 @@ export default async function NotePage({ params }: PageProps) {
                 I review infrastructure and spend for select clients.
               </p>
             </div>
-            <Link
+            <SectionLink
               href="/#contact"
               className="bg-gold text-strath-navy px-6 py-3 font-bold text-sm tracking-wide uppercase hover:bg-white transition-all whitespace-nowrap"
             >
               Request Analysis
-            </Link>
+            </SectionLink>
           </div>
         </div>
 

@@ -2,32 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 
-function scrollToSection(href: string) {
-  if (!href.startsWith("/#")) return false;
-
-  const id = href.replace("/", "");
-  const element = document.querySelector(id);
-  if (!element) return false;
-
-  const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 100;
-  window.scrollTo({
-    top: offsetTop,
-    behavior: "smooth",
-  });
-
-  return true;
-}
+const MOBILE_SECTION_NAVIGATION_DELAY_MS = 250;
 
 export function Navigation() {
-  const pathname = usePathname();
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [pendingHref, setPendingHref] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -54,44 +37,7 @@ export function Navigation() {
     { name: "Intelligence Log", href: "/insights" },
     { name: "FAQs", href: "/#faq" },
   ];
-
-  useEffect(() => {
-    if (!pendingHref || isOpen) return;
-
-    const frame = window.requestAnimationFrame(() => {
-      if (!(pathname === "/" && scrollToSection(pendingHref))) {
-        router.push(pendingHref);
-      }
-      setPendingHref(null);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [isOpen, pathname, pendingHref, router]);
-
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Let modified clicks keep their default browser behavior.
-    if (
-      e.defaultPrevented ||
-      e.button !== 0 ||
-      e.metaKey ||
-      e.ctrlKey ||
-      e.shiftKey ||
-      e.altKey
-    ) {
-      return;
-    }
-
-    e.preventDefault();
-    if (isOpen) {
-      setPendingHref(href);
-      setIsOpen(false);
-      return;
-    }
-
-    if (!(pathname === "/" && scrollToSection(href))) {
-      router.push(href);
-    }
-  };
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <nav 
@@ -115,22 +61,20 @@ export function Navigation() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 pl-8 xl:gap-10 xl:pl-10">
           {navLinks.map((link) => (
-            <Link 
+            <SectionLink
               key={link.name} 
               href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
               className="text-sm font-medium text-slate-300 hover:text-white hover:text-gold transition-colors uppercase tracking-wider"
             >
               {link.name}
-            </Link>
+            </SectionLink>
           ))}
-          <Link 
+          <SectionLink
             href="/#contact"
-            onClick={(e) => handleLinkClick(e, "/#contact")}
             className="bg-white text-strath-navy px-6 py-2.5 text-sm font-bold tracking-wide hover:bg-gold hover:text-white transition-all duration-300 uppercase"
           >
             Request a Review
-          </Link>
+          </SectionLink>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -155,22 +99,24 @@ export function Navigation() {
           >
             <div className="flex flex-col p-8 gap-6">
               {navLinks.map((link) => (
-                <Link 
+                <SectionLink
                   key={link.name} 
                   href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
+                  onNavigate={closeMenu}
+                  navigationDelayMs={MOBILE_SECTION_NAVIGATION_DELAY_MS}
                   className="text-xl font-serif text-slate-200 hover:text-gold transition-colors"
                 >
                   {link.name}
-                </Link>
+                </SectionLink>
               ))}
-              <Link 
+              <SectionLink
                 href="/#contact"
-                onClick={(e) => handleLinkClick(e, "/#contact")}
+                onNavigate={closeMenu}
+                navigationDelayMs={MOBILE_SECTION_NAVIGATION_DELAY_MS}
                 className="mt-4 text-center bg-gold text-strath-navy py-4 font-bold uppercase tracking-widest"
               >
                 Request a Review
-              </Link>
+              </SectionLink>
             </div>
           </motion.div>
         )}

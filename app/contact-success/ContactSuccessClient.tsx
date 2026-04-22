@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 
 const LEAD_SESSION_STORAGE_KEY = "strathmark_pending_lead";
 const LAST_SUBMIT_STORAGE_KEY = "strathmark_last_submit_ts";
@@ -53,12 +54,12 @@ export function ContactSuccessClient() {
             >
               Return Home
             </Link>
-            <Link
+            <SectionLink
               href="/#contact"
               className="inline-flex items-center justify-center border border-white/15 px-6 py-3 text-white hover:border-gold hover:text-gold transition-colors"
             >
               Submit Another Brief
-            </Link>
+            </SectionLink>
           </div>
         </div>
       </section>

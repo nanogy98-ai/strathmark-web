@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Navigation } from "@/app/components/Navigation";
 import { Footer } from "@/app/components/sections/Footer";
 import { CookieResetButton } from "@/app/components/ui/CookieResetButton";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -56,9 +56,9 @@ export default function PrivacyPage() {
           <h3 className="text-2xl font-serif font-bold text-white">Contact</h3>
           <p>
             If you have questions about privacy or data handling, please use the{" "}
-            <Link href="/#contact" className="text-gold hover:text-white underline underline-offset-4">
+            <SectionLink href="/#contact" className="text-gold hover:text-white underline underline-offset-4">
               contact form
-            </Link>
+            </SectionLink>
             .
           </p>
 

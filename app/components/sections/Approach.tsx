@@ -31,7 +31,7 @@ export function Approach() {
   ];
 
   return (
-    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto bg-white/[0.02]" id="approach">
+    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto bg-white/[0.02] scroll-mt-28 md:scroll-mt-32" id="approach">
       <div className="mb-10 md:mb-16 text-center">
         <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">The Methodology</h3>
         <p className="text-slate-400">Predictable. Transparent. Commercial.</p>

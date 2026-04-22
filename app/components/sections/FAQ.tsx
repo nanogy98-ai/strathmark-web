@@ -29,7 +29,7 @@ export function FAQ() {
   ];
 
   return (
-    <section className="w-full max-w-3xl px-6 py-16 md:py-24 mx-auto border-t border-white/5" id="faq">
+    <section className="w-full max-w-3xl px-6 py-16 md:py-24 mx-auto border-t border-white/5 scroll-mt-28 md:scroll-mt-32" id="faq">
       <h3 className="text-3xl font-serif font-bold text-white mb-10 md:mb-12 text-center">Questions & Answers</h3>
       
       <div className="space-y-4">

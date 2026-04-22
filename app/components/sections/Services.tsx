@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, BarChart, Server, Lock } from "lucide-react";
+import { SectionLink } from "@/app/components/ui/SectionLink";
 
 export function Services() {
   const pillars = [
@@ -18,7 +19,7 @@ export function Services() {
         "Search strategy validation"
       ],
       cta: "Strategic Review",
-      link: "#contact"
+      link: "/#contact"
     },
     {
       shortTitle: "The Technical Fix",
@@ -33,7 +34,7 @@ export function Services() {
         "Technical debt consolidation"
       ],
       cta: "Technical Audit",
-      link: "#contact"
+      link: "/#contact"
     },
     {
       shortTitle: "The Ongoing Advisor",
@@ -48,12 +49,12 @@ export function Services() {
         "Execution only after review"
       ],
       cta: "Retainer Consideration",
-      link: "#contact"
+      link: "/#contact"
     }
   ];
 
   return (
-    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto" id="services">
+    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto scroll-mt-28 md:scroll-mt-32" id="services">
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -114,12 +115,12 @@ export function Services() {
               ))}
             </ul>
 
-            <a 
+            <SectionLink
               href={pillar.link}
               className="w-full py-4 border border-white/10 text-white text-center text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-strath-navy transition-all flex items-center justify-center gap-2 group-hover:border-white"
             >
               {pillar.cta} <ArrowRight size={16} />
-            </a>
+            </SectionLink>
           </motion.div>
         ))}
       </div>
