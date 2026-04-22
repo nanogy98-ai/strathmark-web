@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { ComponentProps, MouseEvent } from "react";
 import {
   getHomeSectionHash,
@@ -31,6 +31,7 @@ export function SectionLink({
   ...props
 }: SectionLinkProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const sectionHash = getHomeSectionHash(href);
   const isSamePageSectionLink = pathname === HOME_PATHNAME && sectionHash;
   const resolvedHref = sectionHash
@@ -46,21 +47,27 @@ export function SectionLink({
 
     onNavigate?.();
 
-    if (!isSamePageSectionLink || isModifiedEvent(event)) return;
+    if (isModifiedEvent(event)) return;
+
+    if (!isSamePageSectionLink && navigationDelayMs === 0) return;
 
     event.preventDefault();
 
     const performNavigation = () => {
-      const historyMethod = window.location.hash === sectionHash ? "replaceState" : "pushState";
-      window.history[historyMethod](null, "", sectionHash);
-      window.dispatchEvent(
-        new CustomEvent(SITE_SECTION_NAVIGATION_EVENT, {
-          detail: {
-            hash: sectionHash,
-            behavior: scrollBehavior,
-          },
-        })
-      );
+      if (isSamePageSectionLink) {
+        const historyMethod = window.location.hash === sectionHash ? "replaceState" : "pushState";
+        window.history[historyMethod](null, "", sectionHash);
+        window.dispatchEvent(
+          new CustomEvent(SITE_SECTION_NAVIGATION_EVENT, {
+            detail: {
+              hash: sectionHash,
+              behavior: scrollBehavior,
+            },
+          })
+        );
+      } else {
+        router.push(resolvedHref, { scroll: scroll !== false });
+      }
     };
 
     if (navigationDelayMs > 0) {
@@ -71,5 +78,5 @@ export function SectionLink({
     performNavigation();
   };
 
-  return <Link href={resolvedHref} scroll={sectionHash ? false : scroll} onClick={handleClick} {...props} />;
+  return <Link href={resolvedHref} scroll={isSamePageSectionLink ? false : scroll} onClick={handleClick} {...props} />;
 }

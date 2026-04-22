@@ -5,7 +5,9 @@ const HOME_SECTION_IDS = [
   "about",
   "services",
   "approach",
+  "outcomes",
   "briefing",
+  "insights",
   "faq",
   "contact",
 ] as const;
