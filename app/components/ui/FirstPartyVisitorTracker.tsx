@@ -13,6 +13,7 @@ const LAST_EVENT_KEY = "strathmark_visitor_analytics_last_key";
 const LAST_EVENT_TS_KEY = "strathmark_visitor_analytics_last_ts";
 const SCROLL_MILESTONES = [25, 50, 75, 100] as const;
 const HEARTBEAT_INTERVAL_MS = 20_000;
+const TRACKING_EXCLUDED_PATH_PREFIXES = ["/ops"] as const;
 
 type NavigatorWithConnection = Navigator & {
   deviceMemory?: number;
@@ -25,6 +26,12 @@ type NavigatorWithConnection = Navigator & {
 };
 
 type TrackerPayload = ClientVisitorEvent;
+
+function shouldTrackPath(pathname: string) {
+  return !TRACKING_EXCLUDED_PATH_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+  );
+}
 
 function hasAnalyticsConsent() {
   try {
@@ -173,10 +180,10 @@ function shouldSkipDuplicateEvent(dedupeKey: string) {
 
 function buildPayload(
   type: TrackerPayload["type"],
-  overrides: Partial<TrackerPayload> = {}
+  overrides: Partial<TrackerPayload> = {},
+  currentUrl = getCurrentUrl()
 ): TrackerPayload {
   const navigatorWithConnection = navigator as NavigatorWithConnection;
-  const currentUrl = getCurrentUrl();
   const performanceMetrics = getNavigationPerformance();
 
   return {
@@ -295,10 +302,15 @@ export function FirstPartyVisitorTracker() {
   }, []);
 
   useEffect(() => {
+    if (!shouldTrackPath(pathname)) {
+      return;
+    }
+
     if (!hasAnalyticsConsent()) {
       return;
     }
 
+    const routeUrl = getCurrentUrl();
     const dedupeKey = `${pathname}?${search}`;
     const routeStartedAt = Date.now();
     let maxScrollPercent = getScrollPercent();
@@ -326,7 +338,7 @@ export function FirstPartyVisitorTracker() {
       void sendVisitorEvent(
         buildPayload("exit", {
           engagement: buildEngagementSnapshot(currentScrollPercent),
-        })
+        }, routeUrl)
       );
     };
 
@@ -345,7 +357,7 @@ export function FirstPartyVisitorTracker() {
       void sendVisitorEvent(
         buildPayload("heartbeat", {
           engagement: buildEngagementSnapshot(currentScrollPercent),
-        })
+        }, routeUrl)
       );
     };
 
@@ -359,7 +371,7 @@ export function FirstPartyVisitorTracker() {
       void sendVisitorEvent(
         buildPayload("pageview", {
           engagement: buildEngagementSnapshot(currentScrollPercent),
-        })
+        }, routeUrl)
       );
     }, 180);
 
@@ -377,7 +389,7 @@ export function FirstPartyVisitorTracker() {
         void sendVisitorEvent(
           buildPayload("scroll", {
             engagement: buildEngagementSnapshot(milestone),
-          })
+          }, routeUrl)
         );
       }
     };
@@ -421,7 +433,7 @@ export function FirstPartyVisitorTracker() {
               host: resolvedUrl.host,
               text: toNullableString(anchor.textContent, 255),
             },
-          })
+          }, routeUrl)
         );
       } catch {
         // Ignore malformed URLs.
@@ -460,8 +472,6 @@ export function FirstPartyVisitorTracker() {
     document.addEventListener("click", handleDocumentClick, true);
     document.addEventListener("pointerdown", markInteraction, true);
     document.addEventListener("keydown", markInteraction, true);
-
-    handleScroll();
 
     return () => {
       window.clearTimeout(pageviewTimer);
