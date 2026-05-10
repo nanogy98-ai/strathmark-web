@@ -3,18 +3,15 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { notes } from "@/lib/notes-data";
+import { formatDateOnly, getDateOnlyTime } from "@/lib/date-format";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
 
 function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  return formatDateOnly(dateStr, { month: "short" });
 }
 
 const sortedNotes = [...notes].sort(
-  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  (a, b) => getDateOnlyTime(b.date) - getDateOnlyTime(a.date)
 );
 
 export function Insights() {

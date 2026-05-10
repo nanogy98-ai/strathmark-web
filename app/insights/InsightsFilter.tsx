@@ -4,13 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
 import type { Note } from "@/lib/notes-data";
+import { formatDateOnly } from "@/lib/date-format";
 
 function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  return formatDateOnly(dateStr);
 }
 
 interface InsightsFilterProps {

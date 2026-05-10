@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
 import { notes } from "@/lib/notes-data";
+import { formatDateOnly, getDateOnlyTime } from "@/lib/date-format";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
 import { SHARE_IMAGE_PATH, SITE_URL } from "@/lib/site";
@@ -22,16 +23,12 @@ export const metadata: Metadata = {
 };
 
 function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  return formatDateOnly(dateStr);
 }
 
 const categories = Array.from(new Set(notes.map((n) => n.category)));
 const sortedNotes = [...notes].sort(
-  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  (a, b) => getDateOnlyTime(b.date) - getDateOnlyTime(a.date)
 );
 const featured = sortedNotes[0];
 const rest = sortedNotes.slice(1);

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 import { notes } from "@/lib/notes-data";
+import { formatDateOnly } from "@/lib/date-format";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
 import { SectionLink } from "@/app/components/ui/SectionLink";
@@ -45,11 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  return formatDateOnly(dateStr);
 }
 
 function getRelatedArticles(currentSlug: string, currentTags: string[]) {
