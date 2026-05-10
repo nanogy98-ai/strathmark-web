@@ -1,12 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import type { ClientVisitorEvent } from "@/lib/visitor-analytics/schema";
-import {
-  ANALYTICS_CONSENT_EVENT,
-  ANALYTICS_CONSENT_KEY,
-} from "@/lib/analytics-consent";
 
 const SESSION_STORAGE_KEY = "strathmark_visitor_analytics_session_id";
 const LAST_EVENT_KEY = "strathmark_visitor_analytics_last_key";
@@ -31,14 +27,6 @@ function shouldTrackPath(pathname: string) {
   return !TRACKING_EXCLUDED_PATH_PREFIXES.some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
   );
-}
-
-function hasAnalyticsConsent() {
-  try {
-    return window.localStorage.getItem(ANALYTICS_CONSENT_KEY) === "analytics";
-  } catch {
-    return false;
-  }
 }
 
 function getOrCreateSessionId() {
@@ -278,35 +266,10 @@ function sendVisitorEvent(payload: TrackerPayload) {
 export function FirstPartyVisitorTracker() {
   const pathname = usePathname() ?? "/";
   const searchParams = useSearchParams();
-  const [consentTick, setConsentTick] = useState(0);
   const search = searchParams.toString();
 
   useEffect(() => {
-    const bumpConsentTick = () => {
-      setConsentTick((value) => value + 1);
-    };
-
-    const handleStorage = (event: StorageEvent) => {
-      if (event.key === ANALYTICS_CONSENT_KEY) {
-        bumpConsentTick();
-      }
-    };
-
-    window.addEventListener(ANALYTICS_CONSENT_EVENT, bumpConsentTick);
-    window.addEventListener("storage", handleStorage);
-
-    return () => {
-      window.removeEventListener(ANALYTICS_CONSENT_EVENT, bumpConsentTick);
-      window.removeEventListener("storage", handleStorage);
-    };
-  }, []);
-
-  useEffect(() => {
     if (!shouldTrackPath(pathname)) {
-      return;
-    }
-
-    if (!hasAnalyticsConsent()) {
       return;
     }
 
@@ -328,7 +291,7 @@ export function FirstPartyVisitorTracker() {
     });
 
     const sendExitEvent = () => {
-      if (exitEventSent || !hasAnalyticsConsent()) {
+      if (exitEventSent) {
         return;
       }
 
@@ -343,10 +306,6 @@ export function FirstPartyVisitorTracker() {
     };
 
     const sendHeartbeat = () => {
-      if (!hasAnalyticsConsent()) {
-        return;
-      }
-
       const currentScrollPercent = getScrollPercent();
       maxScrollPercent = Math.max(maxScrollPercent, currentScrollPercent);
 
@@ -395,10 +354,6 @@ export function FirstPartyVisitorTracker() {
     };
 
     const handleDocumentClick = (event: MouseEvent) => {
-      if (!hasAnalyticsConsent()) {
-        return;
-      }
-
       const target = event.target;
       if (!(target instanceof Element)) {
         return;
@@ -486,7 +441,7 @@ export function FirstPartyVisitorTracker() {
       document.removeEventListener("keydown", markInteraction, true);
       sendExitEvent();
     };
-  }, [consentTick, pathname, search]);
+  }, [pathname, search]);
 
   return null;
 }
