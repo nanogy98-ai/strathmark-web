@@ -27,6 +27,7 @@ import { VisitorsSessionControls } from "@/app/ops/visitors/VisitorsSessionContr
 import {
   LIVE_VISITOR_WINDOW_MS,
   buildLiveVisitorSessions,
+  buildVisitorSessions,
   type LiveVisitorSession,
 } from "@/lib/visitor-analytics/live";
 import type {
@@ -202,39 +203,6 @@ function getReferrerLabel(event: VisitorAnalyticsEvent) {
   return event.page.referrerHost ?? "Direct visit";
 }
 
-function getDeviceLabel(event: VisitorAnalyticsEvent) {
-  const bits = [
-    event.parsedUserAgent.deviceType,
-    event.parsedUserAgent.deviceVendor,
-    event.parsedUserAgent.deviceModel,
-    event.client.device?.platform,
-  ].filter(Boolean);
-
-  return bits.length > 0 ? bits.join(" / ") : "Unknown";
-}
-
-function getBrowserLabel(event: VisitorAnalyticsEvent) {
-  const bits = [
-    event.parsedUserAgent.browserName,
-    event.parsedUserAgent.browserVersion,
-    event.parsedUserAgent.osName,
-    event.parsedUserAgent.osVersion,
-  ].filter(Boolean);
-
-  return bits.length > 0 ? bits.join(" / ") : "Unknown";
-}
-
-function getLocationLabel(event: VisitorAnalyticsEvent) {
-  const bits = [
-    event.location.city,
-    event.location.region,
-    event.location.country,
-    event.location.postalCode,
-  ].filter(Boolean);
-
-  return bits.length > 0 ? bits.join(", ") : "Unknown";
-}
-
 function getLocationConfidenceLabel(confidence: VisitorLocationConfidence) {
   if (confidence === "precise") {
     return "Exact Location";
@@ -265,20 +233,6 @@ function getLocationConfidenceTone(confidence: VisitorLocationConfidence) {
   }
 
   return "bg-white/10 text-slate-200 border-white/10";
-}
-
-function getPreciseCoordinatesLabel(event: VisitorAnalyticsEvent) {
-  const { latitude, longitude, accuracyMeters } = event.location.precise;
-  if (latitude === null || longitude === null) {
-    return null;
-  }
-
-  const coordinates = `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
-  if (accuracyMeters === null) {
-    return coordinates;
-  }
-
-  return `${coordinates} ±${Math.round(accuracyMeters)}m`;
 }
 
 function getLivePreciseCoordinatesLabel(session: LiveVisitorSession) {
@@ -323,15 +277,6 @@ function getCampaignLabel(event: VisitorAnalyticsEvent) {
     event.marketing.fbclid ??
     "Unattributed"
   );
-}
-
-function getPerformanceLabel(event: VisitorAnalyticsEvent) {
-  const loadEventMs = event.performance.loadEventMs;
-  if (!loadEventMs) {
-    return "Unknown";
-  }
-
-  return formatDuration(loadEventMs);
 }
 
 function buildSearchIndex(event: VisitorAnalyticsEvent) {
@@ -765,37 +710,22 @@ function DetailChip({ label, value }: { label: string; value: string }) {
   );
 }
 
-function SummaryStat({
-  label,
-  value,
-  accent = false,
+function LiveVisitorCard({
+  session,
+  now,
+  mode = "live",
 }: {
-  label: string;
-  value: string;
-  accent?: boolean;
+  session: LiveVisitorSession;
+  now: number;
+  mode?: "live" | "history";
 }) {
-  return (
-    <div
-      className={`border p-4 ${
-        accent
-          ? "border-gold/30 bg-gold/10 shadow-[0_20px_50px_rgba(212,175,99,0.08)]"
-          : "border-white/10 bg-slate-950/35"
-      }`}
-    >
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-500">{label}</p>
-      <p
-        className={`mt-3 break-words text-base font-semibold ${
-          accent ? "text-white" : "text-slate-200"
-        }`}
-      >
-        {value}
-      </p>
-    </div>
-  );
-}
-
-function LiveVisitorCard({ session, now }: { session: LiveVisitorSession; now: number }) {
-  const statusLabel = getLiveStatusLabel(session, now);
+  const isLiveMode = mode === "live";
+  const statusLabel = isLiveMode
+    ? getLiveStatusLabel(session, now)
+    : `${formatCount(session.eventCount)} events`;
+  const statusTone = isLiveMode
+    ? getLiveStatusTone(session, now)
+    : "border-slate-400/20 bg-slate-400/10 text-slate-200";
   const relativeAge = formatRelativeAge(session.lastSeenAt, now);
   const preciseCoordinatesLabel = getLivePreciseCoordinatesLabel(session);
 
@@ -805,10 +735,7 @@ function LiveVisitorCard({ session, now }: { session: LiveVisitorSession; now: n
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-3">
             <span
-              className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] ${getLiveStatusTone(
-                session,
-                now
-              )}`}
+              className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] ${statusTone}`}
             >
               {statusLabel}
             </span>
@@ -844,7 +771,7 @@ function LiveVisitorCard({ session, now }: { session: LiveVisitorSession; now: n
         </div>
 
         <div className="text-right text-sm text-slate-400">
-          <p>{relativeAge}</p>
+          <p>{isLiveMode ? relativeAge : `Last seen ${relativeAge}`}</p>
           <p className="mt-1">{formatTimestamp(session.lastSeenAt)}</p>
         </div>
       </div>
@@ -868,7 +795,7 @@ function LiveVisitorCard({ session, now }: { session: LiveVisitorSession; now: n
       {session.pagePaths.length > 1 ? (
         <div className="mt-4 border-t border-white/5 pt-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500">
-            Pages In Active Window
+            {isLiveMode ? "Pages In Active Window" : "Pages In This Visit"}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             {session.pagePaths.map((path) => (
@@ -1097,7 +1024,8 @@ export function VisitorsDashboard({
     4
   );
   const eventMix = takeTopCounts(filteredEvents.map((event) => getEventLabel(event.eventType)), 6);
-  const visibleEvents = filteredEvents.slice(0, 120);
+  const visitorSessions = buildVisitorSessions(filteredEvents);
+  const visibleVisitorSessions = visitorSessions.slice(0, 120);
 
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_top,#18233b_0%,#0f172a_46%,#0a1020_100%)] px-5 py-10 text-slate-200 md:px-8">
@@ -1396,9 +1324,9 @@ export function VisitorsDashboard({
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-8">
           <MetricCard
             icon={<Activity className="h-5 w-5" />}
-            label="Events"
-            value={formatCount(filteredEvents.length)}
-            hint="Filtered total"
+            label="Visits"
+            value={formatCount(visitorSessions.length)}
+            hint={`${formatCount(filteredEvents.length)} events grouped`}
           />
           <MetricCard
             icon={<RefreshCw className="h-5 w-5" />}
@@ -1542,200 +1470,24 @@ export function VisitorsDashboard({
               <h2 className="mt-2 font-serif text-3xl font-bold text-white">Latest Visits</h2>
             </div>
             <p className="text-sm text-slate-500">
-              Showing {formatCount(visibleEvents.length)} of {formatCount(filteredEvents.length)}{" "}
-              filtered records
+              Showing {formatCount(visibleVisitorSessions.length)} of{" "}
+              {formatCount(visitorSessions.length)} filtered visits
             </p>
           </div>
 
-          {visibleEvents.length === 0 ? (
+          {visibleVisitorSessions.length === 0 ? (
             <div className="border border-dashed border-white/10 bg-white/[0.03] p-8 text-slate-400">
-              No events matched the current filters.
+              No visits matched the current filters.
             </div>
           ) : (
             <div className="grid gap-4">
-              {visibleEvents.map((event) => (
-                <article
-                  key={event.id}
-                  className="border border-white/10 bg-white/[0.03] p-5 shadow-[0_20px_80px_rgba(2,6,23,0.18)]"
-                >
-                  <div className="flex flex-col gap-4 border-b border-white/5 pb-4 xl:flex-row xl:items-start xl:justify-between">
-                    <div className="space-y-3">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span
-                          className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] ${getEventTone(
-                            event.eventType
-                          )}`}
-                        >
-                          {getEventLabel(event.eventType)}
-                        </span>
-                        <span
-                          className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] ${getLocationConfidenceTone(
-                            event.location.confidence
-                          )}`}
-                        >
-                          {getLocationConfidenceLabel(event.location.confidence)}
-                        </span>
-                        {event.marketing.utmCampaign ? (
-                          <span className="rounded-full border border-gold/20 bg-gold/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-gold">
-                            {event.marketing.utmCampaign}
-                          </span>
-                        ) : null}
-                        {event.link.host ? (
-                          <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-emerald-200">
-                            {event.link.host}
-                          </span>
-                        ) : null}
-                      </div>
-
-                      <div>
-                        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">
-                          {event.page.path || "/"}
-                        </p>
-                        <p className="mt-2 break-all text-sm text-slate-400">{event.page.href}</p>
-                      </div>
-                    </div>
-
-                    <div className="text-sm text-slate-400">{formatTimestamp(event.recordedAt)}</div>
-                  </div>
-
-                  <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-                    <SummaryStat
-                      label="IP Address"
-                      value={event.request.ip ?? "Unknown"}
-                      accent
-                    />
-                    <SummaryStat
-                      label="Visitor Location"
-                      value={getLocationLabel(event)}
-                    />
-                    <SummaryStat
-                      label="Location Quality"
-                      value={getLocationConfidenceLabel(event.location.confidence)}
-                    />
-                    <SummaryStat label="Browser" value={getBrowserLabel(event)} />
-                    <SummaryStat label="Device" value={getDeviceLabel(event)} />
-                    <SummaryStat label="Arrived From" value={getReferrerLabel(event)} />
-                    <SummaryStat
-                      label="Time On Page"
-                      value={formatDuration(event.engagement.timeOnPageMs)}
-                    />
-                    <SummaryStat
-                      label="Page Seen"
-                      value={formatPercent(
-                        event.engagement.maxScrollPercent ?? event.engagement.scrollPercent
-                      )}
-                    />
-                  </div>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {getPreciseCoordinatesLabel(event) ? (
-                      <DetailChip
-                        label="Coordinates"
-                        value={getPreciseCoordinatesLabel(event) ?? ""}
-                      />
-                    ) : null}
-                    <DetailChip
-                      label="Load Time"
-                      value={getPerformanceLabel(event)}
-                    />
-                    <DetailChip
-                      label="Inactive For"
-                      value={formatDuration(event.engagement.idleForMs)}
-                    />
-                    <DetailChip
-                      label="Page Open"
-                      value={event.engagement.isVisible === false ? "In background" : "On screen"}
-                    />
-                    <DetailChip
-                      label="Window"
-                      value={event.engagement.isFocused ? "Active" : "Not active"}
-                    />
-                  </div>
-
-                  <details className="mt-4 border-t border-white/5 pt-4">
-                    <summary className="cursor-pointer text-sm font-medium text-slate-300">
-                      Show technical details
-                    </summary>
-                    <div className="mt-4 grid gap-4 text-sm text-slate-400 md:grid-cols-2 xl:grid-cols-6">
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500">
-                          Campaign Tags
-                        </p>
-                        <p className="mt-2">
-                          {[
-                            event.marketing.utmSource,
-                            event.marketing.utmMedium,
-                            event.marketing.utmCampaign,
-                            event.marketing.utmContent,
-                            event.marketing.utmTerm,
-                          ]
-                            .filter(Boolean)
-                            .join(" / ") || "None"}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500">
-                          URL Tags
-                        </p>
-                        <p className="mt-2 break-words">
-                          {event.page.queryParams.length > 0
-                            ? event.page.queryParams
-                                .map((param) => `${param.key}=${param.value ?? ""}`)
-                                .join(", ")
-                            : "None"}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500">
-                          Location
-                        </p>
-                        <p className="mt-2">
-                          {getLocationLabel(event)} · {getLocationConfidenceLabel(event.location.confidence)}
-                          {event.location.timezone ? ` · ${event.location.timezone}` : ""}
-                          {event.location.postalCode ? ` · ${event.location.postalCode}` : ""}
-                          {getPreciseCoordinatesLabel(event)
-                            ? ` · ${getPreciseCoordinatesLabel(event)}`
-                            : ""}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500">
-                          Screen Size
-                        </p>
-                        <p className="mt-2">
-                          {event.client.viewport
-                            ? `${event.client.viewport.width}x${event.client.viewport.height}`
-                            : "Unknown"}{" "}
-                          /{" "}
-                          {event.client.screen
-                            ? `${event.client.screen.width}x${event.client.screen.height}`
-                            : "Unknown"}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500">
-                          Load Speed
-                        </p>
-                        <p className="mt-2">
-                          Full load: {formatDuration(event.performance.loadEventMs)} · Ready to use:{" "}
-                          {formatDuration(event.performance.domInteractiveMs)} · First response:{" "}
-                          {formatDuration(event.performance.requestMs)}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-slate-500">
-                          Page Status
-                        </p>
-                        <p className="mt-2">
-                          {event.engagement.isVisible === false ? "In background" : "On screen"} ·{" "}
-                          {event.engagement.isFocused ? "Active window" : "Not active"} · Inactive{" "}
-                          {formatDuration(event.engagement.idleForMs)} ·{" "}
-                          {event.client.network?.effectiveType ?? "Unknown network"}
-                        </p>
-                      </div>
-                    </div>
-                  </details>
-                </article>
+              {visibleVisitorSessions.map((session) => (
+                <LiveVisitorCard
+                  key={session.key}
+                  session={session}
+                  now={now}
+                  mode="history"
+                />
               ))}
             </div>
           )}

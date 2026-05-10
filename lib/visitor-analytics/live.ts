@@ -87,7 +87,6 @@ function buildSessionKey(event: VisitorAnalyticsEvent) {
   return [
     event.request.ip ?? "unknown-ip",
     event.request.userAgent ?? "unknown-ua",
-    event.page.pathname ?? event.page.path,
   ].join("::");
 }
 
@@ -295,4 +294,8 @@ export function buildLiveVisitorSessions(
       isFocused: session.isFocused,
       networkType: session.networkType,
     }));
+}
+
+export function buildVisitorSessions(events: VisitorAnalyticsEvent[]) {
+  return buildLiveVisitorSessions(events, Date.now(), Number.POSITIVE_INFINITY);
 }
