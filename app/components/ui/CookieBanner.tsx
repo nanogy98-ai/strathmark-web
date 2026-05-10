@@ -1,12 +1,14 @@
- "use client";
+"use client";
 
 import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-
-const CONSENT_KEY = "strathmark_cookie_consent_v1";
-type ConsentValue = "analytics" | "essential";
+import {
+  ANALYTICS_CONSENT_EVENT,
+  ANALYTICS_CONSENT_KEY,
+  type AnalyticsConsentValue,
+} from "@/lib/analytics-consent";
 
 declare global {
   interface Window {
@@ -25,7 +27,7 @@ export function CookieBanner() {
     },
     () => {
       try {
-        return !window.localStorage.getItem(CONSENT_KEY);
+        return !window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
       } catch {
         return true;
       }
@@ -33,9 +35,9 @@ export function CookieBanner() {
     () => false
   );
 
-  const setConsent = (value: ConsentValue) => {
+  const setConsent = (value: AnalyticsConsentValue) => {
     try {
-      window.localStorage.setItem(CONSENT_KEY, value);
+      window.localStorage.setItem(ANALYTICS_CONSENT_KEY, value);
     } catch {
       // ignore
     }
@@ -50,6 +52,8 @@ export function CookieBanner() {
         ad_personalization: "denied",
       });
     }
+
+    window.dispatchEvent(new Event(ANALYTICS_CONSENT_EVENT));
   };
 
   // Private proposal pages are invite-only; no banner noise there.

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import { CookieBanner } from "@/app/components/ui/CookieBanner";
 import { Analytics } from "@/app/components/ui/Analytics";
+import { FirstPartyVisitorTracker } from "@/app/components/ui/FirstPartyVisitorTracker";
 import { ScrollBehaviorManager } from "@/app/components/ui/ScrollBehaviorManager";
 import { LOGO_PATH, SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -81,6 +83,9 @@ export default function RootLayout({
         style={{ backgroundColor: "#0F172A", color: "#F8FAFC" }}
       >
         <Analytics />
+        <Suspense fallback={null}>
+          <FirstPartyVisitorTracker />
+        </Suspense>
         <ScrollBehaviorManager />
         <script
           type="application/ld+json"

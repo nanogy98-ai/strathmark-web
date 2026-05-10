@@ -2,8 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-
-const CONSENT_KEY = "strathmark_cookie_consent_v1";
+import { ANALYTICS_CONSENT_KEY } from "@/lib/analytics-consent";
 const GA_MEASUREMENT_ID = "G-6W1G9FJ5TV";
 const CLARITY_PROJECT_ID = "wce5rr4juk";
 
@@ -20,7 +19,7 @@ export function Analytics() {
   useEffect(() => {
     let stored: string | null = null;
     try {
-      stored = window.localStorage.getItem(CONSENT_KEY);
+      stored = window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
     } catch {
       stored = null;
     }

@@ -1,19 +1,22 @@
 "use client";
 
 import { useState } from "react";
-
-const CONSENT_KEY = "strathmark_cookie_consent_v1";
+import {
+  ANALYTICS_CONSENT_EVENT,
+  ANALYTICS_CONSENT_KEY,
+} from "@/lib/analytics-consent";
 
 export function CookieResetButton() {
   const [done, setDone] = useState(false);
 
   const reset = () => {
     try {
-      window.localStorage.removeItem(CONSENT_KEY);
+      window.localStorage.removeItem(ANALYTICS_CONSENT_KEY);
     } catch {
       // ignore
     }
     setDone(true);
+    window.dispatchEvent(new Event(ANALYTICS_CONSENT_EVENT));
     window.location.reload();
   };
 
@@ -27,5 +30,4 @@ export function CookieResetButton() {
     </button>
   );
 }
-
 
