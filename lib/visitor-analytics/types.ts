@@ -3,7 +3,8 @@ export type VisitorEventType =
   | "scroll"
   | "exit"
   | "outbound_click"
-  | "heartbeat";
+  | "heartbeat"
+  | "offline_attempt";
 
 export type VisitorQueryParam = {
   key: string;

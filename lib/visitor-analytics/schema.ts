@@ -11,6 +11,7 @@ const visitorEventTypeSchema = z.enum([
   "exit",
   "outbound_click",
   "heartbeat",
+  "offline_attempt",
 ]);
 const visitorLocationPermissionStateSchema = z.enum([
   "granted",
