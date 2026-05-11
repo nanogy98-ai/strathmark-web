@@ -160,10 +160,6 @@ function matchesPreset(recordedAt: string, preset: DatePreset, now: number) {
 }
 
 function getEventTone(eventType: VisitorEventType) {
-  if (eventType === "offline_attempt") {
-    return "bg-red-400/15 text-red-100 border-red-400/25";
-  }
-
   if (eventType === "pageview") {
     return "bg-sky-400/15 text-sky-200 border-sky-400/20";
   }
@@ -184,10 +180,6 @@ function getEventTone(eventType: VisitorEventType) {
 }
 
 function getEventLabel(eventType: VisitorEventType) {
-  if (eventType === "offline_attempt") {
-    return "Tried Offline Site";
-  }
-
   if (eventType === "outbound_click") {
     return "Clicked External Link";
   }
@@ -1260,7 +1252,6 @@ export function VisitorsDashboard({
                   >
                     <option value="all">All events</option>
                     <option value="pageview">Opened page</option>
-                    <option value="offline_attempt">Tried offline site</option>
                     <option value="heartbeat">Still on page</option>
                     <option value="scroll">Read further down</option>
                     <option value="outbound_click">Clicked external link</option>
