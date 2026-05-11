@@ -76,8 +76,9 @@ export default async function NotePage({ params }: PageProps) {
     headline: note.title,
     description: note.excerpt,
     author: {
-      "@type": "Person",
+      "@type": "Organization",
       name: note.author,
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
@@ -144,7 +145,7 @@ export default async function NotePage({ params }: PageProps) {
                   <span className="text-xs font-mono text-gold uppercase tracking-widest">Principal Consultant</span>
                 </div>
                 <p className="text-slate-400 text-sm leading-relaxed mb-4 max-w-2xl">
-                  Graeme is the founder and principal consultant at Strathmark Consulting. With over a decade of experience across agency, contracting, and in-house roles for major international brands, he advises leadership teams on digital strategy, agency oversight, and marketing infrastructure across the UK, US, UAE, and Europe.
+                  Strathmark Consulting advises leadership teams on digital strategy, agency oversight, and marketing infrastructure across the UK, US, UAE, and Europe.
                 </p>
                 <div className="flex justify-center sm:justify-start flex-wrap items-center gap-6 text-xs font-mono text-slate-500">
                   <span className="flex items-center gap-1.5">

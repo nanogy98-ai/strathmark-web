@@ -73,7 +73,7 @@ export function About() {
                 <div className="relative aspect-[3/4] w-full transition-all duration-700 ease-in-out bg-slate-900 overflow-hidden">
                   <Image 
                     src="/founder.png"
-                    alt="Graeme Tudhope - Principal Consultant"
+                    alt="Strathmark principal consultant"
                     fill
                     className="object-cover object-center opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
                     sizes="(max-width: 768px) 100vw, 200px"
@@ -94,10 +94,10 @@ export function About() {
               <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-2">Principal-Led Advisory</h4>
               <div className="space-y-4 text-sm text-slate-400 leading-relaxed">
                 <p>
-                  Strathmark is led by Graeme, a principal consultant with over a decade of experience across agency, contracting, and in-house roles for major international brands.
+                  Strathmark is a principal-led consultancy with over a decade of experience across agency, contracting, and in-house roles for major international brands.
                 </p>
                 <p>
-                  He founded Strathmark to solve a specific problem: too many organisations spend significantly on digital marketing without clarity on what works.
+                  The firm was founded to solve a specific problem: too many organisations spend significantly on digital marketing without clarity on what works.
                 </p>
               </div>
             </div>

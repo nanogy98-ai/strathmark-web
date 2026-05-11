@@ -104,10 +104,6 @@ export default function RootLayout({
               },
               "description": "Independent strategic digital consulting and technical advisory.",
               "priceRange": "£££",
-              "founder": {
-                "@type": "Person",
-                "name": "Graeme"
-              },
               "areaServed": ["UK", "US", "UAE", "Europe"],
               "knowsAbout": ["Digital Strategy", "Technical SEO", "Marketing Infrastructure"]
             }),

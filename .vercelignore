@@ -1,0 +1,16 @@
+.DS_Store
+.claude/
+.env*
+.next/
+out/
+node_modules/
+test-results/
+tsconfig.tsbuildinfo
+
+# Local/private working files
+Coffee company/
+Logo/
+www.strathmarkconsulting.com-*.html
+*.pdf
+*.xlsx
+*.rtf
