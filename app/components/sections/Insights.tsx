@@ -37,9 +37,9 @@ export function Insights() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-12">
+        <div className="mt-12 grid items-start gap-5 lg:grid-cols-12">
           <Link href={`/insights/${featuredNote.slug}`} className="group block lg:col-span-7">
-            <article className="flex h-full flex-col overflow-hidden border border-ink/15 bg-white shadow-[0_22px_70px_rgba(11,22,36,0.09)] transition-transform duration-300 group-hover:-translate-y-1">
+            <article className="flex flex-col overflow-hidden border border-ink/15 bg-white shadow-[0_22px_70px_rgba(11,22,36,0.09)] transition-transform duration-300 group-hover:-translate-y-1">
               <div className="relative aspect-[16/10] overflow-hidden bg-strath-navy">
                 <Image
                   src={featuredNote.shareImage ?? "/share-image.png"}
