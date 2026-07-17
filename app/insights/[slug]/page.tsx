@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, BookOpen, Clock, Calendar } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, Clock, Calendar } from "lucide-react";
 import { notes } from "@/lib/notes-data";
+import { getNoteSeoData } from "@/lib/notes-seo-data";
 import { formatDateOnly } from "@/lib/date-format";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
+import { Breadcrumbs } from "@/app/components/ui/Breadcrumbs";
 import { SectionLink } from "@/app/components/ui/SectionLink";
-import { SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
+import { LOGO_PATH, SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 import { ReadingProgress } from "@/app/components/ReadingProgress";
 
 interface PageProps {
@@ -26,21 +28,38 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const note = notes.find((n) => n.slug === slug);
+  const seo = note ? getNoteSeoData(note.slug) : null;
   return {
-    title: note ? `${note.title} | ${SITE_NAME}` : "Entry Not Found",
-    description: note?.excerpt,
+    title: seo?.seoTitle || "Entry Not Found",
+    description: seo?.metaDescription,
     openGraph: {
-      title: note ? `${note.title} | ${SITE_NAME}` : "Entry Not Found",
-      description: note?.excerpt,
+      title: seo ? `${seo.seoTitle} | ${SITE_NAME}` : "Entry Not Found",
+      description: seo?.metaDescription,
       type: "article",
       url: note ? `${SITE_URL}/insights/${note.slug}` : `${SITE_URL}/insights`,
-      images: [note?.shareImage || SHARE_IMAGE_PATH],
+      siteName: SITE_NAME,
+      locale: "en_GB",
+      images: [
+        {
+          url: note?.shareImage || SHARE_IMAGE_PATH,
+          width: 1200,
+          height: 630,
+          alt: note ? `${note.title} — Strathmark editorial illustration` : SITE_NAME,
+        },
+      ],
       ...(note && {
         publishedTime: note.date,
+        modifiedTime: seo?.lastModified,
         authors: [note.author],
         section: note.category,
         tags: note.tags,
       }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo ? `${seo.seoTitle} | ${SITE_NAME}` : "Entry Not Found",
+      description: seo?.metaDescription,
+      images: [note?.shareImage || SHARE_IMAGE_PATH],
     },
     alternates: {
       canonical: note ? `${SITE_URL}/insights/${note.slug}` : `${SITE_URL}/insights`,
@@ -71,6 +90,7 @@ export default async function NotePage({ params }: PageProps) {
     notFound();
   }
 
+  const seo = getNoteSeoData(note.slug);
   const related = getRelatedArticles(note.slug, note.tags);
   const noteNumber = String(notes.findIndex((entry) => entry.slug === note.slug) + 1).padStart(2, "0");
 
@@ -78,25 +98,61 @@ export default async function NotePage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: note.title,
-    description: note.excerpt,
+    alternativeHeadline: seo.seoTitle,
+    description: seo.metaDescription,
+    image: [`${SITE_URL}${note.shareImage || SHARE_IMAGE_PATH}`],
     author: {
       "@type": "Organization",
       name: note.author,
-      url: SITE_URL,
+      url: `${SITE_URL}/#about`,
     },
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
       url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}${LOGO_PATH}`,
+      },
     },
     datePublished: note.date,
-    dateModified: note.date,
+    dateModified: seo.lastModified,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE_URL}/insights/${note.slug}`,
     },
     articleSection: note.category,
-    keywords: note.tags.join(", "),
+    keywords: [seo.primaryKeyword, ...seo.secondaryKeywords, ...note.tags].join(", "),
+    isPartOf: {
+      "@type": "Blog",
+      name: "Strathmark Intelligence Log",
+      url: `${SITE_URL}/insights`,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Insights",
+        item: `${SITE_URL}/insights`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: note.title,
+        item: `${SITE_URL}/insights/${note.slug}`,
+      },
+    ],
   };
 
   return (
@@ -108,6 +164,10 @@ export default async function NotePage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
       <article className="w-full flex-1">
         <header className="relative overflow-hidden border-b border-white/10 pt-32 md:pt-40">
@@ -115,6 +175,12 @@ export default async function NotePage({ params }: PageProps) {
           <div className="absolute -right-48 top-0 h-[38rem] w-[38rem] rounded-full bg-gold/[0.08] blur-3xl" aria-hidden="true" />
 
           <div className="section-shell relative pb-16 md:pb-24">
+            <Breadcrumbs
+              items={[
+                { label: "Insights", href: "/insights" },
+                { label: note.title },
+              ]}
+            />
             <Link
               href="/insights"
               className="inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-slate-400 transition-colors hover:text-gold"
@@ -146,7 +212,7 @@ export default async function NotePage({ params }: PageProps) {
                 <div className="relative aspect-[4/3] overflow-hidden border border-white/15 bg-[#101f31] shadow-[0_30px_90px_rgba(0,0,0,0.35)]">
                   <Image
                     src={note.shareImage || SHARE_IMAGE_PATH}
-                    alt=""
+                    alt={`${note.title} — Strathmark editorial illustration`}
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 42vw"
@@ -202,6 +268,10 @@ export default async function NotePage({ params }: PageProps) {
                       <dd className="font-semibold text-ink">{formatDate(note.date)}</dd>
                     </div>
                     <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
+                      <dt className="text-slate-600">Reviewed</dt>
+                      <dd className="font-semibold text-ink">{formatDate(seo.lastModified)}</dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                       <dt className="text-slate-600">Reading time</dt>
                       <dd className="font-semibold text-ink">{note.readingTime}</dd>
                     </div>
@@ -227,10 +297,47 @@ export default async function NotePage({ params }: PageProps) {
                 <p className="text-xs font-bold uppercase tracking-[0.17em] text-[#74521f]">Independent analysis</p>
               </div>
 
+              <p className="max-w-3xl text-xl leading-9 text-slate-700 md:text-[1.35rem] md:leading-10">
+                {seo.introduction}
+              </p>
+
+              <section aria-labelledby="key-takeaways" className="my-12 border border-ink/15 bg-[#efe8dc] p-7 shadow-[0_18px_55px_rgba(11,22,36,0.06)] md:p-9">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#74521f]">The short version</p>
+                <h2 id="key-takeaways" className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-ink">Key takeaways</h2>
+                <ul className="mt-6 grid gap-4">
+                  {seo.keyTakeaways.map((takeaway) => (
+                    <li key={takeaway} className="flex gap-4 text-base leading-7 text-slate-700 md:text-lg md:leading-8">
+                      <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center bg-gold text-ink" aria-hidden="true">
+                        <Check size={15} strokeWidth={2.5} />
+                      </span>
+                      <span>{takeaway}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
               <div
                 className="strath-article"
                 dangerouslySetInnerHTML={{ __html: note.content }}
               />
+
+              <section aria-labelledby="article-faqs" className="mt-20 border-t border-ink/15 pt-12">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#74521f]">Useful answers</p>
+                <h2 id="article-faqs" className="mt-4 text-[clamp(2.2rem,4vw,3.4rem)] font-semibold leading-tight tracking-[-0.03em] text-ink">
+                  Frequently asked questions
+                </h2>
+                <div className="mt-8 divide-y divide-ink/15 border-y border-ink/15">
+                  {seo.faqs.map((faq, index) => (
+                    <details key={faq.question} className="group py-2" open={index === 0}>
+                      <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-4 text-lg font-semibold text-ink marker:content-none md:text-xl">
+                        <span>{faq.question}</span>
+                        <span className="text-2xl font-light text-[#74521f] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                      </summary>
+                      <p className="max-w-3xl pb-6 pr-10 text-base leading-8 text-slate-700 md:text-lg">{faq.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
 
               <div className="mt-20 border border-ink/15 bg-strath-navy p-7 text-white shadow-[0_22px_70px_rgba(11,22,36,0.16)] md:p-10">
                 <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
@@ -275,7 +382,7 @@ export default async function NotePage({ params }: PageProps) {
                       <div className="relative aspect-[16/10] overflow-hidden bg-strath-navy">
                         <Image
                           src={relatedNote.shareImage || SHARE_IMAGE_PATH}
-                          alt=""
+                          alt={`${relatedNote.title} — Strathmark editorial illustration`}
                           fill
                           sizes="(max-width: 768px) 100vw, 33vw"
                           className="object-cover transition-transform duration-700 group-hover:scale-105"

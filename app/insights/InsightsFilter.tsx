@@ -68,7 +68,7 @@ export function InsightsFilter({ categories, notes }: InsightsFilterProps) {
               <div className="relative aspect-[16/10] overflow-hidden bg-[#101f31]">
                 <Image
                   src={note.shareImage ?? "/share-image.png"}
-                  alt=""
+                  alt={`${note.title} — Strathmark editorial illustration`}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

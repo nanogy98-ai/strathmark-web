@@ -8,21 +8,20 @@ export interface BreadcrumbItem {
 
 export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <nav className="flex flex-wrap items-center text-[10px] md:text-xs font-mono uppercase tracking-widest text-slate-500 mb-8">
-      <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+    <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center text-xs font-semibold uppercase tracking-[0.13em] text-slate-400 md:text-sm">
+      <Link href="/" className="transition-colors hover:text-gold">Home</Link>
       {items.map((item, index) => (
         <div key={index} className="flex items-center">
-          <ChevronRight size={10} className="mx-2 text-slate-700" />
+          <ChevronRight aria-hidden="true" size={13} className="mx-2 text-slate-600" />
           {item.href ? (
-            <Link href={item.href} className="hover:text-gold transition-colors">
+            <Link href={item.href} className="transition-colors hover:text-gold">
               {item.label}
             </Link>
           ) : (
-            <span className="text-slate-300">{item.label}</span>
+            <span aria-current="page" className="max-w-[18rem] truncate text-slate-200 md:max-w-md">{item.label}</span>
           )}
         </div>
       ))}
     </nav>
   );
 }
-

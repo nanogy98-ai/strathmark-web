@@ -6,7 +6,7 @@ import { notes } from "@/lib/notes-data";
 import { formatDateOnly, getDateOnlyTime } from "@/lib/date-format";
 import { Footer } from "@/app/components/sections/Footer";
 import { Navigation } from "@/app/components/Navigation";
-import { SHARE_IMAGE_PATH, SITE_URL } from "@/lib/site";
+import { SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 import { InsightsFilter, type InsightsFilterNote } from "./InsightsFilter";
 
 export const metadata: Metadata = {
@@ -16,6 +16,12 @@ export const metadata: Metadata = {
     title: "Intelligence Log — Digital Strategy Insights | Strathmark Consulting",
     description: "Strategic field notes on SEO, paid media, agency management, and digital infrastructure.",
     url: `${SITE_URL}/insights`,
+    images: [SHARE_IMAGE_PATH],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Intelligence Log — Digital Strategy Insights | Strathmark Consulting",
+    description: "Strategic field notes on SEO, paid media, agency management, and digital infrastructure.",
     images: [SHARE_IMAGE_PATH],
   },
   alternates: {
@@ -46,8 +52,34 @@ const restSummaries: InsightsFilterNote[] = rest.map(
 );
 
 export default function InsightsIndex() {
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Strathmark Intelligence Log",
+    description: "Strategic field notes on SEO, paid media, agency management, and digital infrastructure.",
+    url: `${SITE_URL}/insights`,
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: sortedNotes.map((note, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${SITE_URL}/insights/${note.slug}`,
+        name: note.title,
+      })),
+    },
+  };
+
   return (
     <main className="min-h-screen bg-strath-navy text-slate-200 selection:bg-gold selection:text-strath-navy flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+      />
       <Navigation />
 
       {/* Hero */}
@@ -68,7 +100,7 @@ export default function InsightsIndex() {
             <div className="relative min-h-[22rem] overflow-hidden bg-[#101f31] md:col-span-5 md:min-h-full">
               <Image
                 src={featured.shareImage ?? "/share-image.png"}
-                alt=""
+                alt={`${featured.title} — Strathmark editorial illustration`}
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 42vw"
