@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
@@ -16,9 +14,9 @@ export function ProvenOutcomes() {
       <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div className="max-w-3xl">
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold">Case studies</span>
-          <h3 className="mt-6 text-3xl md:text-4xl font-serif font-bold text-white">
+          <h2 className="mt-6 text-3xl md:text-4xl font-serif font-bold text-white">
             Proof that the work goes beyond tidy decks and vague uplift.
-          </h3>
+          </h2>
           <p className="mt-4 text-slate-400 text-lg font-light leading-relaxed">
             Enterprise insurers, legal firms, utilities, and owner-led brands all have different constraints. The common thread is the same: clearer structure, stronger demand capture, and better commercial accountability.
           </p>
@@ -38,9 +36,9 @@ export function ProvenOutcomes() {
                 <span className="text-slate-500">{featuredStudies[0].region}</span>
               </div>
 
-              <h4 className="mt-6 text-3xl font-serif font-bold text-white leading-tight group-hover:text-gold transition-colors">
+              <h3 className="mt-6 text-3xl font-serif font-bold text-white leading-tight group-hover:text-gold transition-colors">
                 {featuredStudies[0].client}
-              </h4>
+              </h3>
               <p className="mt-5 text-lg text-slate-300 font-light leading-relaxed">
                 {featuredStudies[0].headline}
               </p>
@@ -72,9 +70,9 @@ export function ProvenOutcomes() {
                   <span className="text-slate-500">{study.region}</span>
                 </div>
 
-                <h4 className="mt-5 text-2xl font-serif font-bold text-white leading-tight group-hover:text-gold transition-colors">
+                <h3 className="mt-5 text-2xl font-serif font-bold text-white leading-tight group-hover:text-gold transition-colors">
                   {study.client}
-                </h4>
+                </h3>
                 <p className="mt-4 text-sm text-slate-300 font-light leading-relaxed">
                   {study.excerpt}
                 </p>

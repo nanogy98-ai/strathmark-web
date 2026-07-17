@@ -1,124 +1,101 @@
-import Image from "next/image";
-import { caseStudies } from "@/lib/case-studies-data";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SectionLink } from "@/app/components/ui/SectionLink";
 
+const FOOTER_COLUMNS = [
+  {
+    title: "Services",
+    links: [
+      ["/#services", "Independent review"],
+      ["/#services", "Technical recovery"],
+      ["/#services", "Ongoing oversight"],
+      ["/#approach", "The approach"],
+    ],
+  },
+  {
+    title: "Proof & thinking",
+    links: [
+      ["/case-studies", "Case studies"],
+      ["/insights", "Intelligence Log"],
+      ["/#briefing", "5-Minute Briefing"],
+      ["/#faq", "Questions"],
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      ["/#about", "About Strathmark"],
+      ["/#contact", "Request a review"],
+      ["/privacy", "Privacy"],
+    ],
+  },
+] as const;
+
 export function Footer() {
-  const featuredCaseStudies = caseStudies.filter((study) => study.featured).slice(0, 3);
-  const quickLinks = [
-    ["/", "Home"],
-    ["/#about", "About"],
-    ["/#services", "Services"],
-    ["/#approach", "Approach"],
-    ["/#briefing", "5-Minute Briefing"],
-    ["/#faq", "FAQ"],
-  ];
-  const resourceLinks = [
-    ["/case-studies", "Case Studies"],
-    ["/insights", "Intelligence Log"],
-  ];
-  const supportLinks = [
-    ["/#briefing", "Read the 5-minute briefing"],
-    ["/#contact", "Request Review"],
-    ["/privacy", "Privacy"],
-  ];
-
   return (
-    <footer className="w-full border-t border-white/5 bg-black/20 text-slate-300">
-      <div className="max-w-7xl mx-auto px-6 pt-12 pb-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.1fr_0.85fr_0.9fr_0.9fr] lg:gap-12">
-          <div className="space-y-4">
-            <Image 
-              src="/logo-footer.png" 
-              alt="Strathmark Consulting" 
-              width={180} 
-              height={60} 
-              className="h-12 w-auto object-contain opacity-80"
-            />
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-500 font-mono">
-              Strategic Digital Advisory
+    <footer className="w-full bg-[#07111d] text-slate-300">
+      <div className="border-b border-white/10">
+        <div className="section-shell grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-center md:py-16">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Independent perspective</p>
+            <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-white md:text-5xl">
+              Need a clear answer before the next digital decision?
+            </h2>
+          </div>
+          <SectionLink
+            href="/#contact"
+            className="group inline-flex min-h-14 w-full items-center justify-center gap-3 bg-gold px-7 text-sm font-bold uppercase tracking-[0.14em] text-ink transition-colors hover:bg-white md:w-auto"
+          >
+            Request a review
+            <ArrowRight aria-hidden="true" size={16} className="transition-transform group-hover:translate-x-1" />
+          </SectionLink>
+        </div>
+      </div>
+
+      <div className="section-shell py-12 md:py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.25fr_1.75fr] lg:gap-20">
+          <div>
+            <Link href="/" aria-label="Strathmark Consulting home" className="inline-flex items-center gap-3">
+              <span className="grid h-10 w-10 place-items-center border border-gold/45 bg-gold/10 font-serif text-xl font-bold text-gold">
+                S
+              </span>
+              <span className="font-serif text-2xl tracking-[0.14em] text-white">STRATHMARK</span>
+            </Link>
+            <p className="mt-6 max-w-sm text-sm leading-7 text-slate-400">
+              Independent digital advisory for clearer commercial decisions.
             </p>
-            <p className="text-sm leading-relaxed text-slate-400">
-              Independent advisory for commercial decision-makers who prefer commercial clarity over vanity numbers.
+            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+              Edinburgh · Working internationally
             </p>
-            <div className="pt-3">
-              <SectionLink
-                href="/#briefing"
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] border border-white/10 px-4 py-3 hover:border-gold hover:text-gold transition-colors"
-              >
-                5-Minute Briefing <ArrowRight size={12} />
-              </SectionLink>
-            </div>
           </div>
 
-          <div>
-            <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-gold mb-4">Navigation</p>
-            <ul className="space-y-2 text-sm">
-              {quickLinks.map(([href, label]) => (
-                <li key={label}>
-                  <SectionLink href={href} className="hover:text-white transition-colors">
-                    {label}
-                  </SectionLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-gold mb-4">Work & Resources</p>
-            <div className="space-y-3">
-              <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500">Featured Case Studies</p>
-              <ul className="mt-2 space-y-2 text-sm">
-                {featuredCaseStudies.map((study) => (
-                  <li key={study.slug}>
-                    <Link href={`/case-studies/${study.slug}`} className="hover:text-white transition-colors">
-                      {study.client}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link href="/case-studies" className="text-gold hover:text-white transition-colors">
-                    Browse all case studies
-                  </Link>
-                </li>
-              </ul>
-              <div className="pt-3">
-                <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mb-2">Content</p>
-                <ul className="space-y-2 text-sm">
-                  {resourceLinks.map(([href, label]) => (
+          <div className="grid gap-9 sm:grid-cols-3">
+            {FOOTER_COLUMNS.map((column) => (
+              <div key={column.title}>
+                <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-gold">{column.title}</h3>
+                <ul className="mt-5 space-y-3 text-sm">
+                  {column.links.map(([href, label]) => (
                     <li key={label}>
-                      <Link href={href} className="hover:text-white transition-colors">
+                      <SectionLink href={href} className="inline-flex min-h-8 items-center text-slate-400 transition-colors hover:text-white">
                         {label}
-                      </Link>
+                      </SectionLink>
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
-          </div>
-
-          <div>
-            <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-gold mb-4">Action & Compliance</p>
-            <ul className="space-y-2 text-sm">
-              {supportLinks.map(([href, label]) => (
-                <li key={label}>
-                  <SectionLink href={href} className="hover:text-white transition-colors">
-                    {label}
-                  </SectionLink>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 text-xs text-slate-500">
-              <p>Strathmark Consulting, Edinburgh.</p>
-              <p>Registered in Scotland.</p>
-            </div>
+            ))}
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/5 pt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} Strathmark Consulting. All rights reserved.</p>
-          <p>Fixed fees. No lock-in. Advisory-first.</p>
+        <div className="mt-12 flex flex-col gap-6 border-t border-white/10 pt-7 text-xs text-slate-400 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p>Strathmark Consulting, Edinburgh.</p>
+            <p className="mt-1">Registered in Scotland.</p>
+          </div>
+          <div className="flex flex-col gap-2 md:items-end">
+            <p>© {new Date().getFullYear()} Strathmark Consulting. All rights reserved.</p>
+            <p>Fixed fees. No lock-in. Advisory-first.</p>
+          </div>
         </div>
       </div>
     </footer>

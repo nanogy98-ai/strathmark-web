@@ -1,60 +1,81 @@
-"use client";
+import { ListChecks, Route, SearchCheck, ShieldCheck } from "lucide-react";
 
-import { motion } from "framer-motion";
+const STEPS = [
+  {
+    icon: SearchCheck,
+    number: "01",
+    label: "Diagnose",
+    detail: "Analyse spend, infrastructure, reporting, and team capabilities.",
+    timing: "Fixed-fee review",
+  },
+  {
+    icon: ListChecks,
+    number: "02",
+    label: "Prioritise",
+    detail: "Set out what to fix, what to stop, and where to double down.",
+    timing: "Findings readout",
+  },
+  {
+    icon: Route,
+    number: "03",
+    label: "Plan",
+    detail: "Define the solution, owners, dependencies, and sequence of work.",
+    timing: "Action roadmap",
+  },
+  {
+    icon: ShieldCheck,
+    number: "04",
+    label: "Oversee",
+    detail: "Add optional ongoing advisory to maintain pace and accountability.",
+    timing: "By invitation",
+  },
+] as const;
 
 export function Approach() {
-  const steps = [
-    {
-      num: "01",
-      title: "Review & Diagnosis",
-      desc: "I analyse your spend, infrastructure, and team capabilities. 7-14 day turnaround.",
-      time: "Fixed Fee"
-    },
-    {
-      num: "02",
-      title: "Findings & Priorities",
-      desc: "You get a prioritised roadmap of what to fix, what to stop, and where to double down.",
-      time: "Delivery Meeting"
-    },
-    {
-      num: "03",
-      title: "Execution Plan",
-      desc: "I architect the solution. Your team executes, or I bring in specialists.",
-      time: "Strategic Roadmap"
-    },
-    {
-      num: "04",
-      title: "Oversight & Accountability",
-      desc: "Ongoing advisory to ensure the plan is followed and ROI is realised.",
-      time: "Optional Retainer"
-    }
-  ];
-
   return (
-    <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto bg-white/[0.02] scroll-mt-28 md:scroll-mt-32" id="approach">
-      <div className="mb-10 md:mb-16 text-center">
-        <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">The Methodology</h3>
-        <p className="text-slate-400">Predictable. Transparent. Commercial.</p>
-      </div>
+    <section className="relative w-full overflow-hidden bg-ivory py-20 text-ink md:py-28" id="approach">
+      <div className="section-shell">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+          <div>
+            <p className="section-kicker !text-[#74521f]">The review process</p>
+            <h2 className="mt-6 max-w-3xl text-[clamp(2.6rem,5vw,4.7rem)] font-semibold leading-[1.02] tracking-[-0.025em]">
+              A clear route from diagnosis to action.
+            </h2>
+          </div>
+          <p className="max-w-xl border-l-2 border-gold pl-6 text-xl font-medium leading-9 text-slate-700 lg:justify-self-end">
+            The work is deliberately structured: establish the evidence, make the decisions, then decide who should execute.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {steps.map((step, i) => (
-          <motion.div 
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="relative p-6 border-l border-white/10 hover:border-gold transition-colors group"
-          >
-            <span className="text-4xl font-serif text-white/5 font-bold absolute top-4 right-4 group-hover:text-gold/10 transition-colors">
-              {step.num}
-            </span>
-            <div className="text-gold font-mono text-xs mb-3">{step.time}</div>
-            <h4 className="text-xl font-bold text-white mb-3">{step.title}</h4>
-            <p className="text-slate-400 text-sm">{step.desc}</p>
-          </motion.div>
-        ))}
+        <ol className="mt-14 grid gap-4 md:grid-cols-2">
+          {STEPS.map((step) => {
+            const Icon = step.icon;
+            return (
+              <li
+                key={step.number}
+                className="group relative overflow-hidden border border-ink/15 bg-white/70 p-7 shadow-[0_16px_45px_rgba(11,22,36,0.05)] transition-all hover:-translate-y-1 hover:border-gold/70 hover:bg-white md:p-9"
+              >
+                <span className="absolute -right-3 -top-5 font-mono text-[7rem] font-semibold leading-none text-ink/[0.035]" aria-hidden="true">
+                  {step.number}
+                </span>
+                <div className="relative flex items-center justify-between gap-5">
+                  <span className="grid h-14 w-14 place-items-center bg-strath-navy text-gold">
+                    <Icon aria-hidden="true" size={24} />
+                  </span>
+                  <span className="font-mono text-2xl font-semibold text-[#74521f]">{step.number}</span>
+                </div>
+                <div className="relative mt-10 flex flex-wrap items-center justify-between gap-4">
+                  <h3 className="text-3xl font-semibold">{step.label}</h3>
+                  <span className="border border-ink/15 bg-ivory px-3 py-2 text-xs font-semibold uppercase tracking-[0.13em] text-slate-600">
+                    {step.timing}
+                  </span>
+                </div>
+                <p className="relative mt-5 max-w-xl text-base leading-8 text-slate-700">{step.detail}</p>
+                <div className="relative mt-8 h-1 w-14 bg-gold transition-all duration-300 group-hover:w-24" aria-hidden="true" />
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

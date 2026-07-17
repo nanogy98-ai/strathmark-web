@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 import { Footer } from "@/app/components/sections/Footer";
@@ -10,6 +11,8 @@ import { SHARE_IMAGE_PATH, SITE_URL } from "@/lib/site";
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return caseStudies.map((study) => ({
@@ -49,7 +52,7 @@ export default async function CaseStudyDetail({ params }: PageProps) {
   const study = caseStudies.find((entry) => entry.slug === slug);
 
   if (!study) {
-    return <div className="py-20 text-center text-white">Case study not found</div>;
+    notFound();
   }
 
   const relatedStudies = getRelatedStudies(study.slug, study.industry);

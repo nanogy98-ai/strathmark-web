@@ -1,5 +1,6 @@
 import { Navigation } from "@/app/components/Navigation";
 import { Hero } from "@/app/components/sections/Hero";
+import { Proof } from "@/app/components/sections/Proof";
 import { About } from "@/app/components/sections/About";
 import { Services } from "@/app/components/sections/Services";
 import { Approach } from "@/app/components/sections/Approach";
@@ -9,21 +10,19 @@ import { LeadMagnet } from "@/app/components/sections/LeadMagnet";
 import { FAQ } from "@/app/components/sections/FAQ";
 import { Contact } from "@/app/components/sections/Contact";
 import { Footer } from "@/app/components/sections/Footer";
-import { ReadingProgress } from "@/app/components/ReadingProgress";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center bg-strath-navy text-slate-200 overflow-x-hidden selection:bg-gold selection:text-strath-navy">
-      <ReadingProgress />
+    <main className="min-h-screen overflow-x-hidden bg-strath-navy text-slate-200">
       <Navigation />
       <Hero />
-      <h2 className="sr-only">Homepage Sections</h2>
-      <About />
+      <Proof />
       <Services />
-      <Approach />
       <ProvenOutcomes />
-      <LeadMagnet />
+      <Approach />
+      <About />
       <Insights />
+      <LeadMagnet />
       <FAQ />
       <Contact />
       <Footer />

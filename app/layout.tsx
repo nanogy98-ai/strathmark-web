@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import { Suspense } from "react";
 import "./globals.css";
 import { CookieBanner } from "@/app/components/ui/CookieBanner";
@@ -8,29 +8,34 @@ import { FirstPartyVisitorTracker } from "@/app/components/ui/FirstPartyVisitorT
 import { ScrollBehaviorManager } from "@/app/components/ui/ScrollBehaviorManager";
 import { LOGO_PATH, SHARE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: "./fonts/geist-latin.woff2",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
   display: "swap",
+  weight: "100 900",
+});
+
+const geistMono = localFont({
+  src: "./fonts/geist-mono-latin.woff2",
+  variable: "--font-geist-mono",
+  display: "swap",
+  weight: "100 900",
+});
+
+const playfair = localFont({
+  src: "./fonts/playfair-display-latin.woff2",
+  variable: "--font-playfair",
+  display: "swap",
+  weight: "400 900",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: `Independent Digital Advisory & Agency Oversight | Strathmark`,
-  description: "Independent strategic digital consulting for organizations where spend, scale, and search matter. Commercial accountability and technical precision.",
+  title: `Independent Digital Performance Advisory | Strathmark`,
+  description: "Independent digital performance reviews, technical recovery, and agency oversight for leadership teams that need clear commercial answers.",
   openGraph: {
-    title: `Independent Digital Advisory & Agency Oversight | Strathmark`,
-    description: "Independent strategic digital consulting for high-liability industries. Commercial accountability and technical precision.",
+    title: `Independent Digital Performance Advisory | Strathmark`,
+    description: "Independent digital performance reviews, technical recovery, and agency oversight for leadership teams.",
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: "en_GB",
@@ -46,8 +51,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `Independent Digital Advisory & Agency Oversight | Strathmark`,
-    description: "Independent strategic digital consulting for high-liability industries.",
+    title: `Independent Digital Performance Advisory | Strathmark`,
+    description: "Independent digital performance reviews, technical recovery, and agency oversight for leadership teams.",
     images: [SHARE_IMAGE_PATH],
   },
   robots: {
@@ -60,11 +65,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
   alternates: {
     canonical: SITE_URL,
@@ -80,7 +80,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-strath-navy text-slate-200`}
-        style={{ backgroundColor: "#0F172A", color: "#F8FAFC" }}
+        style={{ backgroundColor: "#0B1624", color: "#F8FAFC" }}
       >
         <Analytics />
         <Suspense fallback={null}>
