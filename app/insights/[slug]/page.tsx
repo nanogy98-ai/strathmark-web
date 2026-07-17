@@ -230,68 +230,66 @@ export default async function NotePage({ params }: PageProps) {
         </header>
 
         <section className="bg-ivory py-20 text-ink md:py-28">
-          <div className="section-shell grid gap-12 lg:grid-cols-12 lg:items-start">
-            <aside className="lg:col-span-3">
-              <div className="space-y-5 lg:sticky lg:top-32">
-                <div className="border border-ink/15 bg-white p-6 shadow-[0_18px_55px_rgba(11,22,36,0.07)]">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#74521f]">Written by</p>
-                  <div className="mt-5 flex items-center gap-4">
-                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-gold/55">
-                      <Image
-                        src="/founder.png"
-                        alt={note.author}
-                        fill
-                        className="object-cover object-center"
-                        sizes="64px"
-                      />
-                    </div>
-                    <div>
-                      <SectionLink href="/#about" className="text-lg font-semibold text-ink transition-colors hover:text-[#74521f]">
-                        {note.author}
-                      </SectionLink>
-                      <p className="mt-1 text-xs font-semibold uppercase tracking-[0.13em] text-[#74521f]">Principal Consultant</p>
-                    </div>
+          <div className="section-shell">
+            <aside aria-label="Article details" className="overflow-hidden border border-ink/15 bg-white shadow-[0_24px_70px_rgba(11,22,36,0.08)] lg:grid lg:grid-cols-12">
+              <div className="border-b border-ink/10 p-6 md:p-8 lg:col-span-5 lg:border-b-0 lg:border-r">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#74521f]">Written and reviewed by</p>
+                <div className="mt-5 flex items-center gap-5">
+                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-gold/55">
+                    <Image
+                      src="/founder.png"
+                      alt={note.author}
+                      fill
+                      className="object-cover object-center"
+                      sizes="80px"
+                    />
                   </div>
-                  <p className="mt-5 text-sm leading-7 text-slate-600">
-                    Strathmark Consulting advises leadership teams on digital strategy, agency oversight, and marketing infrastructure across the UK, US, UAE, and Europe.
-                  </p>
+                  <div>
+                    <SectionLink href="/#about" className="text-xl font-semibold text-ink transition-colors hover:text-[#74521f]">
+                      {note.author}
+                    </SectionLink>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.13em] text-[#74521f]">Principal Consultant</p>
+                  </div>
                 </div>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-slate-600 md:text-base">
+                  Independent advice for leadership teams across digital strategy, agency oversight, and marketing infrastructure.
+                </p>
+              </div>
 
-                <div className="border border-ink/15 bg-[#efe8dc] p-6">
-                  <div className="flex items-center gap-3 text-[#74521f]">
-                    <BookOpen aria-hidden="true" size={18} />
-                    <p className="text-xs font-bold uppercase tracking-[0.16em]">Reading details</p>
+              <div className="bg-[#efe8dc] p-6 md:p-8 lg:col-span-7">
+                <div className="flex items-center gap-3 text-[#74521f]">
+                  <BookOpen aria-hidden="true" size={18} />
+                  <p className="text-xs font-bold uppercase tracking-[0.16em]">Article dossier</p>
+                </div>
+                <dl className="mt-5 grid grid-cols-2 gap-px overflow-hidden border border-ink/10 bg-ink/10 text-sm sm:grid-cols-4">
+                  <div className="bg-[#f8f4ec] p-4">
+                    <dt className="text-slate-600">Published</dt>
+                    <dd className="mt-2 font-semibold text-ink">{formatDate(note.date)}</dd>
                   </div>
-                  <dl className="mt-5 grid gap-4 text-sm">
-                    <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
-                      <dt className="text-slate-600">Published</dt>
-                      <dd className="font-semibold text-ink">{formatDate(note.date)}</dd>
-                    </div>
-                    <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
-                      <dt className="text-slate-600">Reviewed</dt>
-                      <dd className="font-semibold text-ink">{formatDate(seo.lastModified)}</dd>
-                    </div>
-                    <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
-                      <dt className="text-slate-600">Reading time</dt>
-                      <dd className="font-semibold text-ink">{note.readingTime}</dd>
-                    </div>
-                    <div className="flex items-center justify-between gap-4">
-                      <dt className="text-slate-600">Category</dt>
-                      <dd className="font-semibold text-ink">{note.category}</dd>
-                    </div>
-                  </dl>
-                  <div className="mt-6 flex flex-wrap gap-2 border-t border-ink/10 pt-5">
-                    {note.tags.slice(0, 4).map((tag) => (
-                      <span key={tag} className="border border-ink/15 bg-white/60 px-3 py-1.5 text-xs font-semibold text-slate-600">
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="bg-[#f8f4ec] p-4">
+                    <dt className="text-slate-600">Reviewed</dt>
+                    <dd className="mt-2 font-semibold text-ink">{formatDate(seo.lastModified)}</dd>
                   </div>
+                  <div className="bg-[#f8f4ec] p-4">
+                    <dt className="text-slate-600">Reading time</dt>
+                    <dd className="mt-2 font-semibold text-ink">{note.readingTime}</dd>
+                  </div>
+                  <div className="bg-[#f8f4ec] p-4">
+                    <dt className="text-slate-600">Category</dt>
+                    <dd className="mt-2 font-semibold text-ink">{note.category}</dd>
+                  </div>
+                </dl>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {note.tags.slice(0, 4).map((tag) => (
+                    <span key={tag} className="border border-ink/15 bg-white/70 px-3 py-1.5 text-xs font-semibold text-slate-600">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             </aside>
 
-            <div className="lg:col-span-8 lg:col-start-5">
+            <div className="mx-auto mt-16 max-w-4xl md:mt-20">
               <div className="mb-12 flex items-center gap-4">
                 <span className="h-1 w-16 bg-gold" aria-hidden="true" />
                 <p className="text-xs font-bold uppercase tracking-[0.17em] text-[#74521f]">Independent analysis</p>
