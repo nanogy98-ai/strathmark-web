@@ -13,12 +13,12 @@ export function ProvenOutcomes() {
     <section className="w-full max-w-7xl px-6 py-16 md:py-24 mx-auto border-t border-white/5" id="outcomes">
       <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div className="max-w-3xl">
-          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold">Case studies</span>
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold">Established digital practice</span>
           <h2 className="mt-6 text-3xl md:text-4xl font-serif font-bold text-white">
-            Proof that the work goes beyond tidy decks and vague uplift.
+            A record of diagnosing complex commercial and technical systems.
           </h2>
           <p className="mt-4 text-slate-400 text-lg font-light leading-relaxed">
-            Enterprise insurers, legal firms, utilities, and owner-led brands all have different constraints. The common thread is the same: clearer structure, stronger demand capture, and better commercial accountability.
+            These are digital performance engagements, not AI delivery claims. They demonstrate the analytical, technical and commercial discipline that underpins Strathmark’s approach to transformation.
           </p>
         </div>
         <Link href="/case-studies" className="text-gold inline-flex items-center gap-2 hover:gap-4 transition-all uppercase tracking-widest text-xs font-mono">

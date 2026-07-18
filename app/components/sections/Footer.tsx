@@ -4,20 +4,20 @@ import { SectionLink } from "@/app/components/ui/SectionLink";
 
 const FOOTER_COLUMNS = [
   {
-    title: "Services",
+    title: "AI advisory",
     links: [
-      ["/#services", "Independent review"],
-      ["/#services", "Technical recovery"],
-      ["/#services", "Ongoing oversight"],
-      ["/#approach", "The approach"],
+      ["/#services", "Opportunity review"],
+      ["/#services", "Workflow diagnostic"],
+      ["/#services", "Controlled pilot"],
+      ["/#governance", "Governance"],
     ],
   },
   {
-    title: "Proof & thinking",
+    title: "Evidence & thinking",
     links: [
-      ["/case-studies", "Case studies"],
       ["/insights", "Intelligence Log"],
-      ["/#briefing", "5-Minute Briefing"],
+      ["/briefings/industrial-ai-systems-integrator", "Sample briefing"],
+      ["/case-studies", "Digital case studies"],
       ["/#faq", "Questions"],
     ],
   },
@@ -25,7 +25,8 @@ const FOOTER_COLUMNS = [
     title: "Company",
     links: [
       ["/#about", "About Strathmark"],
-      ["/#contact", "Request a review"],
+      ["/digital-performance", "Digital performance"],
+      ["/#contact", "Discuss your business"],
       ["/privacy", "Privacy"],
     ],
   },
@@ -37,16 +38,16 @@ export function Footer() {
       <div className="border-b border-white/10">
         <div className="section-shell grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-center md:py-16">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Independent perspective</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Independent AI transformation</p>
             <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-white md:text-5xl">
-              Need a clear answer before the next digital decision?
+              Ready to find the AI opportunity worth proving?
             </h2>
           </div>
           <SectionLink
             href="/#contact"
             className="group inline-flex min-h-14 w-full items-center justify-center gap-3 bg-gold px-7 text-sm font-bold uppercase tracking-[0.14em] text-ink transition-colors hover:bg-white md:w-auto"
           >
-            Request a review
+            Discuss your business
             <ArrowRight aria-hidden="true" size={16} className="transition-transform group-hover:translate-x-1" />
           </SectionLink>
         </div>
@@ -62,7 +63,7 @@ export function Footer() {
               <span className="font-serif text-2xl tracking-[0.14em] text-white">STRATHMARK</span>
             </Link>
             <p className="mt-6 max-w-sm text-sm leading-7 text-slate-400">
-              Independent digital advisory for clearer commercial decisions.
+              AI transformation for founder-led engineering, manufacturing and specialist technical businesses.
             </p>
             <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
               Edinburgh · Working internationally
@@ -94,7 +95,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col gap-2 md:items-end">
             <p>© {new Date().getFullYear()} Strathmark Consulting. All rights reserved.</p>
-            <p>Fixed fees. No lock-in. Advisory-first.</p>
+            <p>Fixed fees. Human authority. Evidence before scale.</p>
           </div>
         </div>
       </div>

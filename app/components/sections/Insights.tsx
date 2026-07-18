@@ -23,9 +23,9 @@ export function Insights() {
       <div className="section-shell">
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="section-kicker !text-[#74521f]">Insights &amp; decision guides</p>
+            <p className="section-kicker !text-[#74521f]">Independent intelligence</p>
             <h2 className="mt-6 max-w-3xl text-[clamp(2.6rem,5vw,4.7rem)] font-semibold leading-[1.02] tracking-[-0.025em]">
-              Independent thinking for better digital decisions.
+              Clear thinking for consequential technology decisions.
             </h2>
           </div>
           <Link

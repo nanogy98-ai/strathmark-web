@@ -31,11 +31,11 @@ const playfair = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: `Independent Digital Performance Advisory | Strathmark`,
-  description: "Independent digital performance reviews, technical recovery, and agency oversight for leadership teams that need clear commercial answers.",
+  title: `AI Transformation for Technical SMEs | Strathmark`,
+  description: "Independent AI transformation for founder-led engineering and manufacturing businesses. Find valuable workflows, control risk and prove the case before scaling.",
   openGraph: {
-    title: `Independent Digital Performance Advisory | Strathmark`,
-    description: "Independent digital performance reviews, technical recovery, and agency oversight for leadership teams.",
+    title: `AI Transformation for Technical SMEs | Strathmark`,
+    description: "Turn hard-won technical knowledge into an AI advantage, with controlled pilots, human authority and evidence before scale.",
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: "en_GB",
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `Independent Digital Performance Advisory | Strathmark`,
-    description: "Independent digital performance reviews, technical recovery, and agency oversight for leadership teams.",
+    title: `AI Transformation for Technical SMEs | Strathmark`,
+    description: "Turn hard-won technical knowledge into an AI advantage, with controlled pilots and evidence before scale.",
     images: [SHARE_IMAGE_PATH],
   },
   robots: {
@@ -102,10 +102,20 @@ export default function RootLayout({
                 "addressRegion": "Scotland",
                 "addressCountry": "UK"
               },
-              "description": "Independent strategic digital consulting and technical advisory.",
+              "description": "Independent AI transformation advisory for founder-led engineering, manufacturing and specialist technical businesses.",
               "priceRange": "£££",
               "areaServed": ["UK", "US", "UAE", "Europe"],
-              "knowsAbout": ["Digital Strategy", "Technical SEO", "Marketing Infrastructure"]
+              "knowsAbout": ["AI Transformation", "Industrial AI", "AI Governance", "Knowledge Management", "Digital Strategy", "Technical SEO"],
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "AI transformation advisory services",
+                "itemListElement": [
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Opportunity and Exposure Review" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Workflow and Knowledge Diagnostic" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Controlled AI Pilot" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Independent AI Oversight" } }
+                ]
+              }
             }),
           }}
         />

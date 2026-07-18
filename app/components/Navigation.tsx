@@ -7,10 +7,10 @@ import { clsx } from "clsx";
 import { SectionLink } from "@/app/components/ui/SectionLink";
 
 const NAV_LINKS = [
-  { name: "Review", href: "/#services" },
-  { name: "Approach", href: "/#approach" },
-  { name: "Case Studies", href: "/case-studies" },
-  { name: "About", href: "/#about" },
+  { name: "AI Advisory", href: "/#services" },
+  { name: "Use Cases", href: "/#use-cases" },
+  { name: "Governance", href: "/#governance" },
+  { name: "Digital", href: "/digital-performance" },
   { name: "Insights", href: "/insights" },
 ] as const;
 
@@ -145,7 +145,7 @@ export function Navigation() {
               href="/#contact"
               className="inline-flex min-h-11 items-center border border-gold bg-gold px-5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-ink transition-colors hover:bg-white"
             >
-              Request a review
+              Discuss your business
             </SectionLink>
           </div>
 
@@ -198,10 +198,10 @@ export function Navigation() {
                 onNavigate={closeMenu}
                 className="flex min-h-14 w-full items-center justify-center bg-gold px-6 text-sm font-bold uppercase tracking-[0.16em] text-ink transition-colors hover:bg-white"
               >
-                Request a review
+                Discuss your business
               </SectionLink>
               <p className="mt-5 text-center text-xs text-slate-400">
-                Fixed fees · No lock-in · Principal-led
+                Fixed fees · Controlled pilots · Principal-led
               </p>
             </div>
           </div>
