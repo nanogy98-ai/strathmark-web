@@ -63,12 +63,9 @@ export function CookieBanner() {
     <div className="fixed inset-x-0 bottom-0 z-[60] p-4 md:p-6">
       <div className="mx-auto max-w-7xl border border-white/10 bg-strath-navy/95 supports-[backdrop-filter]:backdrop-blur-sm shadow-xl transform-gpu">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 md:p-5">
-          <div className="max-w-4xl text-sm text-slate-300 leading-relaxed">
-            <span className="font-semibold text-white">Privacy choices.</span>{" "}
-            This site keeps a private first-party operational log, including full IP address,
-            to protect and run the website. Essential storage remembers your preferences and
-            visit session. With your permission, Google Analytics and Microsoft Clarity are
-            also used to understand site usage.
+          <div className="text-sm text-slate-300 leading-relaxed">
+            <span className="font-semibold text-white">Cookies.</span>{" "}
+            I use essential storage to remember your preferences. With your permission, I also use Google Analytics and Microsoft Clarity to understand site usage.
             {" "}
             <Link href="/privacy" className="text-gold hover:text-white underline underline-offset-4">
               Learn more
@@ -95,7 +92,7 @@ export function CookieBanner() {
                 "border border-white/15 text-white hover:border-gold hover:text-gold transition-colors"
               )}
             >
-              Continue without analytics
+              Reject
             </button>
           </div>
         </div>
