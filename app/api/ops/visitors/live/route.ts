@@ -2,7 +2,7 @@ import { getDashboardSession } from "@/lib/ops-auth";
 import {
   VISITOR_ANALYTICS_DASHBOARD_LIMIT,
   getVisitorAnalyticsStorageInfo,
-  listVisitorAnalyticsEvents,
+  listVisitorAnalyticsFeed,
 } from "@/lib/visitor-analytics/store";
 
 export const runtime = "nodejs";
@@ -22,8 +22,8 @@ export async function GET() {
     );
   }
 
-  const [events, storage] = await Promise.all([
-    listVisitorAnalyticsEvents(VISITOR_ANALYTICS_DASHBOARD_LIMIT),
+  const [{ events, feed }, storage] = await Promise.all([
+    listVisitorAnalyticsFeed(VISITOR_ANALYTICS_DASHBOARD_LIMIT),
     Promise.resolve(getVisitorAnalyticsStorageInfo()),
   ]);
 
@@ -31,6 +31,7 @@ export async function GET() {
     {
       ok: true,
       events,
+      feed,
       storage,
       refreshedAt: new Date().toISOString(),
     },

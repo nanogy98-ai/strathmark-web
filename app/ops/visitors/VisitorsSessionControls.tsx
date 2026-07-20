@@ -40,29 +40,31 @@ export function VisitorsSessionControls({
   };
 
   return (
-    <div className="border border-white/10 bg-white/[0.02] p-6">
-      <h2 className="font-serif text-2xl font-bold text-white">Session</h2>
-      <p className="mt-3 break-all text-sm leading-relaxed text-slate-400">
-        Signed in as {username ?? "Unknown user"}.
-      </p>
-      {lastSyncLabel ? (
-        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-slate-500">
-          {lastSyncLabel}
+    <div className="flex flex-col gap-4 border border-white/10 bg-white/[0.025] p-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="min-w-0">
+        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">
+          Private session
         </p>
-      ) : null}
+        <p className="mt-1 truncate text-sm font-semibold text-white">
+          {username ?? "Unknown user"}
+        </p>
+        {lastSyncLabel ? (
+          <p className="mt-1 text-xs text-slate-500">{lastSyncLabel}</p>
+        ) : null}
+      </div>
 
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="flex shrink-0 flex-wrap gap-2">
         <button
           type="button"
           onClick={handleRefresh}
-          className="bg-gold px-5 py-3 text-xs font-bold uppercase tracking-[0.24em] text-strath-navy transition-colors hover:bg-white"
+          className="bg-gold px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.22em] text-strath-navy transition-colors hover:bg-white"
         >
           {isRefreshing || isPending ? "Syncing…" : "Refresh"}
         </button>
         <button
           type="button"
           onClick={handleSignOut}
-          className="border border-white/15 px-5 py-3 text-xs font-bold uppercase tracking-[0.24em] text-white transition-colors hover:border-gold hover:text-gold"
+          className="border border-white/15 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.22em] text-white transition-colors hover:border-gold hover:text-gold"
         >
           {isPending ? "Signing Out…" : "Sign Out"}
         </button>

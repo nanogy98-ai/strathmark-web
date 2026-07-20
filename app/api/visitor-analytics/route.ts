@@ -1,4 +1,5 @@
 import { userAgent } from "next/server";
+import { isIP } from "node:net";
 import { clientVisitorEventSchema } from "@/lib/visitor-analytics/schema";
 import {
   recordVisitorAnalyticsEvent,
@@ -20,19 +21,24 @@ function decodeHeaderValue(value: string | null) {
 }
 
 function getClientIp(headers: Headers) {
-  const rawForwardedFor =
-    headers.get("x-vercel-forwarded-for") ??
-    headers.get("x-forwarded-for") ??
-    headers.get("x-real-ip");
+  const candidates = [
+    ["x-vercel-forwarded-for", headers.get("x-vercel-forwarded-for")],
+    ["x-forwarded-for", headers.get("x-forwarded-for")],
+    ["x-real-ip", headers.get("x-real-ip")],
+  ] as const;
 
-  if (!rawForwardedFor) {
-    return null;
+  for (const [source, rawValue] of candidates) {
+    const ip = rawValue
+      ?.split(",")
+      .map((part) => part.trim())
+      .find((part) => isIP(part) > 0);
+
+    if (ip) {
+      return { ip, source };
+    }
   }
 
-  return rawForwardedFor
-    .split(",")
-    .map((part) => part.trim())
-    .find(Boolean) ?? null;
+  return { ip: null, source: "unavailable" as const };
 }
 
 function getLocationConfidence({
@@ -75,6 +81,19 @@ export async function POST(request: Request) {
   }
 
   const requestUserAgent = userAgent({ headers: request.headers });
+  const clientIp = getClientIp(request.headers);
+  if (!clientIp.ip) {
+    return Response.json(
+      { ok: false, error: "A valid client IP was not available for this visit." },
+      {
+        status: 503,
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      }
+    );
+  }
+
   const continent = request.headers.get("x-vercel-ip-continent");
   const country = request.headers.get("x-vercel-ip-country");
   const region = decodeHeaderValue(request.headers.get("x-vercel-ip-country-region"));
@@ -121,16 +140,18 @@ export async function POST(request: Request) {
       liFatId: parsed.data.marketing?.liFatId ?? null,
     },
     sessionId: parsed.data.sessionId ?? null,
+    consentMode: parsed.data.consentMode,
     request: {
       method: request.method,
       host: request.headers.get("host"),
-      ip: getClientIp(request.headers),
+      ip: clientIp.ip,
       forwardedFor: request.headers.get("x-forwarded-for"),
       realIp: request.headers.get("x-real-ip"),
       userAgent: request.headers.get("user-agent"),
       acceptLanguage: request.headers.get("accept-language"),
       vercelId: request.headers.get("x-vercel-id"),
       deploymentUrl: request.headers.get("x-vercel-deployment-url"),
+      ipSource: clientIp.source,
     },
     parsedUserAgent: {
       isBot: requestUserAgent.isBot,

@@ -3,7 +3,16 @@ export type VisitorEventType =
   | "scroll"
   | "exit"
   | "outbound_click"
-  | "heartbeat";
+  | "heartbeat"
+  | "offline_attempt";
+
+export type VisitorConsentMode = "unknown" | "unset" | "essential" | "analytics";
+
+export type VisitorIpSource =
+  | "x-vercel-forwarded-for"
+  | "x-forwarded-for"
+  | "x-real-ip"
+  | "unavailable";
 
 export type VisitorQueryParam = {
   key: string;
@@ -45,6 +54,7 @@ export type VisitorAnalyticsEvent = {
     liFatId: string | null;
   };
   sessionId: string | null;
+  consentMode: VisitorConsentMode;
   request: {
     method: string;
     host: string | null;
@@ -55,6 +65,7 @@ export type VisitorAnalyticsEvent = {
     acceptLanguage: string | null;
     vercelId: string | null;
     deploymentUrl: string | null;
+    ipSource: VisitorIpSource;
   };
   parsedUserAgent: {
     isBot: boolean;
@@ -157,4 +168,11 @@ export type VisitorAnalyticsStorageInfo = {
   durability: "durable" | "not-configured";
   location: string;
   label: string;
+};
+
+export type VisitorAnalyticsFeedInfo = {
+  loadedEventCount: number;
+  totalEventCount: number;
+  hasMore: boolean;
+  limit: number;
 };

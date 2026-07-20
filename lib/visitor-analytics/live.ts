@@ -1,5 +1,6 @@
 import type {
   VisitorAnalyticsEvent,
+  VisitorConsentMode,
   VisitorEventType,
   VisitorLocationConfidence,
 } from "./types";
@@ -15,9 +16,20 @@ export type LiveVisitorSession = {
   currentPath: string;
   currentTitle: string | null;
   currentHref: string;
+  firstPath: string;
   pageCount: number;
   pagePaths: string[];
   eventCount: number;
+  pageviewCount: number;
+  heartbeatCount: number;
+  scrollCount: number;
+  outboundClickCount: number;
+  exitCount: number;
+  offlineAttemptCount: number;
+  durationMs: number;
+  isBot: boolean;
+  consentMode: VisitorConsentMode;
+  events: VisitorAnalyticsEvent[];
   ip: string | null;
   country: string | null;
   region: string | null;
@@ -53,8 +65,19 @@ type LiveVisitorAccumulator = {
   currentPath: string;
   currentTitle: string | null;
   currentHref: string;
+  firstPath: string;
   pagePaths: Set<string>;
   eventCount: number;
+  pageviewCount: number;
+  heartbeatCount: number;
+  scrollCount: number;
+  outboundClickCount: number;
+  exitCount: number;
+  offlineAttemptCount: number;
+  maxReportedDurationMs: number;
+  isBot: boolean;
+  consentMode: VisitorConsentMode;
+  events: VisitorAnalyticsEvent[];
   ip: string | null;
   country: string | null;
   region: string | null;
@@ -98,6 +121,17 @@ function getCampaignLabel(event: VisitorAnalyticsEvent) {
     event.marketing.fbclid ??
     null
   );
+}
+
+function getEventCounts(eventType: VisitorEventType) {
+  return {
+    pageviewCount: eventType === "pageview" ? 1 : 0,
+    heartbeatCount: eventType === "heartbeat" ? 1 : 0,
+    scrollCount: eventType === "scroll" ? 1 : 0,
+    outboundClickCount: eventType === "outbound_click" ? 1 : 0,
+    exitCount: eventType === "exit" ? 1 : 0,
+    offlineAttemptCount: eventType === "offline_attempt" ? 1 : 0,
+  };
 }
 
 function getMostRecentNumber(
@@ -144,6 +178,7 @@ export function buildLiveVisitorSessions(
     const existing = sessions.get(key);
 
     if (!existing) {
+      const eventCounts = getEventCounts(event.eventType);
       sessions.set(key, {
         key,
         sessionId: event.sessionId,
@@ -155,8 +190,14 @@ export function buildLiveVisitorSessions(
         currentPath: event.page.path,
         currentTitle: event.page.title,
         currentHref: event.page.href,
+        firstPath: event.page.path,
         pagePaths: new Set([event.page.path]),
         eventCount: 1,
+        ...eventCounts,
+        maxReportedDurationMs: event.engagement.timeOnPageMs ?? 0,
+        isBot: event.parsedUserAgent.isBot,
+        consentMode: event.consentMode,
+        events: [event],
         ip: event.request.ip,
         country: event.location.country,
         region: event.location.region,
@@ -185,11 +226,24 @@ export function buildLiveVisitorSessions(
     }
 
     existing.eventCount += 1;
+    existing.events.push(event);
+    const eventCounts = getEventCounts(event.eventType);
+    existing.pageviewCount += eventCounts.pageviewCount;
+    existing.heartbeatCount += eventCounts.heartbeatCount;
+    existing.scrollCount += eventCounts.scrollCount;
+    existing.outboundClickCount += eventCounts.outboundClickCount;
+    existing.exitCount += eventCounts.exitCount;
+    existing.offlineAttemptCount += eventCounts.offlineAttemptCount;
+    existing.maxReportedDurationMs = Math.max(
+      existing.maxReportedDurationMs,
+      event.engagement.timeOnPageMs ?? 0
+    );
     existing.pagePaths.add(event.page.path);
 
     if (eventMs < existing.firstSeenMs) {
       existing.firstSeenMs = eventMs;
       existing.firstSeenAt = event.recordedAt;
+      existing.firstPath = event.page.path;
     }
 
     if (eventMs >= existing.lastSeenMs) {
@@ -219,6 +273,10 @@ export function buildLiveVisitorSessions(
       existing.referrerHost = event.page.referrerHost ?? existing.referrerHost;
       existing.campaignLabel = getCampaignLabel(event) ?? existing.campaignLabel;
       existing.networkType = event.client.network?.effectiveType ?? existing.networkType;
+      existing.isBot = event.parsedUserAgent.isBot;
+      if (event.consentMode !== "unknown") {
+        existing.consentMode = event.consentMode;
+      }
     }
 
     existing.scrollPercent = getMostRecentNumber(
@@ -268,9 +326,26 @@ export function buildLiveVisitorSessions(
       currentPath: session.currentPath,
       currentTitle: session.currentTitle,
       currentHref: session.currentHref,
+      firstPath: session.firstPath,
       pageCount: session.pagePaths.size,
       pagePaths: [...session.pagePaths].slice(0, 6),
       eventCount: session.eventCount,
+      pageviewCount: session.pageviewCount,
+      heartbeatCount: session.heartbeatCount,
+      scrollCount: session.scrollCount,
+      outboundClickCount: session.outboundClickCount,
+      exitCount: session.exitCount,
+      offlineAttemptCount: session.offlineAttemptCount,
+      durationMs: Math.max(
+        session.maxReportedDurationMs,
+        session.lastSeenMs - session.firstSeenMs
+      ),
+      isBot: session.isBot,
+      consentMode: session.consentMode,
+      events: session.events.toSorted(
+        (left, right) =>
+          new Date(right.recordedAt).getTime() - new Date(left.recordedAt).getTime()
+      ),
       ip: session.ip,
       country: session.country,
       region: session.region,

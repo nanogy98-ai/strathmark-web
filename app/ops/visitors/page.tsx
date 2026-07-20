@@ -8,7 +8,7 @@ import { getSupabaseAdminConfig, isSupabaseAdminConfigured } from "@/lib/supabas
 import {
   VISITOR_ANALYTICS_DASHBOARD_LIMIT,
   getVisitorAnalyticsStorageInfo,
-  listVisitorAnalyticsEvents,
+  listVisitorAnalyticsFeed,
 } from "@/lib/visitor-analytics/store";
 import { VisitorsDashboard } from "@/app/ops/visitors/VisitorsDashboard";
 import { VisitorsLoginCard } from "@/app/ops/visitors/VisitorsLoginCard";
@@ -41,8 +41,8 @@ function VisitorsShell({
             Visitor Log
           </h1>
           <p className="mt-4 max-w-3xl text-slate-400">
-            First-party request and device telemetry from consented visits, with IP, user
-            agent, geolocation, screen data, and page history.
+            Private first-party operational telemetry with full IP capture, visit journeys,
+            device context, traffic sources, and data-integrity monitoring.
           </p>
         </header>
 
@@ -76,7 +76,8 @@ function SetupCard() {
 {`SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SECRET_KEY=${adminKey ?? "sb_secret_..."}
 VISITOR_DASHBOARD_USERNAME=${username || "ops"}
-VISITOR_DASHBOARD_PASSWORD=${password || "choose-a-strong-password"}`}
+VISITOR_DASHBOARD_PASSWORD=${password || "choose-a-strong-password"}
+VISITOR_DASHBOARD_SESSION_SECRET=generate-a-long-random-secret`}
           </pre>
           <p>
             Then run the SQL in <code>supabase/visitor_analytics.sql</code> inside the Supabase
@@ -113,22 +114,25 @@ export default async function VisitorLogPage() {
     return (
       <VisitorsShell aside={<VisitorsLoginCard mode="login" defaultUsername={username} />}>
         <div className="border border-dashed border-white/10 bg-white/[0.02] p-8 text-slate-300">
-          <h2 className="font-serif text-2xl font-bold text-white">Sign In Required</h2>
+          <h2 className="font-serif text-2xl font-bold text-white">Private access</h2>
           <p className="mt-4 leading-relaxed text-slate-400">
-            Use your private dashboard username and password in the panel on the right to unlock
-            the visitor log.
+            Sign in to see the organised visit ledger, live activity, full IP records, traffic
+            sources, and capture-health checks.
           </p>
         </div>
       </VisitorsShell>
     );
   }
 
-  const events = await listVisitorAnalyticsEvents(VISITOR_ANALYTICS_DASHBOARD_LIMIT);
+  const { events, feed } = await listVisitorAnalyticsFeed(
+    VISITOR_ANALYTICS_DASHBOARD_LIMIT
+  );
   const storage = getVisitorAnalyticsStorageInfo();
 
   return (
     <VisitorsDashboard
       events={events}
+      feed={feed}
       storage={storage}
       initialRefreshedAt={new Date().toISOString()}
       username={session.username}

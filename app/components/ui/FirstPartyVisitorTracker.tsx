@@ -3,12 +3,16 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import type { ClientVisitorEvent } from "@/lib/visitor-analytics/schema";
+import {
+  ANALYTICS_CONSENT_EVENT,
+  ANALYTICS_CONSENT_KEY,
+} from "@/lib/analytics-consent";
 
 const SESSION_STORAGE_KEY = "strathmark_visitor_analytics_session_id";
 const LAST_EVENT_KEY = "strathmark_visitor_analytics_last_key";
 const LAST_EVENT_TS_KEY = "strathmark_visitor_analytics_last_ts";
 const SCROLL_MILESTONES = [25, 50, 75, 100] as const;
-const HEARTBEAT_INTERVAL_MS = 20_000;
+const HEARTBEAT_INTERVAL_MS = 60_000;
 const TRACKING_EXCLUDED_PATH_PREFIXES = ["/ops"] as const;
 
 type NavigatorWithConnection = Navigator & {
@@ -54,6 +58,19 @@ function getColorScheme() {
   }
 
   return "no-preference" as const;
+}
+
+function getConsentMode(): TrackerPayload["consentMode"] {
+  try {
+    const consent = window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
+    if (consent === "analytics" || consent === "essential") {
+      return consent;
+    }
+  } catch {
+    // The server-side request log still works if local storage is unavailable.
+  }
+
+  return "unset";
 }
 
 function getCurrentUrl() {
@@ -186,6 +203,7 @@ function buildPayload(
     queryParams: getQueryParams(currentUrl),
     marketing: getMarketingDetails(currentUrl),
     sessionId: getOrCreateSessionId(),
+    consentMode: getConsentMode(),
     language: navigator.language || null,
     languages: navigator.languages?.slice(0, 10) ?? [],
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone ?? null,
@@ -423,6 +441,7 @@ export function FirstPartyVisitorTracker() {
     window.addEventListener("pagehide", sendExitEvent);
     window.addEventListener("focus", handleFocusChange);
     window.addEventListener("blur", handleFocusChange);
+    window.addEventListener(ANALYTICS_CONSENT_EVENT, sendHeartbeat);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     document.addEventListener("click", handleDocumentClick, true);
     document.addEventListener("pointerdown", markInteraction, true);
@@ -435,6 +454,7 @@ export function FirstPartyVisitorTracker() {
       window.removeEventListener("pagehide", sendExitEvent);
       window.removeEventListener("focus", handleFocusChange);
       window.removeEventListener("blur", handleFocusChange);
+      window.removeEventListener(ANALYTICS_CONSENT_EVENT, sendHeartbeat);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       document.removeEventListener("click", handleDocumentClick, true);
       document.removeEventListener("pointerdown", markInteraction, true);

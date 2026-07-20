@@ -12,6 +12,7 @@ const visitorEventTypeSchema = z.enum([
   "outbound_click",
   "heartbeat",
 ]);
+const visitorConsentModeSchema = z.enum(["unset", "essential", "analytics"]);
 const visitorLocationPermissionStateSchema = z.enum([
   "granted",
   "prompt",
@@ -67,6 +68,7 @@ export const clientVisitorEventSchema = z.object({
     })
     .optional(),
   sessionId: z.string().uuid().nullable().optional(),
+  consentMode: visitorConsentModeSchema.default("unset"),
   language: nullableShortString,
   languages: z.array(z.string().trim().min(1).max(32)).max(10).optional(),
   timezone: nullableShortString,
