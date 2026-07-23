@@ -49,6 +49,7 @@ export function CookieBanner() {
       // ignore
     }
     setDismissed(true);
+
     window.dispatchEvent(new Event(ANALYTICS_CONSENT_EVENT));
   };
 

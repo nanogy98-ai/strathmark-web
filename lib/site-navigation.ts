@@ -4,12 +4,16 @@ export const SITE_SECTION_NAVIGATION_EVENT = "strathmark:navigate-section";
 const HOME_SECTION_IDS = [
   "about",
   "services",
+  "why-now",
+  "use-cases",
   "approach",
+  "governance",
   "outcomes",
   "briefing",
   "insights",
   "faq",
   "contact",
+  "digital-performance",
 ] as const;
 
 const HOME_SECTION_ID_SET = new Set<string>(HOME_SECTION_IDS);

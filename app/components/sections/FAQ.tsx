@@ -5,24 +5,28 @@ import { useId, useState } from "react";
 
 const FAQS = [
   {
-    q: "Are you an agency?",
-    a: "No. Strathmark is an independent consultancy. I do not have account managers, junior staff, or high-volume production teams. You work directly with the principal. My goal is to fix your infrastructure and strategy, not to sell you more hours."
+    q: "Is this an AI agency or software implementation service?",
+    a: "No. Strathmark is an independent advisory firm. The first job is to establish where AI could create measurable operating value, what could go wrong and what the business should do next. Specialist implementation may follow, but it is never assumed or bundled into the diagnosis."
   },
   {
-    q: "Do you only do SEO?",
-    a: "No. While technical search is a core competency, my advisory covers broader digital commercial performance. This includes paid spend efficiency, platform architecture, vendor management, and tracking/attribution. If it impacts online revenue, it's in scope."
+    q: "What does the AI Opportunity and Exposure Review include?",
+    a: "Leadership and workflow interviews, an opportunity and exposure map, a review of data and governance readiness, and a prioritised 90-day roadmap. The review is fixed fee from £3,500 and is designed to produce a clear investment decision."
   },
   {
-    q: "What does a review include?",
-    a: "I conduct a forensic audit of your current digital estate. This includes technical code review, crawl analysis, spend efficiency checks, and commercial data verification. You receive a findings document and a prioritised roadmap, usually within 14 days."
+    q: "Do we need clean data or an AI strategy before starting?",
+    a: "No. Readiness is part of the diagnosis. Many useful first steps begin with understanding existing workflows, project records and decision ownership. The recommendation may be to improve information structure before introducing any AI system."
   },
   {
-    q: "Do you work with US clients?",
-    a: "Yes. A significant portion of my work involves US-based organisations. I am accustomed to cross-Atlantic workflows and time zones."
+    q: "Will AI be allowed to make engineering or production decisions?",
+    a: "Not through this work. Safety-critical engineering, certification, regulatory approval, legal interpretation, live production control and final customer deliverables stay under qualified human authority. Any pilot is bounded, reviewed and reversible."
   },
   {
-    q: "What is your minimum engagement?",
-    a: "I am selective. Fixed-fee independent reviews typically start at £3,500. Ongoing advisory retainers start at £2,000/month and are by invitation only."
+    q: "What size and type of business is this for?",
+    a: "The primary fit is a founder-led engineering, manufacturing or specialist technical business with roughly 10 to 150 people, valuable accumulated know-how and a leadership team that wants practical advantage without losing control."
+  },
+  {
+    q: "Does Strathmark still provide digital performance consulting?",
+    a: "Yes. Independent digital reviews, technical recovery, search and agency oversight continue as a separate secondary practice. You can explore that work through the Digital Performance page."
   }
 ] as const;
 
@@ -33,10 +37,10 @@ export function FAQ() {
         <div className="lg:col-span-5">
           <p className="section-kicker">Questions</p>
           <h2 className="mt-6 max-w-xl text-[clamp(2.6rem,5vw,4.5rem)] font-semibold leading-[1.03] tracking-[-0.025em] text-white">
-            What to know before requesting a review.
+            Direct answers before you commit.
           </h2>
           <p className="mt-6 max-w-md text-base leading-7 text-slate-400">
-            Straight answers on scope, working style, and the commercial model.
+            The work is deliberately transparent about scope, authority, limits and the evidence needed to proceed.
           </p>
         </div>
 

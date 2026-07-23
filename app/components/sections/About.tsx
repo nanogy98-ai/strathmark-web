@@ -3,20 +3,20 @@ import { ArrowUpRight, Check } from "lucide-react";
 
 const PRINCIPLES = [
   {
-    title: "Independent oversight",
-    copy: "Advice is separated from implementation incentives so recommendations can be judged on their commercial merit.",
+    title: "Independent judgement",
+    copy: "Advice is separated from software sales and implementation incentives, so each recommendation must stand on its business case.",
   },
   {
-    title: "Commercial focus",
-    copy: "The work connects digital activity with the decisions, demand, and operating outcomes leadership actually needs.",
+    title: "Operational focus",
+    copy: "The work starts with real workflows, constraints and ownership, not a catalogue of AI features.",
   },
   {
-    title: "Technical depth",
-    copy: "Strategy is grounded in the architecture, search, performance, and measurement realities underneath the surface.",
+    title: "Technical respect",
+    copy: "AI supports qualified people. It does not bypass engineering authority, review or accountability.",
   },
   {
-    title: "Selective roster",
-    copy: "Active engagements are deliberately limited so every client receives direct, senior attention.",
+    title: "Evidence before scale",
+    copy: "A bounded pilot must improve the baseline before a wider programme earns approval.",
   },
 ] as const;
 
@@ -51,14 +51,14 @@ export function About() {
 
           <div className="lg:col-span-7">
             <h2 className="max-w-3xl text-[clamp(2.8rem,5vw,4.9rem)] font-semibold leading-[1.01] tracking-[-0.03em] text-white">
-              Independent by design. Principal-led throughout.
+              Built for decisions that need commercial judgement and technical respect.
             </h2>
             <div className="mt-9 grid gap-6 border-t border-white/10 pt-8 text-lg leading-8 text-slate-300 xl:grid-cols-2">
               <p>
-                Strathmark Consulting is an independent advisory firm built on commercial accountability and technical precision. It is not a volume agency.
+                Strathmark Consulting is an independent, principal-led advisory firm for founder-led engineering, manufacturing and specialist technical businesses.
               </p>
               <p>
-                Headquartered in Edinburgh, the consultancy works across the UK, US, UAE, and Europe, treating digital performance as a structural business function rather than a marketing add-on.
+                The work combines more than a decade across digital strategy, technical delivery and commercial operations with a rigorous approach to AI opportunity, exposure and governance.
               </p>
             </div>
           </div>
@@ -83,17 +83,17 @@ export function About() {
           <div className="flex flex-col justify-between border border-gold/30 bg-gold/10 p-7 md:p-9">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Experience</p>
             <p className="mt-8 text-lg leading-8 text-slate-300">
-              Strathmark is a principal-led consultancy with over a decade of experience across agency, contracting, and in-house roles for major international brands.
+              Direct senior involvement throughout. No junior handoff, platform quota or incentive to recommend a larger programme than the evidence supports.
             </p>
           </div>
 
           <div className="border border-white/10 bg-white/[0.025] p-7 md:p-9">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Specialist operating brand</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Operator perspective</p>
             <div className="mt-5 grid gap-6 md:grid-cols-[0.65fr_1.35fr] md:items-start">
               <h3 className="text-2xl font-semibold text-white">Apex Aesthetics</h3>
               <div>
                 <p className="text-base leading-7 text-slate-400">
-                  I run Apex Aesthetics, my specialist growth brand for UK aesthetic clinics. Operating this live niche brand keeps my Strathmark marketing and advisory work grounded in real-world SEO, conversions, and commercial execution — not theory.
+                  I also run Apex Aesthetics, a specialist growth brand for UK aesthetic clinics. Operating a live business keeps advisory work grounded in real decisions, systems, customers and commercial consequences, not theory.
                 </p>
                 <a
                   href="https://www.apexaesthetics.co.uk/"

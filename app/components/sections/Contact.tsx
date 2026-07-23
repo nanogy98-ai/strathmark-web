@@ -67,8 +67,9 @@ const contactSchema = z.object({
     .transform(normalizeWebsiteInput),
   country: z.string().min(2, "Country is required"),
   serviceType: z.string().min(1, "Please select an engagement type"),
-  situation: z.string().min(1, "Please select a situation"),
-  spend: z.string().min(1, "Please select a spend range"),
+  companySize: z.string().min(1, "Please select a company size"),
+  industry: z.string().min(1, "Please select an industry"),
+  challenge: z.string().min(1, "Please select a primary challenge"),
   timeline: z.string().min(1, "Please select a timeline"),
   message: z.string().min(10, "Message must be at least 10 characters"),
   heardFrom: z.string().optional().or(z.literal("")),
@@ -222,8 +223,9 @@ export function Contact() {
         `Website: ${result.data.website}`,
         `Country: ${result.data.country}`,
         `Looking for: ${result.data.serviceType}`,
-        `Situation: ${result.data.situation}`,
-        `Spend: ${result.data.spend}`,
+        `Company size: ${result.data.companySize}`,
+        `Industry: ${result.data.industry}`,
+        `Primary challenge: ${result.data.challenge}`,
         `Timeline: ${result.data.timeline}`,
         result.data.heardFrom ? `Heard from: ${result.data.heardFrom}` : null,
         `Message: ${result.data.message}`,
@@ -261,8 +263,9 @@ export function Contact() {
           window.gtag("event", "generate_lead", {
             form_id: "contact",
             serviceType: result.data.serviceType,
-            situation: result.data.situation,
-            spend: result.data.spend,
+            companySize: result.data.companySize,
+            industry: result.data.industry,
+            challenge: result.data.challenge,
             timeline: result.data.timeline,
           });
         }
@@ -314,16 +317,16 @@ export function Contact() {
         <div className="lg:col-span-4">
           <p className="section-kicker !text-[#74521f]">Start a conversation</p>
           <h2 className="mt-6 text-[clamp(2.6rem,5vw,4.5rem)] font-semibold leading-[1.03] tracking-[-0.025em]">
-            Request an independent review.
+            Discuss your AI opportunity.
           </h2>
           <p className="mt-6 text-base leading-8 text-slate-700">
-            Tell me what is not making sense. I review each brief personally and respond within two business days when I can add meaningful value.
+            Tell me where valuable knowledge, repeated work or operational friction is constraining the business. Every brief is reviewed personally.
           </p>
 
           <dl className="mt-10 border-t border-ink/15">
             {[
               ["01", "Share the context"],
-              ["02", "I review the fit"],
+              ["02", "I assess the opportunity and boundaries"],
               ["03", "You receive a direct response"],
             ].map(([number, label]) => (
               <div key={number} className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-ink/15 py-4">
@@ -454,7 +457,7 @@ export function Contact() {
               The current situation
             </h3>
             <p className="mt-3 text-sm leading-6 text-slate-400">
-              Add enough context to make the first response useful.
+              Add enough operational context to make the first response useful.
             </p>
 
             <div className="mt-8 space-y-6">
@@ -463,40 +466,42 @@ export function Contact() {
                   label="Engagement Type"
                   name="serviceType"
                   options={[
-                    { label: "Independent Digital & Spend Review", value: "strategic-review" },
-                    { label: "Strategic Advisory (Ongoing)", value: "advisory" },
-                    { label: "Selective Execution (By Invitation)", value: "execution" },
+                    { label: "AI Opportunity and Exposure Review", value: "ai-opportunity-review" },
+                    { label: "Workflow and Knowledge Diagnostic", value: "workflow-diagnostic" },
+                    { label: "Controlled AI Pilot", value: "controlled-pilot" },
+                    { label: "Independent AI Oversight", value: "ai-oversight" },
+                    { label: "Knowledge and Succession", value: "knowledge-succession" },
+                    { label: "Digital Performance Advisory", value: "digital-performance" },
                     { label: "Unsure / Other", value: "unsure" }
                   ]}
                   error={errors.serviceType}
                 />
                 <SelectField
-                  label="Primary Challenge"
-                  name="situation"
+                  label="Company Size"
+                  name="companySize"
                   options={[
-                    { label: "Growth has stalled", value: "stalled" },
-                    { label: "Paid spend feels inefficient", value: "inefficient-spend" },
-                    { label: "Platform issues / Rebuild needed", value: "platform-issues" },
-                    { label: "Tracking & Attribution unclear", value: "tracking" },
-                    { label: "Penalty or Technical Issues", value: "penalty" },
-                    { label: "Other", value: "other" }
+                    { label: "1 to 9 people", value: "1-9" },
+                    { label: "10 to 49 people", value: "10-49" },
+                    { label: "50 to 150 people", value: "50-150" },
+                    { label: "151 to 500 people", value: "151-500" },
+                    { label: "500+ people", value: "500-plus" }
                   ]}
-                  error={errors.situation}
+                  error={errors.companySize}
                 />
               </div>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <SelectField
-                  label="Approx Monthly Marketing Spend"
-                  name="spend"
+                  label="Industry"
+                  name="industry"
                   options={[
-                    { label: "Under £5k", value: "under-5k" },
-                    { label: "£5k - £20k", value: "5k-20k" },
-                    { label: "£20k - £100k", value: "20k-100k" },
-                    { label: "£100k+", value: "100k+" },
-                    { label: "Prefer not to say", value: "hidden" }
+                    { label: "Engineering", value: "engineering" },
+                    { label: "Manufacturing", value: "manufacturing" },
+                    { label: "Industrial systems", value: "industrial-systems" },
+                    { label: "Specialist technical services", value: "technical-services" },
+                    { label: "Other", value: "other" }
                   ]}
-                  error={errors.spend}
+                  error={errors.industry}
                 />
                 <SelectField
                   label="Timeline"
@@ -510,6 +515,20 @@ export function Contact() {
                   error={errors.timeline}
                 />
               </div>
+
+              <SelectField
+                label="Primary Challenge"
+                name="challenge"
+                options={[
+                  { label: "Repeated knowledge work", value: "repeated-work" },
+                  { label: "Knowledge is hard to find or reuse", value: "knowledge-reuse" },
+                  { label: "AI use is already happening without a plan", value: "uncontrolled-use" },
+                  { label: "Succession or key-person dependency", value: "succession" },
+                  { label: "Need a practical AI investment case", value: "investment-case" },
+                  { label: "Other", value: "other" }
+                ]}
+                error={errors.challenge}
+              />
 
               <div className="space-y-2">
                 <label htmlFor="contact-message" className="block text-xs font-semibold uppercase tracking-[0.15em] text-gold">
@@ -525,7 +544,7 @@ export function Contact() {
                     "w-full resize-y border bg-white/[0.045] p-4 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-gold",
                     errors.message ? "border-red-400" : "border-white/15"
                   )}
-                  placeholder="Describe your objectives or the current failure state..."
+                  placeholder="Describe the workflow, knowledge dependency or decision you want to improve..."
                 />
                 {errors.message ? (
                   <p id="contact-message-error" className="mt-2 flex items-center gap-2 text-xs text-red-300">
@@ -566,7 +585,7 @@ export function Contact() {
                 {isSubmitting ? (
                   <>Processing <Loader2 aria-hidden="true" className="animate-spin" /></>
                 ) : (
-                  "Send review request"
+                  "Send opportunity brief"
                 )}
               </button>
             </div>

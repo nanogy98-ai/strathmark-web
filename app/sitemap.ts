@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 
-const LAST_MODIFIED = new Date("2026-04-07T00:00:00.000Z");
+const LAST_MODIFIED = new Date("2026-07-18T00:00:00.000Z");
 const INSIGHTS_LAST_MODIFIED = new Date("2026-07-17T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,6 +16,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: LAST_MODIFIED,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: `${SITE_URL}/digital-performance`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/briefings/industrial-ai-systems-integrator`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     {
       url: `${SITE_URL}/case-studies`,

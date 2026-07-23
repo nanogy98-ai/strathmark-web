@@ -1,81 +1,20 @@
-import { ListChecks, Route, SearchCheck, ShieldCheck } from "lucide-react";
-
 const STEPS = [
-  {
-    icon: SearchCheck,
-    number: "01",
-    label: "Diagnose",
-    detail: "Analyse spend, infrastructure, reporting, and team capabilities.",
-    timing: "Fixed-fee review",
-  },
-  {
-    icon: ListChecks,
-    number: "02",
-    label: "Prioritise",
-    detail: "Set out what to fix, what to stop, and where to double down.",
-    timing: "Findings readout",
-  },
-  {
-    icon: Route,
-    number: "03",
-    label: "Plan",
-    detail: "Define the solution, owners, dependencies, and sequence of work.",
-    timing: "Action roadmap",
-  },
-  {
-    icon: ShieldCheck,
-    number: "04",
-    label: "Oversee",
-    detail: "Add optional ongoing advisory to maintain pace and accountability.",
-    timing: "By invitation",
-  },
+  { number: "01", verb: "Review", title: "Establish the operating truth", copy: "Interview leaders and workflow owners, inspect the evidence and separate real constraints from assumptions." },
+  { number: "02", verb: "Prioritise", title: "Rank value against exposure", copy: "Score opportunities for business value, feasibility, data readiness, review burden and operational risk." },
+  { number: "03", verb: "Pilot", title: "Run one bounded test", copy: "Use completed, non-safety-critical work to compare the proposed workflow with the current process." },
+  { number: "04", verb: "Govern", title: "Standardise what earns trust", copy: "Agree owners, access, review gates, monitoring and a clear decision to deploy, revise or stop." },
 ] as const;
 
 export function Approach() {
   return (
     <section className="relative w-full overflow-hidden bg-ivory py-20 text-ink md:py-28" id="approach">
-      <div className="section-shell">
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
-          <div>
-            <p className="section-kicker !text-[#74521f]">The review process</p>
-            <h2 className="mt-6 max-w-3xl text-[clamp(2.6rem,5vw,4.7rem)] font-semibold leading-[1.02] tracking-[-0.025em]">
-              A clear route from diagnosis to action.
-            </h2>
-          </div>
-          <p className="max-w-xl border-l-2 border-gold pl-6 text-xl font-medium leading-9 text-slate-700 lg:justify-self-end">
-            The work is deliberately structured: establish the evidence, make the decisions, then decide who should execute.
-          </p>
-        </div>
-
-        <ol className="mt-14 grid gap-4 md:grid-cols-2">
-          {STEPS.map((step) => {
-            const Icon = step.icon;
-            return (
-              <li
-                key={step.number}
-                className="group relative overflow-hidden border border-ink/15 bg-white/70 p-7 shadow-[0_16px_45px_rgba(11,22,36,0.05)] transition-all hover:-translate-y-1 hover:border-gold/70 hover:bg-white md:p-9"
-              >
-                <span className="absolute -right-3 -top-5 font-mono text-[7rem] font-semibold leading-none text-ink/[0.035]" aria-hidden="true">
-                  {step.number}
-                </span>
-                <div className="relative flex items-center justify-between gap-5">
-                  <span className="grid h-14 w-14 place-items-center bg-strath-navy text-gold">
-                    <Icon aria-hidden="true" size={24} />
-                  </span>
-                  <span className="font-mono text-2xl font-semibold text-[#74521f]">{step.number}</span>
-                </div>
-                <div className="relative mt-10 flex flex-wrap items-center justify-between gap-4">
-                  <h3 className="text-3xl font-semibold">{step.label}</h3>
-                  <span className="border border-ink/15 bg-ivory px-3 py-2 text-xs font-semibold uppercase tracking-[0.13em] text-slate-600">
-                    {step.timing}
-                  </span>
-                </div>
-                <p className="relative mt-5 max-w-xl text-base leading-8 text-slate-700">{step.detail}</p>
-                <div className="relative mt-8 h-1 w-14 bg-gold transition-all duration-300 group-hover:w-24" aria-hidden="true" />
-              </li>
-            );
-          })}
+      <div className="editorial-grid-dark absolute inset-0 opacity-45" aria-hidden="true" />
+      <div className="section-shell relative">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end"><div className="lg:col-span-8"><p className="section-kicker !text-[#74521f]">The controlled route</p><h2 className="mt-6 max-w-4xl text-[clamp(2.7rem,5vw,4.8rem)] font-semibold leading-[1.01] tracking-[-0.03em]">From promising idea to defensible operating decision.</h2></div><p className="text-lg leading-8 text-slate-600 lg:col-span-4">The work is deliberately staged. Each step earns the right to proceed to the next.</p></div>
+        <ol className="mt-12 grid gap-4 lg:grid-cols-4">
+          {STEPS.map((step,index)=><li key={step.number} className="relative border border-ink/15 bg-white p-7 md:p-8"><div className="flex items-center justify-between"><span className="font-mono text-xs font-bold text-[#74521f]">{step.number}</span><span className="text-xs font-bold uppercase tracking-[0.16em] text-[#74521f]">{step.verb}</span></div><div className="mt-8 h-1 w-14 bg-gold"/><h3 className="mt-7 text-2xl font-semibold leading-tight">{step.title}</h3><p className="mt-4 text-base leading-7 text-slate-600">{step.copy}</p>{index<STEPS.length-1?<span aria-hidden="true" className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 rotate-45 border-r border-t border-ink/20 bg-ivory lg:block"/>:null}</li>)}
         </ol>
+        <div className="mt-6 grid border border-ink/15 bg-strath-navy text-white md:grid-cols-3"><div className="p-6 md:p-7"><p className="text-xs uppercase tracking-[0.16em] text-gold">Decision 01</p><p className="mt-2 font-semibold">Is there enough value to pilot?</p></div><div className="border-white/10 p-6 md:border-l md:p-7"><p className="text-xs uppercase tracking-[0.16em] text-gold">Decision 02</p><p className="mt-2 font-semibold">Did the pilot improve the baseline?</p></div><div className="border-white/10 p-6 md:border-l md:p-7"><p className="text-xs uppercase tracking-[0.16em] text-gold">Decision 03</p><p className="mt-2 font-semibold">Can it operate safely and consistently?</p></div></div>
       </div>
     </section>
   );
