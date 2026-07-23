@@ -78,11 +78,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Analytics />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-strath-navy text-slate-200`}
         style={{ backgroundColor: "#0B1624", color: "#F8FAFC" }}
       >
-        <Analytics />
         <Suspense fallback={null}>
           <FirstPartyVisitorTracker />
         </Suspense>
