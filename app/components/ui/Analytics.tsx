@@ -1,72 +1,17 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
-import { ANALYTICS_CONSENT_KEY } from "@/lib/analytics-consent";
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 const GA_MEASUREMENT_ID = "G-6W1G9FJ5TV";
 const CLARITY_PROJECT_ID = "wce5rr4juk";
 
-declare global {
-  interface Window {
-    dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
-    clarity?: (...args: unknown[]) => void;
-  }
-}
-
 export function Analytics() {
-  // If the user has already consented, upgrade analytics storage on mount.
-  useEffect(() => {
-    let stored: string | null = null;
-    try {
-      stored = window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
-    } catch {
-      stored = null;
-    }
-
-    if (stored === "analytics" && typeof window.gtag === "function") {
-      window.gtag("consent", "update", {
-        analytics_storage: "granted",
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-      });
-    }
-  }, []);
-
   return (
     <>
-      {/* Consent Mode defaults should be set before gtag loads */}
-      <Script id="ga-consent-default" strategy="beforeInteractive">
-        {`
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('consent', 'default', {
-  analytics_storage: 'denied',
-  ad_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
-  wait_for_update: 500
-});
-        `}
-      </Script>
+      <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
 
-      {/* Google tag (gtag.js) */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="beforeInteractive"
-      />
-
-      <Script id="ga4-init" strategy="beforeInteractive">
-        {`
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
-        `}
-      </Script>
-
-      <Script id="clarity-stylesheet-unmask" strategy="beforeInteractive">
+      <Script id="clarity-stylesheet-unmask" strategy="afterInteractive">
         {`
 (function() {
   function normaliseStylesheetLink(link) {
@@ -118,7 +63,7 @@ gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
         `}
       </Script>
 
-      <Script id="microsoft-clarity" strategy="beforeInteractive">
+      <Script id="microsoft-clarity" strategy="afterInteractive">
         {`
 (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -130,3 +75,4 @@ gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
     </>
   );
 }
+

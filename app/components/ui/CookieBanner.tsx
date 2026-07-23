@@ -43,16 +43,6 @@ export function CookieBanner() {
     }
     setDismissed(true);
 
-    // Consent Mode: update immediately (works for both GTM and gtag-based setups).
-    if (typeof window.gtag === "function") {
-      window.gtag("consent", "update", {
-        analytics_storage: value === "analytics" ? "granted" : "denied",
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-      });
-    }
-
     window.dispatchEvent(new Event(ANALYTICS_CONSENT_EVENT));
   };
 
