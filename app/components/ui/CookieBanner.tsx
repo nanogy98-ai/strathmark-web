@@ -13,7 +13,29 @@ import {
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    clarity?: (...args: unknown[]) => void;
   }
+}
+
+type ConsentSnapshot = AnalyticsConsentValue | "unset" | "loading";
+
+function getConsentSnapshot(): ConsentSnapshot {
+  try {
+    const consent = window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
+    return consent === "analytics" || consent === "essential" ? consent : "unset";
+  } catch {
+    return "unset";
+  }
+}
+
+function subscribeToConsent(onStoreChange: () => void) {
+  window.addEventListener(ANALYTICS_CONSENT_EVENT, onStoreChange);
+  window.addEventListener("storage", onStoreChange);
+
+  return () => {
+    window.removeEventListener(ANALYTICS_CONSENT_EVENT, onStoreChange);
+    window.removeEventListener("storage", onStoreChange);
+  };
 }
 
 export function CookieBanner() {
@@ -21,18 +43,10 @@ export function CookieBanner() {
   const [dismissed, setDismissed] = useState(false);
   const isProposalPage = pathname?.startsWith("/proposals/") ?? false;
 
-  const shouldShow = useSyncExternalStore(
-    () => () => {
-      // No-op subscription: I re-render on accept via setDismissed().
-    },
-    () => {
-      try {
-        return !window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
-      } catch {
-        return true;
-      }
-    },
-    () => false
+  const consent = useSyncExternalStore(
+    subscribeToConsent,
+    getConsentSnapshot,
+    () => "loading"
   );
 
   const setConsent = (value: AnalyticsConsentValue) => {
@@ -53,11 +67,18 @@ export function CookieBanner() {
       });
     }
 
+    if (typeof window.clarity === "function") {
+      window.clarity("consentv2", {
+        analytics_Storage: value === "analytics" ? "granted" : "denied",
+        ad_Storage: "denied",
+      });
+    }
+
     window.dispatchEvent(new Event(ANALYTICS_CONSENT_EVENT));
   };
 
   // Private proposal pages are invite-only; no banner noise there.
-  if (isProposalPage || !shouldShow || dismissed) return null;
+  if (isProposalPage || consent !== "unset" || dismissed) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[60] p-4 md:p-6">
