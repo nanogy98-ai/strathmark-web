@@ -1,8 +1,6 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
-import { ANALYTICS_CONSENT_KEY } from "@/lib/analytics-consent";
 const GA_MEASUREMENT_ID = "G-6W1G9FJ5TV";
 const CLARITY_PROJECT_ID = "wce5rr4juk";
 
@@ -15,38 +13,6 @@ declare global {
 }
 
 export function Analytics() {
-  // If the user has already consented, upgrade analytics storage on mount.
-  useEffect(() => {
-    let stored: string | null = null;
-    try {
-      stored = window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
-    } catch {
-      stored = null;
-    }
-
-    if (
-      (stored === "analytics" || stored === "essential") &&
-      typeof window.gtag === "function"
-    ) {
-      window.gtag("consent", "update", {
-        analytics_storage: stored === "analytics" ? "granted" : "denied",
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-      });
-    }
-
-    if (
-      (stored === "analytics" || stored === "essential") &&
-      typeof window.clarity === "function"
-    ) {
-      window.clarity("consentv2", {
-        analytics_Storage: stored === "analytics" ? "granted" : "denied",
-        ad_Storage: "denied",
-      });
-    }
-  }, []);
-
   return (
     <>
       {/* Consent Mode defaults should be set before gtag loads */}
@@ -54,18 +20,11 @@ export function Analytics() {
         {`
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-var strathmarkStoredConsent = null;
-try {
-  strathmarkStoredConsent = window.localStorage.getItem('${ANALYTICS_CONSENT_KEY}');
-} catch (error) {
-  strathmarkStoredConsent = null;
-}
 gtag('consent', 'default', {
-  analytics_storage: strathmarkStoredConsent === 'analytics' ? 'granted' : 'denied',
+  analytics_storage: 'granted',
   ad_storage: 'denied',
   ad_user_data: 'denied',
   ad_personalization: 'denied',
-  wait_for_update: 500
 });
         `}
       </Script>
@@ -143,14 +102,8 @@ gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    var storedConsent = null;
-    try {
-      storedConsent = c.localStorage.getItem("${ANALYTICS_CONSENT_KEY}");
-    } catch (error) {
-      storedConsent = null;
-    }
     c[a]("consentv2", {
-      analytics_Storage: storedConsent === "analytics" ? "granted" : "denied",
+      analytics_Storage: "granted",
       ad_Storage: "denied"
     });
 })(window, document, "clarity", "script", "${CLARITY_PROJECT_ID}");

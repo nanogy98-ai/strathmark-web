@@ -24,10 +24,9 @@ export function CookieResetButton() {
     <button
       type="button"
       onClick={reset}
-      className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest border border-white/15 text-white hover:border-gold hover:text-gold transition-colors"
+      className="px-5 py-2.5 text-[15px] font-bold uppercase tracking-widest border border-white/15 text-white hover:border-gold hover:text-gold transition-colors"
     >
-      {done ? "Resetting…" : "Reset cookie preferences"}
+      {done ? "Resetting…" : "Show cookie notice again"}
     </button>
   );
 }
-
